@@ -79,7 +79,7 @@ export default function BrideGroomSection() {
               <div className="mb-6">
                 <h3 className="text-5xl font-allura mb-2 text-gray-800">Wulan</h3>
                 <p className="text-xl font-serif mb-2">Ni Kadek Wulan Purnama Sari</p>
-                <p className="text-sm text-gray-600 mb-1">Anak ke-1 dari</p>
+                <p className="text-sm text-gray-600 mb-1">Anak ke-2 dari</p>
                 <p className="text-base font-serif text-gray-700">
                   I Wayan Sutarjana & Ni Ketut Sutami
                 </p>
