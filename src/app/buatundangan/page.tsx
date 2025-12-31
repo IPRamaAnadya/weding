@@ -10,11 +10,41 @@ export default function BuatUndanganPage() {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
   const invitationURL = name.trim() ? `${baseURL}/mengundang/${encodeURIComponent(name.trim())}` : ''
 
+  const generateInvitationMessage = () => {
+    const guestName = name.trim()
+    return `Kepada Yth.
+Bapak/Ibu/Saudara/i
+*${guestName}*
+Om Swastyastu,
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami :
+
+Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi :
+${invitationURL}
+
+*WAKTU & TEMPAT* 👇👇👇
+
+*Resepsi Pernikahan*
+*Tanggal* : Rabu, 09 Januari 2026
+*Jam* : 14:00 - Selesai
+*Alamat* : Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali
+*Google Map* : https://maps.app.goo.gl/ippAea1qNoV7kP25A
+
+Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+
+Mohon maaf perihal undangan hanya di bagikan melalui pesan ini. 
+
+Terima kasih banyak atas perhatiannya.
+
+Om Shanti, Shanti, Shanti, Om.`
+  }
+
   const handleCopy = async () => {
     if (!name.trim()) return
 
     try {
-      await navigator.clipboard.writeText(invitationURL)
+      const message = generateInvitationMessage()
+      await navigator.clipboard.writeText(message)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (error) {
@@ -54,11 +84,11 @@ export default function BuatUndanganPage() {
 
             {/* Preview URL */}
             {name.trim() && (
-              <div className="bg-gray-50 rounded-lg p-4 break-all">
-                <p className="text-xs text-gray-500 mb-1">Link Undangan:</p>
-                <p className="text-sm text-gray-800 font-mono">
-                  {invitationURL}
-                </p>
+              <div className="bg-gray-50 rounded-lg p-4">
+                <p className="text-xs text-gray-500 mb-2">Preview Pesan:</p>
+                <div className="text-sm text-gray-800 whitespace-pre-wrap font-mono max-h-96 overflow-y-auto">
+                  {generateInvitationMessage()}
+                </div>
               </div>
             )}
 
@@ -82,12 +112,12 @@ export default function BuatUndanganPage() {
               {copied ? (
                 <>
                   <Check size={20} />
-                  Link Tersalin!
+                  Pesan Tersalin!
                 </>
               ) : (
                 <>
                   <Copy size={20} />
-                  Salin Link
+                  Salin Pesan Undangan
                 </>
               )}
             </button>
@@ -96,7 +126,7 @@ export default function BuatUndanganPage() {
           {/* Info */}
           <div className="mt-8 pt-6 border-t border-gray-200">
             <p className="text-xs text-gray-500 text-center">
-              Link undangan akan mengarah ke halaman undangan dengan nama tamu yang Anda masukkan
+              Pesan undangan lengkap akan tersalin dengan format WhatsApp dan siap dibagikan
             </p>
           </div>
         </div>

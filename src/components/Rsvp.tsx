@@ -25,7 +25,7 @@ const statusDisplayMap = {
 } as const
 
 export default function RSVPSection({ guestName }: { guestName?: string }) {
-  const [name, setName] = useState(guestName === 'Terhormat' ? '' : guestName || '')
+  const [name, setName] = useState(guestName || '')
   const [phone, setPhone] = useState('')
   const [status, setStatus] = useState('')
   const [message, setMessage] = useState('')
@@ -81,7 +81,7 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
       if (response.ok) {
         setSubmitStatus('success')
         // Reset form
-        setName(guestName === 'Terhormat' ? '' : guestName || '')
+        setName(guestName || '')
         setPhone('')
         setStatus('')
         setMessage('')
