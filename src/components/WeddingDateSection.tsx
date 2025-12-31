@@ -22,7 +22,10 @@ export default function WeddingDateSection() {
     offset: ['start end', 'end start'],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+  // Enhanced parallax transformations
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['-20%', '20%'])
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 1, 1.2])
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.3, 1, 1, 0.3])
 
   return (
     <>
@@ -33,19 +36,25 @@ export default function WeddingDateSection() {
         ref={ref}
         className="relative h-[220px] md:h-[320px] w-full overflow-hidden"
       >
-        {/* Parallax Background */}
+        {/* Parallax Background with Scale */}
         <motion.div
-          style={{ y }}
-          className="absolute inset-0"
+          style={{ 
+            y: backgroundY,
+            scale: scale,
+          }}
+          className="absolute inset-0 will-change-transform"
         >
           <div
-            className="w-full h-full bg-cover bg-center"
+            className="w-full h-[120%] bg-cover bg-center"
             style={{
               backgroundImage:
                 "url('/images/weddingdate/weddingdate.jpg')",
             }}
           />
-          <div className="absolute inset-0 bg-black/55" />
+          <motion.div 
+            style={{ opacity }}
+            className="absolute inset-0 bg-black/55" 
+          />
         </motion.div>
 
         {/* Title Content */}

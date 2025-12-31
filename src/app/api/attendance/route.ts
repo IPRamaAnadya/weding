@@ -9,6 +9,52 @@ const attendanceSchema = z.object({
   message: z.string().optional(),
 })
 
+async function sendAdminNotification(attendance: any) {
+  try {
+    const adminNumber = process.env.ADMIN_WHATSAPP_NUMBER
+    const token = process.env.FONNTE_API_TOKEN
+
+    if (!adminNumber || !token) {
+      console.log('Admin WhatsApp number or Fonnte token not configured')
+      return
+    }
+
+    const statusText = {
+      HADIR: '✅ Akan Hadir',
+      TIDAK_HADIR: '❌ Tidak Dapat Hadir',
+      BELUM_TAHU: '❓ Belum Tahu',
+    }
+
+    const message = `🔔 *Konfirmasi Kehadiran Baru*
+
+Nama: ${attendance.name}
+Status: ${statusText[attendance.status as keyof typeof statusText]}
+Telepon: ${attendance.phone || '-'}
+Pesan: ${attendance.message || '-'}
+
+Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })}`
+
+    const formData = new FormData()
+    formData.append('target', adminNumber)
+    formData.append('message', message)
+    formData.append('countryCode', '62')
+
+    const response = await fetch('https://api.fonnte.com/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+      },
+      body: formData,
+    })
+
+    if (!response.ok) {
+      console.error('Failed to send WhatsApp notification:', await response.text())
+    }
+  } catch (error) {
+    console.error('Error sending admin notification:', error)
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -17,6 +63,11 @@ export async function POST(request: NextRequest) {
     const attendance = await prisma.attendance.create({
       data: validatedData,
     })
+
+    // Send WhatsApp notification to admin (non-blocking)
+    sendAdminNotification(attendance).catch(err => 
+      console.error('Background notification failed:', err)
+    )
 
     return NextResponse.json(attendance, { status: 201 })
   } catch (error) {

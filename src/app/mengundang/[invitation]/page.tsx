@@ -10,6 +10,7 @@ import WeddingDateSection from '@/components/WeddingDateSection'
 import GallerySection from '@/components/GallerySection'
 import ReservationSection from '@/components/Rsvp'
 import ThankYouSection from '@/components/Thankyou'
+import Footer from '@/components/Footer'
 import { useAudio } from '@/components/AudioProvider'
 
 export default function MengundangPage() {
@@ -50,6 +51,7 @@ export default function MengundangPage() {
       <GallerySection />
       <ReservationSection guestName={guestName} />
       <ThankYouSection />
+      <Footer />
     </main>
   )
 }
