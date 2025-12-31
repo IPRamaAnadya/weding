@@ -6,7 +6,7 @@ import { useRef } from 'react'
 const events = [
   {
     title: 'Resepsi Pernikahan',
-    date: 'Jum'at, 09 Januari 2026',
+    date: 'Jum\'at, 09 Januari 2026',
     time: '14:00 - Selesai',
     address: 'Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali',
     googleMapLink:
