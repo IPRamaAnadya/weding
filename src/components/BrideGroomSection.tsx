@@ -123,7 +123,7 @@ export default function BrideGroomSection() {
             >
               <div
                 className="w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url('/images/bridegroom/bride.avif')` }}
+                style={{ backgroundImage: `url('/images/bridegroom/bride.jpg')` }}
               />
             </motion.div>
           </motion.div>
