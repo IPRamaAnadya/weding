@@ -7,7 +7,7 @@ export default function BuatUndanganPage() {
   const [name, setName] = useState('')
   const [copied, setCopied] = useState(false)
 
-  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+  const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   const invitationURL = name.trim() ? `${baseURL}/mengundang/${encodeURIComponent(name.trim())}` : ''
 
   const generateInvitationMessage = () => {
