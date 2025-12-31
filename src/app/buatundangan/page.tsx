@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
+import Head from 'next/head'
 
 export default function BuatUndanganPage() {
   const [name, setName] = useState('')
@@ -9,6 +10,13 @@ export default function BuatUndanganPage() {
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   const invitationURL = name.trim() ? `${baseURL}/mengundang/${encodeURIComponent(name.trim())}` : ''
+
+  const seoData = {
+    title: 'Buat Undangan Pernikahan | Generator Link Undangan Digital',
+    description: 'Buat link undangan pernikahan digital yang personal dan mudah dibagikan melalui WhatsApp. Generator undangan pernikahan online gratis.',
+    image: `${baseURL}/images/cover.jpg`,
+    url: `${baseURL}/buatundangan`,
+  }
 
   const generateInvitationMessage = () => {
     const guestName = name.trim()
@@ -53,7 +61,32 @@ Om Shanti, Shanti, Shanti, Om.`
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-12">
+    <>
+      <Head>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={seoData.url} />
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.description} />
+        <meta property="og:image" content={seoData.image} />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={seoData.url} />
+        <meta property="twitter:title" content={seoData.title} />
+        <meta property="twitter:description" content={seoData.description} />
+        <meta property="twitter:image" content={seoData.image} />
+        
+        {/* Additional SEO */}
+        <meta name="robots" content="index, follow" />
+        <meta name="keywords" content="undangan pernikahan digital, undangan online, buat undangan, wedding invitation, undangan nikah" />
+        <link rel="canonical" href={seoData.url} />
+      </Head>
+      
+      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           {/* Header */}
@@ -132,5 +165,6 @@ Om Shanti, Shanti, Shanti, Om.`
         </div>
       </div>
     </main>
+    </>
   )
 }
