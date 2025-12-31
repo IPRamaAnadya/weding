@@ -1,25 +1,107 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const dummyReservations = [
-  { name: 'Ayu Lestari', status: 'Hadir', message: 'Semoga langgeng sampai tua ❤️' },
-  { name: 'Budi Santoso', status: 'Tidak Hadir', message: 'Mohon maaf belum bisa hadir' },
-  { name: 'Komang Arta', status: 'Hadir', message: 'Selamat menempuh hidup baru' },
-  { name: 'Made Suryani', status: 'Belum Tahu', message: 'InsyaAllah hadir' },
-  { name: 'Dewi Paramita', status: 'Hadir', message: 'Bahagia selalu ✨' },
-  { name: 'Rizky Pratama', status: 'Hadir', message: 'Semoga menjadi keluarga sakinah' },
-]
+type Attendance = {
+  id: string
+  name: string
+  phone?: string | null
+  status: 'HADIR' | 'TIDAK_HADIR' | 'BELUM_TAHU'
+  message?: string | null
+  createdAt: string
+}
+
+const statusMap = {
+  'Hadir': 'HADIR',
+  'Tidak Hadir': 'TIDAK_HADIR',
+  'Belum Tahu': 'BELUM_TAHU',
+} as const
+
+const statusDisplayMap = {
+  'HADIR': 'Hadir',
+  'TIDAK_HADIR': 'Tidak Hadir',
+  'BELUM_TAHU': 'Belum Tahu',
+} as const
 
 export default function RSVPSection({ guestName }: { guestName?: string }) {
   const [name, setName] = useState(guestName || '')
+  const [phone, setPhone] = useState('')
   const [status, setStatus] = useState('')
+  const [message, setMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [attendances, setAttendances] = useState<Attendance[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [page, setPage] = useState(1)
   const perPage = 3
 
-  const totalPages = Math.ceil(dummyReservations.length / perPage)
-  const currentData = dummyReservations.slice(
+  // Fetch attendances
+  useEffect(() => {
+    fetchAttendances()
+  }, [])
+
+  const fetchAttendances = async () => {
+    try {
+      const response = await fetch('/api/attendance')
+      if (response.ok) {
+        const data = await response.json()
+        setAttendances(data)
+      }
+    } catch (error) {
+      console.error('Failed to fetch attendances:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!name || !status) {
+      alert('Nama dan status kehadiran wajib diisi')
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      const response = await fetch('/api/attendance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone: phone || undefined,
+          status: statusMap[status as keyof typeof statusMap],
+          message: message || undefined,
+        }),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        // Reset form
+        setName(guestName || '')
+        setPhone('')
+        setStatus('')
+        setMessage('')
+        // Refresh attendances
+        fetchAttendances()
+        // Reset success message after 3 seconds
+        setTimeout(() => setSubmitStatus('idle'), 3000)
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      console.error('Failed to submit:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const totalPages = Math.ceil(attendances.length / perPage)
+  const currentData = attendances.slice(
     (page - 1) * perPage,
     page * perPage
   )
@@ -64,7 +146,8 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
         </div>
 
         {/* ================= FORM ================= */}
-        <motion.div
+        <motion.form
+  onSubmit={handleSubmit}
   className="max-w-xl mx-auto space-y-10"
   initial={{ opacity: 0, y: 30 }}
   whileInView={{ opacity: 1, y: 0 }}
@@ -81,6 +164,7 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
       value={name}
       onChange={(e) => setName(e.target.value)}
       placeholder="Masukkan nama Anda"
+      required
       className="
         w-full
         px-4 py-3
@@ -99,10 +183,12 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
   {/* Phone */}
   <div>
     <label className="block mb-2 text-sm font-serif text-gray-700">
-      Nomor WhatsApp
+      Nomor WhatsApp (Opsional)
     </label>
     <input
       type="tel"
+      value={phone}
+      onChange={(e) => setPhone(e.target.value)}
       placeholder="Contoh: 08123456789"
       className="
         w-full
@@ -143,7 +229,9 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
             type="radio"
             name="attendance"
             value={item}
+            checked={status === item}
             onChange={() => setStatus(item)}
+            required
             className="w-4 h-4 accent-gray-800"
           />
           <span className="font-serif text-gray-800">
@@ -157,10 +245,12 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
   {/* Message */}
   <div>
     <label className="block mb-2 text-sm font-serif text-gray-700">
-      Pesan & Doa
+      Pesan & Doa (Opsional)
     </label>
     <textarea
       rows={4}
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
       placeholder="Tulis ucapan dan doa terbaik Anda"
       className="
         w-full
@@ -179,14 +269,28 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
   </div>
 
   {/* Submit */}
-  <div className="pt-0 text-center">
+  <div className="pt-0 text-center space-y-3">
     <button
-      className="w-full px-4 py-2 border border-gray-800 text-gray-800 font-serif text-xs tracking-wider transition-all duration-300 hover:bg-gray-800 hover:text-white"
+      type="submit"
+      disabled={isSubmitting}
+      className="w-full px-4 py-2 border border-gray-800 text-gray-800 font-serif text-xs tracking-wider transition-all duration-300 hover:bg-gray-800 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      KIRIM KONFIRMASI
+      {isSubmitting ? 'MENGIRIM...' : 'KIRIM KONFIRMASI'}
     </button>
+    
+    {submitStatus === 'success' && (
+      <p className="text-sm text-green-600 font-serif">
+        ✓ Terima kasih! Konfirmasi Anda telah dikirim.
+      </p>
+    )}
+    
+    {submitStatus === 'error' && (
+      <p className="text-sm text-red-600 font-serif">
+        ✗ Gagal mengirim. Silakan coba lagi.
+      </p>
+    )}
   </div>
-</motion.div>
+</motion.form>
 
         {/* ================= GUEST WISHES ================= */}
         <div className="mt-40">
@@ -199,10 +303,20 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
             </p>
           </div>
 
-          <div className="space-y-10 max-w-2xl mx-auto">
-            {currentData.map((item, index) => (
+          {isLoading ? (
+            <div className="text-center py-10">
+              <p className="text-gray-500 font-serif">Memuat ucapan...</p>
+            </div>
+          ) : attendances.length === 0 ? (
+            <div className="text-center py-10">
+              <p className="text-gray-500 font-serif">Belum ada ucapan.</p>
+            </div>
+          ) : (
+            <>
+              <div className="space-y-10 max-w-2xl mx-auto">
+            {currentData.map((item) => (
               <motion.div
-                key={index}
+                key={item.id}
                 className="border-b border-gray-200 pb-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -211,22 +325,25 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
                 <div className="flex justify-between items-center mb-2">
                   <p className="font-serif text-gray-800">{item.name}</p>
                   <span className="text-xs tracking-widest text-gray-400">
-                    {item.status}
+                    {statusDisplayMap[item.status]}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 font-serif italic">
-                  “{item.message}”
-                </p>
+                {item.message && (
+                  <p className="text-sm text-gray-600 font-serif italic">
+                    "{item.message}"
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center gap-6 mt-16">
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-6 mt-16">
             <button
               disabled={page === 1}
               onClick={() => setPage((p) => p - 1)}
-              className="text-xs tracking-widest font-serif text-gray-500 disabled:opacity-30"
+              className="text-xs tracking-widest font-serif text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed"
             >
               PREV
             </button>
@@ -236,11 +353,14 @@ export default function RSVPSection({ guestName }: { guestName?: string }) {
             <button
               disabled={page === totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="text-xs tracking-widest font-serif text-gray-500 disabled:opacity-30"
+              className="text-xs tracking-widest font-serif text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed"
             >
               NEXT
             </button>
           </div>
+          )}
+            </>
+          )}
         </div>
 
       </div>
