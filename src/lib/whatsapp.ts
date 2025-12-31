@@ -53,7 +53,7 @@ Kami dengan senang hati mengundang Anda untuk hadir di pernikahan kami:
 
 *Riki & Wulan*
 
-📅 Rabu, 09 Januari 2026
+📅 Jum'at, 09 Januari 2026
 ⏰ 14:00 - Selesai
 📍 Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali
 

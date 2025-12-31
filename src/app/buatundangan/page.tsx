@@ -33,7 +33,7 @@ ${invitationURL}
 *WAKTU & TEMPAT* 👇👇👇
 
 *Resepsi Pernikahan*
-*Tanggal* : Rabu, 09 Januari 2026
+*Tanggal* : Jum'at, 09 Januari 2026
 *Jam* : 14:00 - Selesai
 *Alamat* : Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali
 *Google Map* : https://maps.app.goo.gl/ippAea1qNoV7kP25A

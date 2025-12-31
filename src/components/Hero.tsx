@@ -101,7 +101,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
           >
-            Rabu, 09 Januari 2026
+            Jum'at, 09 Januari 2026
           </motion.p>
         </div>
 

@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   
   const title = `Undangan Pernikahan untuk ${guestName} | Riki & Wulan`
-  const description = `Kepada Yth. ${guestName}, kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Rabu, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali. Mohon konfirmasi kehadiran Anda.`
+  const description = `Kepada Yth. ${guestName}, kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Jum'at, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali. Mohon konfirmasi kehadiran Anda.`
   const imageUrl = `${baseURL}/images/cover.jpg`
   const url = `${baseURL}/mengundang/${encodeURIComponent(guestName)}`
 
@@ -86,10 +86,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       maximumScale: 5,
       userScalable: true,
     },
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-      { media: '(prefers-color-scheme: dark)', color: '#000000' },
-    ],
     appleWebApp: {
       capable: true,
       statusBarStyle: 'default',
@@ -111,7 +107,7 @@ export default function MengundangPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "Event",
     "name": "Pernikahan Riki & Wulan",
-    "description": `Undangan pernikahan untuk ${guestName}`,
+    "description": `Undangan pernikahan untuk ${guestName ?? 'tamu istimewa'}. Kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Jum'at, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali.`,
     "startDate": "2026-01-09T14:00:00+08:00",
     "endDate": "2026-01-09T23:59:00+08:00",
     "eventStatus": "https://schema.org/EventScheduled",
