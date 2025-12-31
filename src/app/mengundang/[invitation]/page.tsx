@@ -2,11 +2,12 @@ import { Metadata } from 'next'
 import MengundangView from './view'
 
 type Props = {
-  params: { invitation: string }
+  params: Promise<{ invitation: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const guestName = decodeURIComponent(params.invitation)
+  const { invitation } = await params
+  const guestName = decodeURIComponent(invitation)
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   
   const title = `Undangan Pernikahan untuk ${guestName == null || guestName == undefined ? 'Tamu Istimewa' : guestName} | Riki & Wulan`
@@ -98,8 +99,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function MengundangPage({ params }: Props) {
-  const guestName = decodeURIComponent(params.invitation)
+export default async function MengundangPage({ params }: Props) {
+  const { invitation } = await params
+  const guestName = decodeURIComponent(invitation)
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   
   // Structured Data for SEO

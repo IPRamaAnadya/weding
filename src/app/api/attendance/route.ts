@@ -91,8 +91,9 @@ export async function GET() {
     })
     return NextResponse.json(attendances)
   } catch (error) {
+    console.error('Error fetching attendances:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
