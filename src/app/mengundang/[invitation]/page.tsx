@@ -9,8 +9,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guestName = decodeURIComponent(params.invitation)
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   
-  const title = `Undangan Pernikahan untuk ${guestName} | Riki & Wulan`
-  const description = `Kepada Yth. ${guestName}, kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Jum'at, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali. Mohon konfirmasi kehadiran Anda.`
+  const title = `Undangan Pernikahan untuk ${guestName == null || guestName == undefined ? 'Tamu Istimewa' : guestName} | Riki & Wulan`
+  const description = `Kepada Yth. ${guestName == null || guestName == undefined ? 'Tamu Istimewa Kami' : guestName}, kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Jum'at, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali. Mohon konfirmasi kehadiran Anda.`
   const imageUrl = `${baseURL}/images/cover.jpg`
   const url = `${baseURL}/mengundang/${encodeURIComponent(guestName)}`
 
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     keywords: [
       'undangan pernikahan',
-      `undangan ${guestName}`,
+      `undangan ${guestName == null || guestName == undefined ? 'Tamu Istimewa' : guestName}`,
       'Riki Wulan',
       'wedding invitation',
       'undangan digital',
