@@ -92,7 +92,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            Riki & Wulan
+            Dedy & Sinta
           </motion.h1>
 
           <motion.p

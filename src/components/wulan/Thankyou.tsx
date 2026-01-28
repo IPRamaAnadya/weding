@@ -26,7 +26,7 @@ export default function ThankYouSection() {
         <div
           className="w-full h-full bg-cover bg-center"
           style={{
-            backgroundImage: "url('/images/cover2.jpg')",
+            backgroundImage: "url('/images/cover.webp')",
           }}
         />
         <div className="absolute inset-0 bg-black/55" />
@@ -82,7 +82,7 @@ export default function ThankYouSection() {
             transition={{ duration: 1, delay: 0.4 }}
           >
             <p className="font-allura text-5xl md:text-6xl opacity-95">
-              Riki & Wulan
+              Dedy & Sinta
             </p>
           </motion.div>
 

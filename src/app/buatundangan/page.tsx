@@ -14,7 +14,7 @@ export default function BuatUndanganPage() {
   const seoData = {
     title: 'Buat Undangan Pernikahan | Generator Link Undangan Digital',
     description: 'Buat link undangan pernikahan digital yang personal dan mudah dibagikan melalui WhatsApp. Generator undangan pernikahan online gratis.',
-    image: `${baseURL}/images/cover.jpg`,
+    image: `${baseURL}/images/cover.webp`,
     url: `${baseURL}/buatundangan`,
   }
 

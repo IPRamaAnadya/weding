@@ -60,7 +60,7 @@ export default function WeddingSplash({
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              RIKI & WULAN
+              Dedy & Sinta
             </motion.h1>
           </motion.div>
         )}
@@ -77,7 +77,7 @@ export default function WeddingSplash({
             {/* Background Image */}
             <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('/images/cover.jpg')` }}
+              style={{ backgroundImage: `url('/images/cover.webp')` }}
             />
 
             {/* White Gradient Overlay */}

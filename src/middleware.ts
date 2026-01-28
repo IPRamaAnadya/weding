@@ -6,12 +6,12 @@ export function middleware(request: NextRequest) {
 
   // Redirect root to /mengundang/Terhormat
   if (pathname === '/') {
-    return NextResponse.redirect(new URL('/mengundang/Terhormat', request.url))
+    return NextResponse.redirect(new URL('/mengundang/Tamu+Terhormat', request.url))
   }
 
-  // Redirect /mengundang to /mengundang/Terhormat
+  // Redirect /mengundang to /mengundang/Tamu+Terhormat
   if (pathname === '/mengundang' || pathname === '/mengundang/') {
-    return NextResponse.redirect(new URL('/mengundang/Terhormat', request.url))
+    return NextResponse.redirect(new URL('/mengundang/Tamu+Terhormat', request.url))
   }
 
   return NextResponse.next()

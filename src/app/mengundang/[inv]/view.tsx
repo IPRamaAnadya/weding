@@ -16,6 +16,7 @@ import Footer from '@/components/wulan/Footer'
 import { useAudio } from '@/components/AudioProvider'
 import InvitationLetterSection from '@/components/sinta/InvitationLetterSection'
 import StorylineSection from '@/components/sinta/StorylineSection'
+import DigitalWalletSection from '@/components/sinta/DigitalWalletSection'
 
 export default function MengundangView() {
   const [opened, setOpened] = useState(false)
@@ -41,10 +42,10 @@ export default function MengundangView() {
   if (!opened) {
     return (
       <WeddingSplash2
-        bgUrl="/images/cover.jpg"
+        bgUrl="/images/cover.webp"
         guestName={guestName}
         name="Dedy & Sinta"
-        date="25 Desember 2026"
+        date="03 April 2026"
         ctaText="BUKA UNDANGAN"
         onFinish={finish}
       />
@@ -57,17 +58,19 @@ export default function MengundangView() {
         welcomeText="The Wedding Celebration"
         subtitle="The Wedding of"
         title="Dedy & Sinta"
-        date="Sabtu, 13 Oktober 2026"
-        venue="di Grand Ballroom Hotel"
+        date="Jum'at, 03 April 2026"
+        venue="di Br.Kawan, Mas, Ubud"
         bgImages={[
-          '/images/hero/hero1.jpg',
-          '/images/hero/hero2.jpg',
-          '/images/hero/hero3.jpg',
-          '/images/hero/hero4.jpg',
-          '/images/hero/hero5.jpg',
-          '/images/hero/hero6.jpg',
+          '/images/sinta/2.webp',
+          '/images/sinta/3.webp',
+          '/images/sinta/4.webp',
+          '/images/sinta/5.webp',
+          '/images/sinta/6.webp',
+          '/images/sinta/7.webp',
+          '/images/sinta/8.webp',
+          '/images/sinta/9.webp',
         ]}
-        weddingDateTime={new Date('2026-02-13T14:00:00')}
+        weddingDateTime={new Date('2026-04-03T13:00:00')}
       />
       <QuoteSection
         quote="Ya Tuhan Yang Maha Pengasih, anugrahkanlah kepada pasangan ini tanpa terpisahkan, panjang umur, semoga pernikahan ini dianugrahkan putra-putri dan cucu yang memberi penghiburan, tinggal di rumah yang penuh kebahagiaan"
@@ -79,34 +82,18 @@ export default function MengundangView() {
           fullName: "I Putu Dedy Bhirawan, S.Ds",
           childOf: "Anak pertama dari",
           parents: "I Wayan Muka & Ni Nyoman Budiarti",
-          instagram: "dedypratama",
-          image: "/images/bridegroom/groom.jpg"
+          instagram: "tuedy_junior11",
+          image: "/images/sinta/4.webp"
         }}
         bride={{
           name: "Sinta",
-          fullName: "Sinta Dewi",
-          childOf: "Anak kedua dari",
+          fullName: "Ns. Ni Ketut Sinta Dewi, S.Tr.Kep",
+          childOf: "Anak keempat dari",
           parents: "I Wayan Sutarjana & Ni Komang Sumerti & Ni Ketut Sutami (Alm.)",
-          instagram: "sintadewi",
-          image: "/images/bridegroom/bride.jpg"
+          instagram: "ketut_sinta",
+          image: "/images/sinta/5.webp"
         }}
-      />
-      <InvitationLetterSection
-        welcomeTitle="ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ"
-        welcomeDescription="Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami bermaksud mengundang Bapak/Ibu/Saudara/i, pada Acara Pawiwahan (Pernikahan) kami:"
-        events={[
-          { name: "Ngidih", date: "31 Maret 2026", time: "10:00 - 12:00 WITA" },
-          { name: "Mesakapan", date: "3 April 2026", time: "14:00 - 17:00 WITA" }
-        ]}
-        venue="Br.Kawan, Mas, Ubud"
-        venueDescription="Jl. Raya Mas No.123, Mas, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia"
-        closingText="Merupakan suatu kebanggan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih."
-        groomName="Dedy"
-        brideName="Sinta"
-        googleMapLink="https://share.google/pYKbIiNDUJis1Jb65"
-        onSaveTheDate={() => console.log('Save the date!')}
-      />
-      <StorylineSection
+      /><StorylineSection
         sectionTitle="Our Story"
         stories={[
           {
@@ -140,22 +127,57 @@ export default function MengundangView() {
         metYear="2016"
         weddingDate="3 April 2026"
       />
+      <InvitationLetterSection
+        welcomeTitle="ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ"
+        welcomeDescription="Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami bermaksud mengundang Bapak/Ibu/Saudara/i, pada Acara Pawiwahan (Pernikahan) kami:"
+        events={[
+          { name: "Ngidih", date: "31 Maret 2026", time: "13:00 - Selesai" },
+          { name: "Mesakapan", date: "3 April 2026", time: "13:00 - Selesai" }
+        ]}
+        venue="Br.Kawan, Mas, Ubud"
+        venueDescription="Jl. Raya Mas No.123, Mas, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia"
+        closingText="Merupakan suatu kebanggan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih."
+        groomName="Dedy"
+        brideName="Sinta"
+        googleMapLink="https://maps.app.goo.gl/mYASY2bNs6iQGZS66?g_st=aw"
+        onSaveTheDate={() => console.log('Save the date!')}
+      />
+      
       <GallerySection
         sectionTitle="Our Moments"
         images={[
-          '/images/gallery/1.jpg',
-          '/images/gallery/2.jpg',
-          '/images/gallery/3.jpg',
-          '/images/gallery/4.jpg',
-          '/images/gallery/5.jpg',
-          '/images/gallery/6.jpg',
-          '/images/gallery/7.jpg',
-          '/images/gallery/8.jpg',
+          '/images/sinta/1.webp',
+          '/images/sinta/2.webp',
+          '/images/sinta/3.webp',
+          '/images/sinta/6.webp',
+          '/images/sinta/7.webp',
+          '/images/sinta/8.webp',
+          '/images/sinta/9.webp',
+          '/images/sinta/10.webp',
+          '/images/sinta/11.webp',
+          '/images/sinta/12.webp',
+          '/images/sinta/13.webp',
+          '/images/sinta/14.webp',
         ]}
       />
       <ReservationSection 
         guestName={guestName}
         sectionTitle="Reservation"
+      />
+      <DigitalWalletSection
+        sectionTitle="Wedding Gift"
+        accounts={[
+          {
+            bankName: "Bank Mandiri",
+            accountNumber: "1450016872299",
+            accountName: "I Putu Dedi Bhirawan"
+          },
+          {
+            bankName: "Bank BPD Bali",
+            accountNumber: "0110215121123",
+            accountName: "Ni Ketut Sinta Dewi"
+          }
+        ]}
       />
       <Footer />
     </main>

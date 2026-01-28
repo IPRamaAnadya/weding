@@ -30,7 +30,7 @@ export default function Footer() {
           </p>
           
           <p className="font-serif text-gray-300 text-xs mt-6">
-            © 2026 · Riki & Wulan
+            © 2026 · Dedy & Sinta
           </p>
         </div>
       </div>

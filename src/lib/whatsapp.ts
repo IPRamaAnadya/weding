@@ -51,7 +51,7 @@ Halo {name},
 
 Kami dengan senang hati mengundang Anda untuk hadir di pernikahan kami:
 
-*Riki & Wulan*
+*Dedy & Sinta*
 
 📅 Jum'at, 09 Januari 2026
 ⏰ 14:00 - Selesai

@@ -8,14 +8,14 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { inv } = await params
 
-  // Decode invitation from Riki+&+Wulan to Riki & Wulan
+  // Decode invitation from Riki+&+Wulan to Dedy & Sinta
   const invitation = (inv as string).replaceAll('+', ' ')
   const guestName = decodeURIComponent(invitation)
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   
-  const title = `Undangan Pernikahan untuk ${guestName == null || guestName == undefined ? 'Tamu Istimewa' : guestName} | Riki & Wulan`
-  const description = `Kepada Yth. ${guestName == null || guestName == undefined ? 'Tamu Istimewa Kami' : guestName}, kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Jum'at, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali. Mohon konfirmasi kehadiran Anda.`
-  const imageUrl = `${baseURL}/images/cover.jpg`
+  const title = `Undangan Pernikahan untuk ${guestName == null || guestName == undefined ? 'Tamu Istimewa' : guestName} | Dedy & Sinta`
+  const description = `Kepada Yth. ${guestName == null || guestName == undefined ? 'Tamu Istimewa Kami' : guestName}, kami mengundang Anda untuk menghadiri pernikahan Dedy & Sinta pada Jum'at, 03 April 2026 di Br. Kawan, Mas, Ubud, Bali. Mohon konfirmasi kehadiran Anda.`
+  const imageUrl = `${baseURL}/images/sinta/8.webp`
   const url = `${baseURL}/mengundang/${encodeURIComponent(guestName)}`
 
   return {
@@ -24,16 +24,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: [
       'undangan pernikahan',
       `undangan ${guestName == null || guestName == undefined ? 'Tamu Istimewa' : guestName}`,
-      'Riki Wulan',
+      'Dedy & Sinta',
       'wedding invitation',
       'undangan digital',
       'pernikahan Bali',
       'resepsi pernikahan',
-      'Pupuan Tabanan',
+      'Ubud Bali',
     ],
-    authors: [{ name: 'Riki & Wulan' }],
-    creator: 'Riki & Wulan',
-    publisher: 'rikiwulan.site',
+    authors: [{ name: 'Dedy & Sinta' }],
+    creator: 'Dedy & Sinta',
+    publisher: 'dedysinta.site',
     formatDetection: {
       email: false,
       address: false,
@@ -48,13 +48,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: url,
       title: title,
       description: description,
-      siteName: 'Undangan Pernikahan Riki & Wulan',
+      siteName: 'Undangan Pernikahan Dedy & Sinta',
       images: [
         {
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: 'Undangan Pernikahan Riki & Wulan',
+          alt: 'Undangan Pernikahan Dedy & Sinta',
         },
       ],
       locale: 'id_ID',
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: title,
       description: description,
       images: [imageUrl],
-      creator: '@rikiwulan',
+      creator: '@iputuramaanadya',
     },
     robots: {
       index: true,
@@ -112,38 +112,38 @@ export default async function MengundangPage({ params }: Props) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Pernikahan Riki & Wulan",
-    "description": `Undangan pernikahan untuk ${guestName ?? 'tamu istimewa'}. Kami mengundang Anda untuk menghadiri pernikahan Riki & Wulan pada Jum'at, 09 Januari 2026 di Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali.`,
-    "startDate": "2026-01-09T14:00:00+08:00",
-    "endDate": "2026-01-09T23:59:00+08:00",
+    "name": "Pernikahan Dedy & Sinta",
+    "description": `Undangan pernikahan untuk ${guestName ?? 'tamu istimewa'}. Kami mengundang Anda untuk menghadiri pernikahan Dedy & Sinta pada Jum'at, 03 April 2026 di Br. Kawan, Mas, Ubud, Bali.`,
+    "startDate": "2026-04-03T14:00:00+08:00",
+    "endDate": "2026-04-03T23:59:00+08:00",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "location": {
       "@type": "Place",
-      "name": "Br. Tanah Sari, Ds. Pajahan",
+      "name": "Br. Kawan, Mas, Ubud",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Br. Tanah Sari, Ds. Pajahan, Pupuan",
-        "addressLocality": "Tabanan",
+        "streetAddress": "Br. Kawan, Mas, Ubud",
+        "addressLocality": "Ubud",
         "addressRegion": "Bali",
-        "postalCode": "82163",
+        "postalCode": "80571",
         "addressCountry": "ID"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": -8.3695,
-        "longitude": 115.1288
+        "latitude": -8.542695183424089,
+        "longitude": 115.27104378640259
       },
-      "url": "https://maps.app.goo.gl/ippAea1qNoV7kP25A"
+      "url": "https://maps.app.goo.gl/qPt2kST9mS38J3FKA"
     },
-    "image": `${baseURL}/images/cover.jpg`,
+    "image": `${baseURL}/images/cover.webp`,
     "organizer": {
       "@type": "Person",
-      "name": "Riki & Wulan"
+      "name": "Dedy & Sinta"
     },
     "performer": {
       "@type": "Person",
-      "name": "Riki & Wulan"
+      "name": "Dedy & Sinta"
     },
     "url": `${baseURL}/mengundang/${encodeURIComponent(guestName)}`
   }
