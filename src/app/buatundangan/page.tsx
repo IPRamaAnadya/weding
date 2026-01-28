@@ -35,16 +35,23 @@ ${invitationURL}
 
 *WAKTU & TEMPAT ACARA* 👇
 
-*Mesakapan*
+*Ngidih*
+📅 31 Maret 2026
+⏰ 08:00 - Selesai
+📍 Br. Margasari, Pujungan
+Pujungan, Kec. Pupuan, Kabupaten Tabanan, Bali 82163, Indonesia
+
+Google Maps:
+https://share.google/1893B64CgEdqUolzA
+
+*Mesakapan & Resepsi*
 📅 3 April 2026
 ⏰ 13:00 - Selesai
-
-*Lokasi:*
-Br.Kawan, Mas, Ubud
+📍 Br.Kawan, Mas, Ubud
 Jl. Raya Mas No.123, Mas, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia
 
-📍 Google Maps:
-https://share.google/pYKbIiNDUJis1Jb65
+Google Maps:
+https://maps.app.goo.gl/mYASY2bNs6iQGZS66?g_st=aw
 
 Merupakan suatu kebanggan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih.
 

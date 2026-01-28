@@ -9,6 +9,9 @@ interface Event {
   name: string
   date: string
   time: string
+  venue?: string
+  location?: string
+  googleMapLink?: string
   startDateTime?: string // Format: YYYYMMDDTHHMMSS for calendar
   endDateTime?: string
 }
@@ -44,7 +47,10 @@ export default function InvitationLetterSection({
   const generateCalendarLink = (event: Event) => {
     const title = `${event.name} - ${groomName} & ${brideName} Wedding`
     const description = `${groomName} & ${brideName} Wedding`
-    const location = `${venue}, ${venueDescription}`
+    const eventLocation = event.venue && event.location 
+      ? `${event.venue}, ${event.location}` 
+      : `${venue}, ${venueDescription}`
+    const location = eventLocation
     
     // If startDateTime is provided, use it; otherwise create a basic link
     if (event.startDateTime && event.endDateTime) {
@@ -133,6 +139,36 @@ export default function InvitationLetterSection({
                 >
                   {event.time}
                 </p>
+                {event.venue && (
+                  <div className="mt-3">
+                    <p
+                      className="text-sm md:text-base text-gray-700 font-semibold"
+                      style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+                    >
+                      {event.venue}
+                    </p>
+                    {event.location && (
+                      <p
+                        className="text-xs md:text-sm text-gray-600"
+                        style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+                      >
+                        {event.location}
+                      </p>
+                    )}
+                    {event.googleMapLink && (
+                      <a
+                        href={event.googleMapLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 mt-2 text-xs text-gray-700 hover:text-gray-900 underline"
+                        style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+                      >
+                        <MapPin size={12} />
+                        View Map
+                      </a>
+                    )}
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -335,6 +371,14 @@ export default function InvitationLetterSection({
                           >
                             {event.date} • {event.time}
                           </p>
+                          {event.venue && (
+                            <p
+                              className="text-xs text-gray-500 mt-0.5"
+                              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+                            >
+                              📍 {event.venue}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </motion.button>

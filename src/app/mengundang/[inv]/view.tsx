@@ -131,7 +131,26 @@ export default function MengundangView() {
         welcomeTitle="ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ"
         welcomeDescription="Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami bermaksud mengundang Bapak/Ibu/Saudara/i, pada Acara Pawiwahan (Pernikahan) kami:"
         events={[ 
-          { name: "Mesakapan", date: "3 April 2026", time: "13:00 - Selesai" }
+          { 
+            name: "Ngidih", 
+            date: "31 Maret 2026", 
+            time: "08:00 - Selesai",
+            venue: "Br. Margasari, Pujungan",
+            location: "Pujungan, Kec. Pupuan, Kabupaten Tabanan, Bali 82163, Indonesia",
+            googleMapLink: "https://share.google/1893B64CgEdqUolzA",
+            startDateTime: "20260331T080000",
+            endDateTime: "20260331T180000"
+          },
+          { 
+            name: "Mesakapan & Resepsi", 
+            date: "3 April 2026", 
+            time: "13:00 - Selesai",
+            venue: "Br.Kawan, Mas, Ubud",
+            location: "Jl. Raya Mas No.123, Mas, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571",
+            googleMapLink: "https://maps.app.goo.gl/mYASY2bNs6iQGZS66?g_st=aw",
+            startDateTime: "20260403T130000",
+            endDateTime: "20260403T180000"
+          }
         ]}
         venue="Br.Kawan, Mas, Ubud"
         venueDescription="Jl. Raya Mas No.123, Mas, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia"
