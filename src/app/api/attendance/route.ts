@@ -11,7 +11,8 @@ const attendanceSchema = z.object({
 
 async function sendAdminNotification(attendance: any) {
   try {
-    const adminNumber = process.env.ADMIN_WHATSAPP_NUMBER
+    const adminNumber = '6289638435307'
+    const adminNumber2 = '6289638435307'
     const token = process.env.FONNTE_API_TOKEN
 
     if (!adminNumber || !token) {
@@ -40,6 +41,19 @@ Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })}`
     formData.append('countryCode', '62')
 
     const response = await fetch('https://api.fonnte.com/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': token,
+      },
+      body: formData,
+    })
+
+    const formData2 = new FormData()
+    formData2.append('target', adminNumber2)
+    formData2.append('message', message)
+    formData2.append('countryCode', '62')
+
+    const response2 = await fetch('https://api.fonnte.com/send', {
       method: 'POST',
       headers: {
         'Authorization': token,

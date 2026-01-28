@@ -130,8 +130,7 @@ export default function MengundangView() {
       <InvitationLetterSection
         welcomeTitle="ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ"
         welcomeDescription="Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami bermaksud mengundang Bapak/Ibu/Saudara/i, pada Acara Pawiwahan (Pernikahan) kami:"
-        events={[
-          { name: "Ngidih", date: "31 Maret 2026", time: "13:00 - Selesai" },
+        events={[ 
           { name: "Mesakapan", date: "3 April 2026", time: "13:00 - Selesai" }
         ]}
         venue="Br.Kawan, Mas, Ubud"
@@ -146,18 +145,24 @@ export default function MengundangView() {
       <GallerySection
         sectionTitle="Our Moments"
         images={[
-          '/images/sinta/1.webp',
-          '/images/sinta/2.webp',
-          '/images/sinta/3.webp',
-          '/images/sinta/6.webp',
-          '/images/sinta/7.webp',
-          '/images/sinta/8.webp',
-          '/images/sinta/9.webp',
-          '/images/sinta/10.webp',
-          '/images/sinta/11.webp',
-          '/images/sinta/12.webp',
-          '/images/sinta/13.webp',
           '/images/sinta/14.webp',
+          '/images/sinta/7.webp',
+          '/images/sinta/19.webp',
+          '/images/sinta/3.webp',
+          '/images/sinta/11.webp',
+          '/images/sinta/16.webp',
+          '/images/sinta/2.webp',
+          '/images/sinta/9.webp',
+          '/images/sinta/20.webp',
+          '/images/sinta/6.webp',
+          '/images/sinta/13.webp',
+          '/images/sinta/1.webp',
+          '/images/sinta/17.webp',
+          '/images/sinta/8.webp',
+          '/images/sinta/12.webp',
+          '/images/sinta/15.webp',
+          '/images/sinta/10.webp',
+          '/images/sinta/18.webp',
         ]}
       />
       <ReservationSection 

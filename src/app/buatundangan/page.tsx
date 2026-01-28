@@ -35,10 +35,6 @@ ${invitationURL}
 
 *WAKTU & TEMPAT ACARA* 👇
 
-*Ngidih*
-📅 31 Maret 2026
-⏰ 13:00 - Selesai
-
 *Mesakapan*
 📅 3 April 2026
 ⏰ 13:00 - Selesai
