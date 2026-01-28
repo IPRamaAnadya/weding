@@ -2,11 +2,14 @@ import { Metadata } from 'next'
 import MengundangView from './view'
 
 type Props = {
-  params: Promise<{ invitation: string }>
+  params: Promise<{ inv: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { invitation } = await params
+  const { inv } = await params
+
+  // Decode invitation from Riki+&+Wulan to Riki & Wulan
+  const invitation = (inv as string).replaceAll('+', ' ')
   const guestName = decodeURIComponent(invitation)
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   
@@ -100,7 +103,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function MengundangPage({ params }: Props) {
-  const { invitation } = await params
+  const { inv } = await params
+  const invitation = (inv as string).replaceAll('+', ' ')
   const guestName = decodeURIComponent(invitation)
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
   

@@ -19,9 +19,14 @@ export default function Footer() {
           
           <p className="font-serif text-gray-400 text-xs tracking-[0.2em]">
             Created by{' '}
-            <span className="text-gray-600 font-medium tracking-wider">
+            <a 
+              href="https://www.instagram.com/ip.rama/?hl=id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-600 font-medium tracking-wider hover:text-gray-800 transition-colors"
+            >
               I Putu Rama Anadya
-            </span>
+            </a>
           </p>
           
           <p className="font-serif text-gray-300 text-xs mt-6">

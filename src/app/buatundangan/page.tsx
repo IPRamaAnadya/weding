@@ -9,7 +9,7 @@ export default function BuatUndanganPage() {
   const [copied, setCopied] = useState(false)
 
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://rikiwulan.site'
-  const invitationURL = name.trim() ? `${baseURL}/mengundang/${encodeURIComponent(name.trim())}` : ''
+  const invitationURL = name.trim() ? `${baseURL}/mengundang/${name.trim().replaceAll(' ', '+')}` : ''
 
   const seoData = {
     title: 'Buat Undangan Pernikahan | Generator Link Undangan Digital',
@@ -23,28 +23,36 @@ export default function BuatUndanganPage() {
     return `Kepada Yth.
 Bapak/Ibu/Saudara/i
 *${guestName}*
-Om Swastyastu,
 
-Tanpa mengurangi rasa hormat, perkenankan kami mengundang Bapak/Ibu/Saudara/i, teman sekaligus sahabat, untuk menghadiri acara pernikahan kami :
+ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ
 
-Berikut link undangan kami untuk info lengkap dari acara bisa kunjungi :
+Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami bermaksud mengundang Bapak/Ibu/Saudara/i, pada Acara Pawiwahan (Pernikahan) kami:
+
+*Dedy & Sinta*
+
+Berikut link undangan kami untuk info lengkap:
 ${invitationURL}
 
-*WAKTU & TEMPAT* 👇👇👇
+*WAKTU & TEMPAT ACARA* 👇
 
-*Resepsi Pernikahan*
-*Tanggal* : Jum'at, 09 Januari 2026
-*Jam* : 14:00 - Selesai
-*Alamat* : Br. Tanah Sari, Ds. Pajahan, Pupuan, Tabanan, Bali
-*Google Map* : https://maps.app.goo.gl/ippAea1qNoV7kP25A
+*Ngidih*
+📅 31 Maret 2026
+⏰ 13:00 - Selesai
 
-Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan untuk hadir dan memberikan doa restu.
+*Mesakapan*
+📅 3 April 2026
+⏰ 13:00 - Selesai
 
-Mohon maaf perihal undangan hanya di bagikan melalui pesan ini. 
+*Lokasi:*
+Br.Kawan, Mas, Ubud
+Jl. Raya Mas No.123, Mas, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia
 
-Terima kasih banyak atas perhatiannya.
+📍 Google Maps:
+https://share.google/pYKbIiNDUJis1Jb65
 
-Om Shanti, Shanti, Shanti, Om.`
+Merupakan suatu kebanggan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami. Atas kehadiran dan doa restunya kami ucapkan terima kasih.
+
+ᬒᬵᬁ ᬰᬵᬦ᭄ᬢᬶᬄ ᬰᬵᬦ᭄ᬢᬶᬄ ᬰᬵᬦ᭄ᬢᬶᬄ ᬒᬵᬁ`
   }
 
   const handleCopy = async () => {
@@ -86,24 +94,34 @@ Om Shanti, Shanti, Shanti, Om.`
         <link rel="canonical" href={seoData.url} />
       </Head>
       
-      <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+      <main className="min-h-screen bg-gray-50 flex items-center justify-center px-6 py-20">
+      <div className="max-w-2xl w-full">
+        <div className="bg-white shadow-lg p-8 md:p-12">
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          <div className="text-center mb-12">
+            <h1 
+              className="text-5xl md:text-6xl text-gray-800 mb-4"
+              style={{ fontFamily: 'The Signature, cursive' }}
+            >
               Buat Undangan
             </h1>
-            <p className="text-gray-600">
-              Masukkan nama tamu untuk membuat link undangan
+            <p 
+              className="text-sm text-gray-600"
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            >
+              Masukkan nama tamu untuk membuat link undangan personal
             </p>
           </div>
 
           {/* Input Form */}
           <div className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Nama Tamu
+              <label 
+                htmlFor="name" 
+                className="block text-sm text-gray-700 mb-2"
+                style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+              >
+                Nama Tamu *
               </label>
               <input
                 type="text"
@@ -111,15 +129,24 @@ Om Shanti, Shanti, Shanti, Om.`
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Contoh: Rama & Mita"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent outline-none transition"
+                className="w-full px-4 py-3 border border-gray-300 rounded-full text-gray-800 focus:border-gray-800 focus:ring-1 focus:ring-gray-800 outline-none transition"
+                style={{ fontFamily: 'Josefin Sans, sans-serif' }}
               />
             </div>
 
-            {/* Preview URL */}
+            {/* Preview Message */}
             {name.trim() && (
-              <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-xs text-gray-500 mb-2">Preview Pesan:</p>
-                <div className="text-sm text-gray-800 whitespace-pre-wrap font-mono max-h-96 overflow-y-auto">
+              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                <p 
+                  className="text-xs text-gray-500 mb-4"
+                  style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+                >
+                  Preview Pesan WhatsApp:
+                </p>
+                <div 
+                  className="text-sm text-gray-700 whitespace-pre-wrap max-h-96 overflow-y-auto leading-relaxed"
+                  style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+                >
                   {generateInvitationMessage()}
                 </div>
               </div>
@@ -130,36 +157,40 @@ Om Shanti, Shanti, Shanti, Om.`
               onClick={handleCopy}
               disabled={!name.trim()}
               className={`
-                w-full py-3 px-6 rounded-lg font-medium
-                transition-all duration-200
+                w-full py-3 px-6 rounded-full text-xs tracking-wider
+                transition-all duration-300
                 flex items-center justify-center gap-2
                 ${
                   name.trim()
                     ? copied
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-800 text-white hover:bg-gray-900'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      ? 'bg-green-600 text-white border border-green-600'
+                      : 'bg-gray-800 text-white border border-gray-800 hover:bg-white hover:text-gray-800'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed border border-gray-300'
                 }
               `}
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
             >
               {copied ? (
                 <>
-                  <Check size={20} />
-                  Pesan Tersalin!
+                  <Check size={18} />
+                  PESAN TERSALIN!
                 </>
               ) : (
                 <>
-                  <Copy size={20} />
-                  Salin Pesan Undangan
+                  <Copy size={18} />
+                  SALIN PESAN UNDANGAN
                 </>
               )}
             </button>
           </div>
 
           {/* Info */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-xs text-gray-500 text-center">
-              Pesan undangan lengkap akan tersalin dengan format WhatsApp dan siap dibagikan
+          <div className="mt-10 pt-8 border-t border-gray-200">
+            <p 
+              className="text-xs text-gray-500 text-center leading-relaxed"
+              style={{ fontFamily: 'Josefin Sans, sans-serif' }}
+            >
+              Pesan undangan lengkap akan tersalin dengan format WhatsApp dan siap dibagikan ke tamu undangan
             </p>
           </div>
         </div>
