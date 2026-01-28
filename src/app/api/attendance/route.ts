@@ -12,7 +12,7 @@ const attendanceSchema = z.object({
 async function sendAdminNotification(attendance: any) {
   try {
     const adminNumber = '6289638435307'
-    const adminNumber2 = '6289638435307'
+    const adminNumber2 = '6287784790482'
     const token = process.env.FONNTE_API_TOKEN
 
     if (!adminNumber || !token) {
