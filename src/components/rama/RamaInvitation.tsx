@@ -270,7 +270,7 @@ export default function RamaInvitation({
     if (introPhase !== 'montage') return
 
     if (montageIndex === introImages.length - 1) {
-      const finishTimer = window.setTimeout(() => setIntroPhase('pause'), 320)
+      const finishTimer = window.setTimeout(() => setIntroPhase('pause'), 180)
       return () => window.clearTimeout(finishTimer)
     }
 
@@ -289,7 +289,7 @@ export default function RamaInvitation({
 
   useEffect(() => {
     if (introPhase !== 'pause') return
-    const pauseTimer = window.setTimeout(() => setIntroPhase('splash'), 1000)
+    const pauseTimer = window.setTimeout(() => setIntroPhase('splash'), 420)
     return () => window.clearTimeout(pauseTimer)
   }, [introPhase])
 
@@ -631,12 +631,12 @@ export default function RamaInvitation({
             initial={{ opacity: 0, filter: 'blur(8px)' }}
             animate={{ opacity: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, filter: 'blur(10px)' }}
-            transition={{ duration: 0.85, ease: 'easeInOut' }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
           >
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.34, 0.34, 0] }}
-              transition={{ duration: 2.7, times: [0, 0.25, 0.7, 1] }}
+              transition={{ duration: 0.7, times: [0, 0.22, 0.62, 1] }}
             >
               {wedding.groomShortName.charAt(0)} &amp; {wedding.brideShortName.charAt(0)}
             </motion.span>
