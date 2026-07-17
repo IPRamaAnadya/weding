@@ -28,19 +28,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const localizedMetadata = {
     id: {
       title: `${wedding.name} untuk ${invitation.name}`,
-      description: `Undangan pernikahan ${wedding.groomFullName} dan ${wedding.brideFullName}.`,
+      description: `Undangan spesial untuk ${invitation.name}. Mari merayakan pernikahan ${wedding.groomShortName} & ${wedding.brideShortName}.`,
     },
     en: {
       title: `${wedding.name} for ${invitation.name}`,
-      description: `Wedding invitation of ${wedding.groomFullName} and ${wedding.brideFullName}.`,
+      description: `A special wedding invitation for ${invitation.name}. Join us in celebrating ${wedding.groomShortName} & ${wedding.brideShortName}.`,
     },
     yue: {
       title: `${wedding.name}｜敬邀 ${invitation.name}`,
-      description: `${wedding.groomFullName} 同 ${wedding.brideFullName} 嘅婚禮邀請。`,
+      description: `特別為 ${invitation.name} 準備嘅婚禮邀請。誠邀您一齊慶祝 ${wedding.groomShortName} 與 ${wedding.brideShortName} 嘅大日子。`,
     },
     ja: {
       title: `${invitation.name}様へ｜${wedding.name}`,
-      description: `${wedding.groomFullName}と${wedding.brideFullName}の結婚式のご案内です。`,
+      description: `${invitation.name}様への特別な結婚式のご案内です。${wedding.groomShortName}と${wedding.brideShortName}の門出を、ぜひご一緒にお祝いください。`,
     },
   }[locale]
 
