@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { normalizeInvitationLocale } from '@/lib/invitation-locale'
 import { prisma } from '@/lib/prisma'
 import WeddingManager from './weddings/[id]/wedding-manager'
 
@@ -36,6 +37,7 @@ export default async function DashboardPage() {
     updatedAt: wedding.updatedAt.toISOString(),
     guests: wedding.guests.map((guest) => ({
       ...guest,
+      locale: normalizeInvitationLocale(guest.locale),
       sentAt: guest.sentAt?.toISOString() || null,
       createdAt: guest.createdAt.toISOString(),
       updatedAt: guest.updatedAt.toISOString(),

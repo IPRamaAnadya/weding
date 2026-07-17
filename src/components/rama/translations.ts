@@ -1,9 +1,15 @@
-export type RamaLocale = 'id' | 'en' | 'yue' | 'ja'
+import type { InvitationLocale } from '@/lib/invitation-locale'
+
+export type RamaLocale = InvitationLocale
 
 export type RamaTranslation = {
   localeName: string
   language: string
   montageCaption: string
+  introPhotoAlt: (groom: string, bride: string) => string
+  couplePhotoAlt: (groom: string, bride: string) => string
+  preweddingPhotoAlt: (groom: string, bride: string, index: number) => string
+  galleryPhotoAlt: (groom: string, bride: string, index: number) => string
   splashInvitation: string
   coverEyebrow: string
   dearGuest: string
@@ -39,6 +45,19 @@ export type RamaTranslation = {
   previousPhoto: string
   nextPhoto: string
   closeGallery: string
+  giftKicker: string
+  giftTitle: string
+  giftDescription: string
+  digitalEnvelope: string
+  bankAccount: string
+  accountHolder: string
+  copyAccount: string
+  physicalGift: string
+  giftRecipient: string
+  shippingAddress: string
+  copyAddress: string
+  copied: string
+  giftThanks: string
   rsvpKicker: string
   rsvpTitle: string
   rsvpDescription: string
@@ -75,6 +94,10 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     localeName: 'Indonesia',
     language: 'Ganti bahasa',
     montageCaption: 'A glimpse of us',
+    introPhotoAlt: (groom, bride) => `Kilas momen ${groom} dan ${bride}`,
+    couplePhotoAlt: (groom, bride) => `${groom} dan ${bride}`,
+    preweddingPhotoAlt: (groom, bride, index) => `Foto prewedding ${groom} dan ${bride} ${index}`,
+    galleryPhotoAlt: (groom, bride, index) => `Momen ${groom} dan ${bride} ${index}`,
     splashInvitation: 'Wedding invitation of',
     coverEyebrow: 'The wedding of',
     dearGuest: 'Kepada Yth.',
@@ -110,6 +133,19 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     previousPhoto: 'Foto sebelumnya',
     nextPhoto: 'Foto berikutnya',
     closeGallery: 'Tutup galeri',
+    giftKicker: 'Tanda kasih',
+    giftTitle: 'Amplop Digital & Gift',
+    giftDescription: 'Doa restu Anda adalah hadiah terindah bagi kami. Namun, apabila berkenan memberikan tanda kasih, dapat disampaikan melalui pilihan berikut.',
+    digitalEnvelope: 'Amplop Digital',
+    bankAccount: 'Nomor rekening',
+    accountHolder: 'Atas nama',
+    copyAccount: 'Salin nomor rekening',
+    physicalGift: 'Kirim Gift',
+    giftRecipient: 'Penerima',
+    shippingAddress: 'Alamat Pengiriman',
+    copyAddress: 'Salin alamat',
+    copied: 'Tersalin',
+    giftThanks: 'Terima kasih atas doa, perhatian, dan tanda kasih yang diberikan.',
     rsvpKicker: 'Kindly respond',
     rsvpTitle: 'Konfirmasi Kehadiran',
     rsvpDescription: 'Kehadiran dan doa restu Anda merupakan hadiah terindah bagi kami.',
@@ -144,6 +180,10 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     localeName: 'English',
     language: 'Change language',
     montageCaption: 'A glimpse of us',
+    introPhotoAlt: (groom, bride) => `A glimpse of ${groom} and ${bride}`,
+    couplePhotoAlt: (groom, bride) => `${groom} and ${bride}`,
+    preweddingPhotoAlt: (groom, bride, index) => `Pre-wedding portrait of ${groom} and ${bride}, frame ${index}`,
+    galleryPhotoAlt: (groom, bride, index) => `${groom} and ${bride}, moment ${index}`,
     splashInvitation: 'Wedding invitation of',
     coverEyebrow: 'The wedding of',
     dearGuest: 'Dear',
@@ -179,6 +219,19 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     previousPhoto: 'Previous photo',
     nextPhoto: 'Next photo',
     closeGallery: 'Close gallery',
+    giftKicker: 'A token of love',
+    giftTitle: 'Digital Envelope & Gift',
+    giftDescription: 'Your prayers and blessings are the greatest gift to us. Should you wish to send another token of love, you may use one of the options below.',
+    digitalEnvelope: 'Digital Envelope',
+    bankAccount: 'Account number',
+    accountHolder: 'Account holder',
+    copyAccount: 'Copy account number',
+    physicalGift: 'Send a Gift',
+    giftRecipient: 'Recipient',
+    shippingAddress: 'Shipping Address',
+    copyAddress: 'Copy address',
+    copied: 'Copied',
+    giftThanks: 'Thank you for your prayers, kindness, and thoughtful gift.',
     rsvpKicker: 'Kindly respond',
     rsvpTitle: 'RSVP',
     rsvpDescription: 'Your presence and blessings would be the most beautiful gift to us.',
@@ -213,6 +266,10 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     localeName: '粵語',
     language: '切換語言',
     montageCaption: '我哋嘅片段',
+    introPhotoAlt: (groom, bride) => `${groom} 同 ${bride} 嘅珍貴片段`,
+    couplePhotoAlt: (groom, bride) => `${groom} 同 ${bride}`,
+    preweddingPhotoAlt: (groom, bride, index) => `${groom} 同 ${bride} 嘅婚前相片 ${index}`,
+    galleryPhotoAlt: (groom, bride, index) => `${groom} 同 ${bride} 嘅珍貴時刻 ${index}`,
     splashInvitation: '誠邀您出席婚禮',
     coverEyebrow: '我哋嘅婚禮',
     dearGuest: '敬邀',
@@ -248,6 +305,19 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     previousPhoto: '上一張相',
     nextPhoto: '下一張相',
     closeGallery: '關閉相片集',
+    giftKicker: '一份心意',
+    giftTitle: '電子禮金與禮物',
+    giftDescription: '您嘅祝福已經係我哋最珍貴嘅禮物。如果您想送上一份心意，可以選擇以下方式。',
+    digitalEnvelope: '電子禮金',
+    bankAccount: '銀行帳戶號碼',
+    accountHolder: '戶口持有人',
+    copyAccount: '複製帳戶號碼',
+    physicalGift: '寄送禮物',
+    giftRecipient: '收件人',
+    shippingAddress: '寄送地址',
+    copyAddress: '複製地址',
+    copied: '已複製',
+    giftThanks: '多謝您嘅祝福、關心同心意。',
     rsvpKicker: '敬請回覆',
     rsvpTitle: '出席確認',
     rsvpDescription: '您嘅蒞臨同祝福，就係我哋最珍貴嘅禮物。',
@@ -282,6 +352,10 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     localeName: '日本語',
     language: '言語を変更',
     montageCaption: 'ふたりの軌跡',
+    introPhotoAlt: (groom, bride) => `${groom}と${bride}の思い出`,
+    couplePhotoAlt: (groom, bride) => `${groom}と${bride}`,
+    preweddingPhotoAlt: (groom, bride, index) => `${groom}と${bride}の前撮り写真 ${index}`,
+    galleryPhotoAlt: (groom, bride, index) => `${groom}と${bride}の思い出 ${index}`,
     splashInvitation: '結婚式のご案内',
     coverEyebrow: '私たちの結婚式',
     dearGuest: '謹んでご招待申し上げます',
@@ -317,6 +391,19 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     previousPhoto: '前の写真',
     nextPhoto: '次の写真',
     closeGallery: 'ギャラリーを閉じる',
+    giftKicker: '感謝のしるし',
+    giftTitle: 'デジタルご祝儀・贈り物',
+    giftDescription: '皆さまからの祝福が、私たちにとって何よりの贈り物です。お気持ちをお寄せくださる場合は、以下をご利用ください。',
+    digitalEnvelope: 'デジタルご祝儀',
+    bankAccount: '口座番号',
+    accountHolder: '口座名義',
+    copyAccount: '口座番号をコピー',
+    physicalGift: '贈り物を送る',
+    giftRecipient: '受取人',
+    shippingAddress: '送付先住所',
+    copyAddress: '住所をコピー',
+    copied: 'コピーしました',
+    giftThanks: '温かいお祝いとお心遣いに、心より感謝申し上げます。',
     rsvpKicker: 'ご出欠のお願い',
     rsvpTitle: '出席確認',
     rsvpDescription: '皆さまのご出席と祝福が、私たちにとって何よりの贈り物です。',

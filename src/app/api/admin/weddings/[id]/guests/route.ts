@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { isAdminSession } from '@/lib/admin'
 import { normalizeGuestSlug } from '@/lib/guest-slug'
+import { invitationLocaleValues } from '@/lib/invitation-locale'
 import { normalizeIndonesianPhone } from '@/lib/phone'
 import { prisma } from '@/lib/prisma'
 
@@ -9,6 +10,7 @@ const guestSchema = z.object({
   name: z.string().trim().min(1).max(120),
   slug: z.string().trim().min(1).max(80),
   phone: z.string().trim().max(30).optional(),
+  locale: z.enum(invitationLocaleValues).default('id'),
 })
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -46,6 +48,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         slug,
         name: input.name,
         phone,
+        locale: input.locale,
         groupName: null,
         maxGuests: 1,
       },

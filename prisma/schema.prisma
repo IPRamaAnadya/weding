@@ -114,6 +114,7 @@ model WeddingGuest {
   name      String
   phone     String?
   groupName String?
+  locale    String             @default("id")
   maxGuests Int                @default(1)
   slug      String             @unique @map("inviteToken")
   isActive  Boolean            @default(true)

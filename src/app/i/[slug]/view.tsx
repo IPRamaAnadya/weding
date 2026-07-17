@@ -2,14 +2,17 @@
 
 import { useEffect } from 'react'
 import RamaInvitation, { RamaWeddingData } from '@/components/rama/RamaInvitation'
+import type { InvitationLocale } from '@/lib/invitation-locale'
 
 export default function PublicWeddingView({
   slug,
   guestName,
+  defaultLocale,
   wedding,
 }: {
   slug: string
   guestName: string
+  defaultLocale: InvitationLocale
   wedding: Partial<RamaWeddingData>
 }) {
   useEffect(() => {
@@ -31,6 +34,7 @@ export default function PublicWeddingView({
   return (
     <RamaInvitation
       guestName={guestName}
+      defaultLocale={defaultLocale}
       weddingData={wedding}
       invitationSlug={slug}
       showDummyConfirmations={false}

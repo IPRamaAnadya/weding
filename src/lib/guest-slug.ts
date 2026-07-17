@@ -9,3 +9,15 @@ export function normalizeGuestSlug(value: string) {
     .join('+')
     .slice(0, 80)
 }
+
+export function normalizeGuestSlugParam(value: string) {
+  try {
+    return normalizeGuestSlug(decodeURIComponent(value))
+  } catch {
+    return normalizeGuestSlug(value)
+  }
+}
+
+export function getGuestInvitationPath(slug: string) {
+  return `/i/${encodeURIComponent(normalizeGuestSlug(slug))}`
+}

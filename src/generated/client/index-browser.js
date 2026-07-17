@@ -206,6 +206,7 @@ exports.Prisma.WeddingGuestScalarFieldEnum = {
   name: 'name',
   phone: 'phone',
   groupName: 'groupName',
+  locale: 'locale',
   maxGuests: 'maxGuests',
   slug: 'slug',
   isActive: 'isActive',

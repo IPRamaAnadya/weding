@@ -3,8 +3,9 @@
 import { FormEvent, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Check, Copy, ExternalLink, List, MessageCircle, Plus, UserPlus } from 'lucide-react'
-import { normalizeGuestSlug } from '@/lib/guest-slug'
+import { getGuestInvitationPath, normalizeGuestSlug } from '@/lib/guest-slug'
 import { generateInvitationMessage } from '@/lib/invitation-message'
+import { invitationLocaleOptions, type InvitationLocale } from '@/lib/invitation-locale'
 import { normalizeIndonesianPhone } from '@/lib/phone'
 
 type Guest = {
@@ -12,19 +13,20 @@ type Guest = {
   name: string
   phone: string | null
   slug: string
+  locale: InvitationLocale
   isSent: boolean
   sentAt: string | null
   createdAt: string
 }
 
-type WeddingMessage = Omit<Parameters<typeof generateInvitationMessage>[0], 'guestName' | 'invitationUrl'>
+type WeddingMessage = Omit<Parameters<typeof generateInvitationMessage>[0], 'locale' | 'guestName' | 'invitationUrl'>
 
 export default function GuestForm({ weddingId, recentGuests: initialGuests, wedding }: {
   weddingId: string
   recentGuests: Guest[]
   wedding: WeddingMessage
 }) {
-  const [form, setForm] = useState({ name: '', phone: '', slug: '' })
+  const [form, setForm] = useState<{ name: string; phone: string; slug: string; locale: InvitationLocale }>({ name: '', phone: '', slug: '', locale: 'id' })
   const [slugEdited, setSlugEdited] = useState(false)
   const [recentGuests, setRecentGuests] = useState(initialGuests)
   const [createdGuest, setCreatedGuest] = useState<Guest | null>(null)
@@ -34,9 +36,10 @@ export default function GuestForm({ weddingId, recentGuests: initialGuests, wedd
 
   const previewSlug = useMemo(() => normalizeGuestSlug(form.slug || form.name), [form.name, form.slug])
 
-  const invitationUrl = (guest: Guest) => `${window.location.origin}/i/${guest.slug}`
+  const invitationUrl = (guest: Guest) => `${window.location.origin}${getGuestInvitationPath(guest.slug)}`
   const messageFor = (guest: Guest) => generateInvitationMessage({
     ...wedding,
+    locale: guest.locale,
     guestName: guest.name,
     invitationUrl: invitationUrl(guest),
   })
@@ -77,7 +80,7 @@ export default function GuestForm({ weddingId, recentGuests: initialGuests, wedd
       const response = await fetch(`/api/admin/weddings/${weddingId}/guests`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name.trim(), phone: phone || '', slug }),
+        body: JSON.stringify({ name: form.name.trim(), phone: phone || '', slug, locale: form.locale }),
       })
       const data = await response.json()
       if (!response.ok) {
@@ -90,13 +93,14 @@ export default function GuestForm({ weddingId, recentGuests: initialGuests, wedd
         name: data.name,
         phone: data.phone,
         slug: data.slug,
+        locale: data.locale,
         isSent: data.isSent,
         sentAt: data.sentAt,
         createdAt: data.createdAt,
       }
       setCreatedGuest(guest)
       setRecentGuests((guests) => [guest, ...guests.filter((item) => item.id !== guest.id)].slice(0, 8))
-      setForm({ name: '', phone: '', slug: '' })
+      setForm({ name: '', phone: '', slug: '', locale: 'id' })
       setSlugEdited(false)
     } catch {
       setError('Koneksi bermasalah. Silakan coba simpan kembali.')
@@ -186,6 +190,20 @@ export default function GuestForm({ weddingId, recentGuests: initialGuests, wedd
               </label>
 
               <label className="block">
+                <span className="mb-2 block text-[10px] uppercase tracking-[0.13em] text-black/50">Bahasa undangan *</span>
+                <select
+                  value={form.locale}
+                  onChange={(event) => setForm((current) => ({ ...current, locale: event.target.value as InvitationLocale }))}
+                  className="w-full border-0 border-b border-black/20 bg-transparent px-0 py-3 text-base outline-none transition-colors focus:border-black"
+                >
+                  {invitationLocaleOptions.map((option) => (
+                    <option key={option.value} value={option.value}>{option.label} — {option.context}</option>
+                  ))}
+                </select>
+                <small className="mt-2 block text-xs leading-5 text-black/38">Menentukan bahasa awal undangan dan template pesan yang dikirim. Default: Indonesia.</small>
+              </label>
+
+              <label className="block">
                 <span className="mb-2 block text-[10px] uppercase tracking-[0.13em] text-black/50">Nomor WhatsApp</span>
                 <input
                   type="tel"
@@ -237,9 +255,10 @@ export default function GuestForm({ weddingId, recentGuests: initialGuests, wedd
                   <div className="min-w-0">
                     <p className="text-[9px] uppercase tracking-[0.18em] text-white/45">Berhasil ditambahkan</p>
                     <h2 className="mt-1 truncate font-serif text-2xl md:text-3xl">{createdGuest.name}</h2>
-                    <a href={`/i/${createdGuest.slug}`} target="_blank" rel="noreferrer" className="mt-2 inline-flex max-w-full items-center gap-2 break-all text-xs text-white/55 hover:text-white">
+                    <a href={getGuestInvitationPath(createdGuest.slug)} target="_blank" rel="noreferrer" className="mt-2 inline-flex max-w-full items-center gap-2 break-all text-xs text-white/55 hover:text-white">
                       /i/{createdGuest.slug} <ExternalLink size={12} className="shrink-0" />
                     </a>
+                    <span className="mt-2 block text-[8px] uppercase tracking-[0.12em] text-white/40">{invitationLocaleOptions.find((option) => option.value === createdGuest.locale)?.context}</span>
                   </div>
                 </div>
 
@@ -284,6 +303,7 @@ export default function GuestForm({ weddingId, recentGuests: initialGuests, wedd
                       <div className="min-w-0">
                         <p className="truncate font-serif text-lg">{guest.name}</p>
                         <p className="mt-1 truncate text-xs text-black/38">/i/{guest.slug}{guest.phone ? ` · ${guest.phone}` : ''}</p>
+                        <span className="mt-1 block text-[8px] uppercase tracking-[0.1em] text-black/32">{invitationLocaleOptions.find((option) => option.value === guest.locale)?.label}</span>
                       </div>
                       <span className={`shrink-0 px-2.5 py-1.5 text-[8px] uppercase tracking-[0.1em] ${guest.isSent ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>{guest.isSent ? 'Dikirim' : 'Belum'}</span>
                     </article>

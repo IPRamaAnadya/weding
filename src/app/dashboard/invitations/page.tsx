@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ChevronLeft, ChevronRight, UserPlus } from 'lucide-react'
+import { normalizeInvitationLocale } from '@/lib/invitation-locale'
 import { prisma } from '@/lib/prisma'
 import InvitationList from './invitation-list'
 
@@ -57,6 +58,7 @@ export default async function InvitationsPage({ searchParams }: { searchParams: 
           name: guest.name,
           phone: guest.phone,
           slug: guest.slug,
+          locale: normalizeInvitationLocale(guest.locale),
           isSent: guest.isSent,
           sentAt: guest.sentAt?.toISOString() || null,
           opened: guest._count.analytics,
@@ -67,6 +69,7 @@ export default async function InvitationsPage({ searchParams }: { searchParams: 
           brideName: wedding.brideShortName,
           groomFullName: wedding.groomFullName,
           brideFullName: wedding.brideFullName,
+          eventDate: wedding.eventDate?.toISOString() || '',
           dateLabel: wedding.dateLabel || '-',
           timeLabel: wedding.timeLabel || '-',
           venueName: wedding.venueName || '-',

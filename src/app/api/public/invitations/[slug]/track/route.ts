@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { normalizeGuestSlugParam } from '@/lib/guest-slug'
 import { prisma } from '@/lib/prisma'
 
 const trackSchema = z.object({
@@ -10,8 +11,9 @@ const trackSchema = z.object({
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const [{ slug }, input] = await Promise.all([params, request.json().then((body) => trackSchema.parse(body))])
+    const normalizedSlug = normalizeGuestSlugParam(slug)
     const guest = await prisma.weddingGuest.findFirst({
-      where: { slug, isActive: true, wedding: { isPublished: true } },
+      where: { slug: { equals: normalizedSlug, mode: 'insensitive' }, isActive: true, wedding: { isPublished: true } },
       select: { id: true, weddingId: true },
     })
     if (!guest) return NextResponse.json({ error: 'Not found' }, { status: 404 })

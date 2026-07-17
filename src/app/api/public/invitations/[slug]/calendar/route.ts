@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { normalizeGuestSlugParam } from '@/lib/guest-slug'
 import { prisma } from '@/lib/prisma'
 
 function icsDate(date: Date) {
@@ -11,8 +12,9 @@ function safeText(value: string) {
 
 export async function GET(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
+  const normalizedSlug = normalizeGuestSlugParam(slug)
   const invitation = await prisma.weddingGuest.findFirst({
-    where: { slug, isActive: true, wedding: { isPublished: true } },
+    where: { slug: { equals: normalizedSlug, mode: 'insensitive' }, isActive: true, wedding: { isPublished: true } },
     include: { wedding: true },
   })
   const wedding = invitation?.wedding

@@ -7,9 +7,13 @@ import {
   ArrowDown,
   ArrowRight,
   CalendarPlus,
+  Check,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  Copy,
+  CreditCard,
+  Gift,
   Languages,
   MapPin,
   Music2,
@@ -17,6 +21,7 @@ import {
   X,
 } from 'lucide-react'
 import { useAudio } from '@/components/AudioProvider'
+import { htmlLanguageByLocale } from '@/lib/invitation-locale'
 import { normalizeIndonesianPhone } from '@/lib/phone'
 import styles from './RamaInvitation.module.css'
 import { ramaLocales, ramaTranslations, type RamaLocale } from './translations'
@@ -26,6 +31,7 @@ type RamaInvitationProps = {
   weddingData?: Partial<RamaWeddingData>
   invitationSlug?: string
   showDummyConfirmations?: boolean
+  defaultLocale?: RamaLocale
 }
 
 export type RamaWeddingData = {
@@ -99,6 +105,12 @@ function getCountdown(targetDate: Date): CountdownValue {
 }
 
 const ramaImage = (number: number) => `/images/rama/${number}.webp`
+
+const giftAccount = {
+  bank: 'BRI',
+  number: '478001000655508',
+  holder: 'I Putu Rama Anadya',
+}
 
 const introImages = [
   32, 22, 31, 1, 4, 2, 15, 16, 34, 35,
@@ -185,6 +197,7 @@ export default function RamaInvitation({
   weddingData,
   invitationSlug,
   showDummyConfirmations = true,
+  defaultLocale = 'id',
 }: RamaInvitationProps) {
   const wedding = { ...defaultRamaWedding, ...weddingData }
   const weddingDateTime = useMemo(() => new Date(wedding.eventDate), [wedding.eventDate])
@@ -198,7 +211,7 @@ export default function RamaInvitation({
   const [heroSlideIndex, setHeroSlideIndex] = useState(0)
   const [countdown, setCountdown] = useState<CountdownValue | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [locale, setLocale] = useState<RamaLocale>('id')
+  const [locale, setLocale] = useState<RamaLocale>(defaultLocale)
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
   const [lightboxDirection, setLightboxDirection] = useState<1 | -1>(1)
@@ -211,6 +224,7 @@ export default function RamaInvitation({
   const [confirmations, setConfirmations] = useState<ConfirmationItem[]>(showDummyConfirmations ? dummyConfirmations : [])
   const [confirmationPage, setConfirmationPage] = useState(1)
   const [submitState, setSubmitState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [copiedGiftDetail, setCopiedGiftDetail] = useState<'account' | 'address' | null>(null)
   const loadedIntroFrames = useRef(new Set<number>())
   const galleryScrollerRef = useRef<HTMLDivElement>(null)
   const galleryPauseUntilRef = useRef(0)
@@ -312,7 +326,7 @@ export default function RamaInvitation({
   }, [opened])
 
   useEffect(() => {
-    document.documentElement.lang = locale === 'yue' ? 'zh-HK' : locale
+    document.documentElement.lang = htmlLanguageByLocale[locale]
   }, [locale])
 
   useEffect(() => {
@@ -467,6 +481,18 @@ export default function RamaInvitation({
     setIsPlaying((current) => !current)
   }
 
+  const copyGiftDetail = async (value: string, detail: 'account' | 'address') => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopiedGiftDetail(detail)
+      window.setTimeout(() => {
+        setCopiedGiftDetail((current) => current === detail ? null : current)
+      }, 2000)
+    } catch {
+      setCopiedGiftDetail(null)
+    }
+  }
+
   const submitRsvp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!rsvp.name.trim() || !rsvp.status) return
@@ -532,7 +558,7 @@ export default function RamaInvitation({
   }
 
   return (
-    <div className={styles.invitation}>
+    <div className={styles.invitation} lang={htmlLanguageByLocale[locale]}>
       <AnimatePresence>
         {introPhase !== 'done' && (
           <motion.div
@@ -570,7 +596,7 @@ export default function RamaInvitation({
               >
                 <Image
                   src={src}
-                  alt={`Kilas momen ${wedding.groomShortName} dan ${wedding.brideShortName}`}
+                  alt={t.introPhotoAlt(wedding.groomShortName, wedding.brideShortName)}
                   fill
                   priority={index === 0}
                   loading={index === 0 ? undefined : 'eager'}
@@ -653,7 +679,7 @@ export default function RamaInvitation({
           >
             <Image
               src={ramaImage(33)}
-              alt={`${wedding.groomShortName} dan ${wedding.brideShortName}`}
+              alt={t.couplePhotoAlt(wedding.groomShortName, wedding.brideShortName)}
               fill
               priority
               sizes="100vw"
@@ -754,7 +780,7 @@ export default function RamaInvitation({
               >
                 <Image
                   src={heroSlides[heroSlideIndex]}
-                  alt={`Foto prewedding ${wedding.groomShortName} dan ${wedding.brideShortName} ${heroSlideIndex + 1}`}
+                  alt={t.preweddingPhotoAlt(wedding.groomShortName, wedding.brideShortName, heroSlideIndex + 1)}
                   fill
                   sizes="100vw"
                   className={styles.heroImage}
@@ -857,7 +883,7 @@ export default function RamaInvitation({
         <section className={styles.dateSection}>
           <Image
             src={ramaImage(25)}
-            alt={`${wedding.groomShortName} dan ${wedding.brideShortName}`}
+            alt={t.couplePhotoAlt(wedding.groomShortName, wedding.brideShortName)}
             fill
             sizes="100vw"
             className={styles.dateImage}
@@ -941,7 +967,7 @@ export default function RamaInvitation({
                 >
                   <Image
                     src={image}
-                    alt={`Momen ${wedding.groomShortName} dan ${wedding.brideShortName} ${imageIndex + 1}`}
+                    alt={t.galleryPhotoAlt(wedding.groomShortName, wedding.brideShortName, imageIndex + 1)}
                     fill
                     sizes="(max-width: 760px) 68vw, 28vw"
                     className={styles.galleryImage}
@@ -971,6 +997,72 @@ export default function RamaInvitation({
               </div>
             </div>
           </motion.div>
+        </section>
+
+        <section className={styles.giftSection}>
+          <motion.div className={styles.giftIntro} {...reveal}>
+            <p>{t.giftKicker}</p>
+            <h2>{t.giftTitle}</h2>
+            <span>{t.giftDescription}</span>
+          </motion.div>
+
+          <div className={styles.giftGrid}>
+            <motion.article className={styles.giftCard} {...reveal}>
+              <div className={styles.giftCardHeader}>
+                <CreditCard size={19} strokeWidth={1.5} />
+                <span>01</span>
+              </div>
+              <p>{t.digitalEnvelope}</p>
+              <h3>{giftAccount.bank}</h3>
+              <dl className={styles.giftDetails}>
+                <div>
+                  <dt>{t.bankAccount}</dt>
+                  <dd className={styles.accountNumber}>{giftAccount.number}</dd>
+                </div>
+                <div>
+                  <dt>{t.accountHolder}</dt>
+                  <dd>{giftAccount.holder}</dd>
+                </div>
+              </dl>
+              <button
+                type="button"
+                className={styles.giftCopyButton}
+                onClick={() => copyGiftDetail(giftAccount.number, 'account')}
+              >
+                {copiedGiftDetail === 'account' ? <Check size={15} /> : <Copy size={15} />}
+                {copiedGiftDetail === 'account' ? t.copied : t.copyAccount}
+              </button>
+            </motion.article>
+
+            <motion.article className={styles.giftCard} {...reveal}>
+              <div className={styles.giftCardHeader}>
+                <Gift size={19} strokeWidth={1.5} />
+                <span>02</span>
+              </div>
+              <p>{t.physicalGift}</p>
+              <h3>{t.shippingAddress}</h3>
+              <dl className={styles.giftDetails}>
+                <div>
+                  <dt>{t.giftRecipient}</dt>
+                  <dd>{wedding.groomShortName} &amp; {wedding.brideShortName}</dd>
+                </div>
+                <div>
+                  <dt>{wedding.venueName}</dt>
+                  <dd className={styles.giftAddress}>{wedding.venueAddress}</dd>
+                </div>
+              </dl>
+              <button
+                type="button"
+                className={styles.giftCopyButton}
+                onClick={() => copyGiftDetail(`${wedding.venueName}, ${wedding.venueAddress}`, 'address')}
+              >
+                {copiedGiftDetail === 'address' ? <Check size={15} /> : <Copy size={15} />}
+                {copiedGiftDetail === 'address' ? t.copied : t.copyAddress}
+              </button>
+            </motion.article>
+          </div>
+
+          <motion.p className={styles.giftThanks} {...reveal}>{t.giftThanks}</motion.p>
         </section>
 
         <section className={styles.rsvpSection}>
@@ -1142,7 +1234,7 @@ export default function RamaInvitation({
               >
                 <Image
                   src={galleryImages[selectedImage]}
-                  alt={`Momen ${wedding.groomShortName} dan ${wedding.brideShortName} ${selectedImage + 1}`}
+                  alt={t.galleryPhotoAlt(wedding.groomShortName, wedding.brideShortName, selectedImage + 1)}
                   fill
                   sizes="100vw"
                   className={styles.lightboxImage}

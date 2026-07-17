@@ -9530,6 +9530,7 @@ export namespace Prisma {
     name: string | null
     phone: string | null
     groupName: string | null
+    locale: string | null
     maxGuests: number | null
     slug: string | null
     isActive: boolean | null
@@ -9545,6 +9546,7 @@ export namespace Prisma {
     name: string | null
     phone: string | null
     groupName: string | null
+    locale: string | null
     maxGuests: number | null
     slug: string | null
     isActive: boolean | null
@@ -9560,6 +9562,7 @@ export namespace Prisma {
     name: number
     phone: number
     groupName: number
+    locale: number
     maxGuests: number
     slug: number
     isActive: number
@@ -9585,6 +9588,7 @@ export namespace Prisma {
     name?: true
     phone?: true
     groupName?: true
+    locale?: true
     maxGuests?: true
     slug?: true
     isActive?: true
@@ -9600,6 +9604,7 @@ export namespace Prisma {
     name?: true
     phone?: true
     groupName?: true
+    locale?: true
     maxGuests?: true
     slug?: true
     isActive?: true
@@ -9615,6 +9620,7 @@ export namespace Prisma {
     name?: true
     phone?: true
     groupName?: true
+    locale?: true
     maxGuests?: true
     slug?: true
     isActive?: true
@@ -9717,6 +9723,7 @@ export namespace Prisma {
     name: string
     phone: string | null
     groupName: string | null
+    locale: string
     maxGuests: number
     slug: string
     isActive: boolean
@@ -9751,6 +9758,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     groupName?: boolean
+    locale?: boolean
     maxGuests?: boolean
     slug?: boolean
     isActive?: boolean
@@ -9770,6 +9778,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     groupName?: boolean
+    locale?: boolean
     maxGuests?: boolean
     slug?: boolean
     isActive?: boolean
@@ -9786,6 +9795,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     groupName?: boolean
+    locale?: boolean
     maxGuests?: boolean
     slug?: boolean
     isActive?: boolean
@@ -9802,6 +9812,7 @@ export namespace Prisma {
     name?: boolean
     phone?: boolean
     groupName?: boolean
+    locale?: boolean
     maxGuests?: boolean
     slug?: boolean
     isActive?: boolean
@@ -9811,7 +9822,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type WeddingGuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingId" | "name" | "phone" | "groupName" | "maxGuests" | "slug" | "isActive" | "isSent" | "sentAt" | "createdAt" | "updatedAt", ExtArgs["result"]["weddingGuest"]>
+  export type WeddingGuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingId" | "name" | "phone" | "groupName" | "locale" | "maxGuests" | "slug" | "isActive" | "isSent" | "sentAt" | "createdAt" | "updatedAt", ExtArgs["result"]["weddingGuest"]>
   export type WeddingGuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     wedding?: boolean | WeddingDefaultArgs<ExtArgs>
     rsvp?: boolean | WeddingGuest$rsvpArgs<ExtArgs>
@@ -9838,6 +9849,7 @@ export namespace Prisma {
       name: string
       phone: string | null
       groupName: string | null
+      locale: string
       maxGuests: number
       slug: string
       isActive: boolean
@@ -10276,6 +10288,7 @@ export namespace Prisma {
     readonly name: FieldRef<"WeddingGuest", 'String'>
     readonly phone: FieldRef<"WeddingGuest", 'String'>
     readonly groupName: FieldRef<"WeddingGuest", 'String'>
+    readonly locale: FieldRef<"WeddingGuest", 'String'>
     readonly maxGuests: FieldRef<"WeddingGuest", 'Int'>
     readonly slug: FieldRef<"WeddingGuest", 'String'>
     readonly isActive: FieldRef<"WeddingGuest", 'Boolean'>
@@ -13165,6 +13178,7 @@ export namespace Prisma {
     name: 'name',
     phone: 'phone',
     groupName: 'groupName',
+    locale: 'locale',
     maxGuests: 'maxGuests',
     slug: 'slug',
     isActive: 'isActive',
@@ -13879,6 +13893,7 @@ export namespace Prisma {
     name?: StringFilter<"WeddingGuest"> | string
     phone?: StringNullableFilter<"WeddingGuest"> | string | null
     groupName?: StringNullableFilter<"WeddingGuest"> | string | null
+    locale?: StringFilter<"WeddingGuest"> | string
     maxGuests?: IntFilter<"WeddingGuest"> | number
     slug?: StringFilter<"WeddingGuest"> | string
     isActive?: BoolFilter<"WeddingGuest"> | boolean
@@ -13897,6 +13912,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrderInput | SortOrder
     groupName?: SortOrderInput | SortOrder
+    locale?: SortOrder
     maxGuests?: SortOrder
     slug?: SortOrder
     isActive?: SortOrder
@@ -13919,6 +13935,7 @@ export namespace Prisma {
     name?: StringFilter<"WeddingGuest"> | string
     phone?: StringNullableFilter<"WeddingGuest"> | string | null
     groupName?: StringNullableFilter<"WeddingGuest"> | string | null
+    locale?: StringFilter<"WeddingGuest"> | string
     maxGuests?: IntFilter<"WeddingGuest"> | number
     isActive?: BoolFilter<"WeddingGuest"> | boolean
     isSent?: BoolFilter<"WeddingGuest"> | boolean
@@ -13936,6 +13953,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrderInput | SortOrder
     groupName?: SortOrderInput | SortOrder
+    locale?: SortOrder
     maxGuests?: SortOrder
     slug?: SortOrder
     isActive?: SortOrder
@@ -13959,6 +13977,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"WeddingGuest"> | string
     phone?: StringNullableWithAggregatesFilter<"WeddingGuest"> | string | null
     groupName?: StringNullableWithAggregatesFilter<"WeddingGuest"> | string | null
+    locale?: StringWithAggregatesFilter<"WeddingGuest"> | string
     maxGuests?: IntWithAggregatesFilter<"WeddingGuest"> | number
     slug?: StringWithAggregatesFilter<"WeddingGuest"> | string
     isActive?: BoolWithAggregatesFilter<"WeddingGuest"> | boolean
@@ -14709,6 +14728,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -14727,6 +14747,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -14743,6 +14764,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -14761,6 +14783,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -14778,6 +14801,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -14792,6 +14816,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -14807,6 +14832,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -15498,6 +15524,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrder
     groupName?: SortOrder
+    locale?: SortOrder
     maxGuests?: SortOrder
     slug?: SortOrder
     isActive?: SortOrder
@@ -15517,6 +15544,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrder
     groupName?: SortOrder
+    locale?: SortOrder
     maxGuests?: SortOrder
     slug?: SortOrder
     isActive?: SortOrder
@@ -15532,6 +15560,7 @@ export namespace Prisma {
     name?: SortOrder
     phone?: SortOrder
     groupName?: SortOrder
+    locale?: SortOrder
     maxGuests?: SortOrder
     slug?: SortOrder
     isActive?: SortOrder
@@ -16643,6 +16672,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -16659,6 +16689,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -16769,6 +16800,7 @@ export namespace Prisma {
     name?: StringFilter<"WeddingGuest"> | string
     phone?: StringNullableFilter<"WeddingGuest"> | string | null
     groupName?: StringNullableFilter<"WeddingGuest"> | string | null
+    locale?: StringFilter<"WeddingGuest"> | string
     maxGuests?: IntFilter<"WeddingGuest"> | number
     slug?: StringFilter<"WeddingGuest"> | string
     isActive?: BoolFilter<"WeddingGuest"> | boolean
@@ -17134,6 +17166,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -17151,6 +17184,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -17245,6 +17279,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17262,6 +17297,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17334,6 +17370,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -17351,6 +17388,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -17445,6 +17483,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17462,6 +17501,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17557,6 +17597,7 @@ export namespace Prisma {
     name: string
     phone?: string | null
     groupName?: string | null
+    locale?: string
     maxGuests?: number
     slug: string
     isActive?: boolean
@@ -17593,6 +17634,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17609,6 +17651,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -17625,6 +17668,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    locale?: StringFieldUpdateOperationsInput | string
     maxGuests?: IntFieldUpdateOperationsInput | number
     slug?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean

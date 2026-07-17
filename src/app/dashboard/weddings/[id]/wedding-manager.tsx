@@ -4,7 +4,8 @@ import { FormEvent, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Check, Copy, List, Plus, UserPlus } from 'lucide-react'
-import { normalizeGuestSlug } from '@/lib/guest-slug'
+import { getGuestInvitationPath, normalizeGuestSlug } from '@/lib/guest-slug'
+import { invitationLocaleOptions, type InvitationLocale } from '@/lib/invitation-locale'
 import { normalizeIndonesianPhone } from '@/lib/phone'
 
 type Rsvp = {
@@ -25,6 +26,7 @@ type Guest = {
   groupName: string | null
   maxGuests: number
   slug: string
+  locale: InvitationLocale
   isActive: boolean
   isSent: boolean
   sentAt: string | null
@@ -86,7 +88,7 @@ export default function WeddingManager({ wedding, analytics }: { wedding: Weddin
     mapUrl: wedding.mapUrl || '',
     isPublished: wedding.isPublished,
   })
-  const [guestForm, setGuestForm] = useState({ name: '', slug: '', phone: '' })
+  const [guestForm, setGuestForm] = useState<{ name: string; slug: string; phone: string; locale: InvitationLocale }>({ name: '', slug: '', phone: '', locale: 'id' })
   const [guestSlugEdited, setGuestSlugEdited] = useState(false)
   const [saving, setSaving] = useState(false)
   const [addingGuest, setAddingGuest] = useState(false)
@@ -132,14 +134,14 @@ export default function WeddingManager({ wedding, analytics }: { wedding: Weddin
     const data = await response.json()
     setAddingGuest(false)
     if (!response.ok) return setMessage(data.error || 'Tamu belum berhasil ditambahkan.')
-    setGuestForm({ name: '', slug: '', phone: '' })
+    setGuestForm({ name: '', slug: '', phone: '', locale: 'id' })
     setGuestSlugEdited(false)
     setMessage('Tamu dan link personal berhasil dibuat.')
     router.refresh()
   }
 
   const copyGuestLink = async (slug: string) => {
-    const url = `${window.location.origin}/i/${slug}`
+    const url = `${window.location.origin}${getGuestInvitationPath(slug)}`
     await navigator.clipboard.writeText(url)
     setCopiedSlug(slug)
     window.setTimeout(() => setCopiedSlug(''), 1600)
@@ -223,12 +225,13 @@ export default function WeddingManager({ wedding, analytics }: { wedding: Weddin
           <div className="space-y-5">
             <label><span className="mb-2 block text-[9px] uppercase tracking-[0.12em] text-black/45">Nama tamu</span><input value={guestForm.name} onChange={(event) => { const name = event.target.value; setGuestForm((current) => ({ ...current, name, slug: guestSlugEdited ? current.slug : normalizeGuestSlug(name) })) }} className="w-full border border-black/15 bg-transparent px-4 py-3 outline-none" placeholder="Rama Anadya" required /></label>
             <label><span className="mb-2 block text-[9px] uppercase tracking-[0.12em] text-black/45">Slug undangan</span><input value={guestForm.slug} onChange={(event) => { setGuestSlugEdited(true); setGuestForm((current) => ({ ...current, slug: event.target.value })) }} onBlur={() => setGuestForm((current) => ({ ...current, slug: normalizeGuestSlug(current.slug) }))} className="w-full border border-black/15 bg-transparent px-4 py-3 outline-none" placeholder="Rama+Anadya" required /><small className="mt-2 block text-xs text-black/40">Link: /i/{guestForm.slug || 'Rama+Anadya'}</small></label>
+            <label><span className="mb-2 block text-[9px] uppercase tracking-[0.12em] text-black/45">Bahasa undangan</span><select value={guestForm.locale} onChange={(event) => setGuestForm((current) => ({ ...current, locale: event.target.value as InvitationLocale }))} className="w-full border border-black/15 bg-transparent px-4 py-3 outline-none">{invitationLocaleOptions.map((option) => <option key={option.value} value={option.value}>{option.label} — {option.context}</option>)}</select><small className="mt-2 block text-xs text-black/40">Bahasa awal undangan dan pesan. Default Indonesia.</small></label>
             <label><span className="mb-2 block text-[9px] uppercase tracking-[0.12em] text-black/45">Nomor HP</span><input type="tel" value={guestForm.phone} onChange={(event) => setGuestForm((current) => ({ ...current, phone: event.target.value }))} onBlur={() => setGuestForm((current) => ({ ...current, phone: normalizeIndonesianPhone(current.phone) || current.phone }))} className="w-full border border-black/15 bg-transparent px-4 py-3 outline-none" placeholder="628xxxxxxxxxx" /><small className="mt-2 block text-xs text-black/40">Otomatis disimpan dalam format Indonesia, contoh 62877...</small></label>
             <button type="submit" disabled={addingGuest} className="inline-flex items-center gap-2 bg-[#171816] px-5 py-3 text-[10px] uppercase tracking-[0.14em] text-white"><Plus size={14} /> {addingGuest ? 'Membuat...' : 'Tambah dan buat link'}</button>
           </div>
         </form>
 
-        <div className="bg-[#fbfaf6] p-6 md:p-8"><p className="text-[9px] uppercase tracking-[0.18em] text-black/40">{wedding.guests.length} guests</p><h2 className="mb-7 mt-2 font-serif text-3xl">Daftar tamu</h2>{wedding.guests.length === 0 ? <p className="text-sm text-black/45">Belum ada tamu.</p> : <div className="divide-y divide-black/10">{wedding.guests.map((guest) => <div key={guest.id} className={`flex flex-col justify-between gap-4 py-5 sm:flex-row sm:items-center ${guest.isActive ? '' : 'opacity-40'}`}><div><strong className="font-serif text-lg font-normal">{guest.name}</strong><p className="mt-1 text-xs text-black/40">/i/{guest.slug}{guest.phone ? ` · ${guest.phone}` : ''} · Dibuka {guest._count.analytics} kali</p>{guest.rsvp && <span className="mt-2 inline-block text-[9px] uppercase tracking-wider text-emerald-700">{guest.rsvp.status.replaceAll('_', ' ')}</span>}</div><div className="flex gap-2"><button type="button" disabled={!guest.isActive} onClick={() => copyGuestLink(guest.slug)} className="inline-flex items-center gap-2 border border-black/15 px-4 py-2 text-[9px] uppercase tracking-wider disabled:opacity-40">{copiedSlug === guest.slug ? <Check size={13} /> : <Copy size={13} />} {copiedSlug === guest.slug ? 'Tersalin' : 'Salin link'}</button>{guest.isActive && <button type="button" onClick={() => deactivateGuest(guest.id)} className="border border-red-900/20 px-3 py-2 text-[9px] uppercase tracking-wider text-red-800">Nonaktifkan</button>}</div></div>)}</div>}</div>
+        <div className="bg-[#fbfaf6] p-6 md:p-8"><p className="text-[9px] uppercase tracking-[0.18em] text-black/40">{wedding.guests.length} guests</p><h2 className="mb-7 mt-2 font-serif text-3xl">Daftar tamu</h2>{wedding.guests.length === 0 ? <p className="text-sm text-black/45">Belum ada tamu.</p> : <div className="divide-y divide-black/10">{wedding.guests.map((guest) => <div key={guest.id} className={`flex flex-col justify-between gap-4 py-5 sm:flex-row sm:items-center ${guest.isActive ? '' : 'opacity-40'}`}><div><strong className="font-serif text-lg font-normal">{guest.name}</strong><p className="mt-1 text-xs text-black/40">/i/{guest.slug}{guest.phone ? ` · ${guest.phone}` : ''} · Dibuka {guest._count.analytics} kali</p><span className="mt-2 inline-block text-[8px] uppercase tracking-[0.1em] text-black/35">{invitationLocaleOptions.find((option) => option.value === guest.locale)?.context}</span>{guest.rsvp && <span className="ml-2 mt-2 inline-block text-[9px] uppercase tracking-wider text-emerald-700">{guest.rsvp.status.replaceAll('_', ' ')}</span>}</div><div className="flex gap-2"><button type="button" disabled={!guest.isActive} onClick={() => copyGuestLink(guest.slug)} className="inline-flex items-center gap-2 border border-black/15 px-4 py-2 text-[9px] uppercase tracking-wider disabled:opacity-40">{copiedSlug === guest.slug ? <Check size={13} /> : <Copy size={13} />} {copiedSlug === guest.slug ? 'Tersalin' : 'Salin link'}</button>{guest.isActive && <button type="button" onClick={() => deactivateGuest(guest.id)} className="border border-red-900/20 px-3 py-2 text-[9px] uppercase tracking-wider text-red-800">Nonaktifkan</button>}</div></div>)}</div>}</div>
       </section>
 
       <section className="bg-[#fbfaf6] p-6 md:p-10"><p className="text-[9px] uppercase tracking-[0.18em] text-black/40">Attendance & wishes</p><h2 className="mb-8 mt-2 font-serif text-3xl">Konfirmasi terbaru</h2>{wedding.rsvps.length === 0 ? <p className="text-sm text-black/45">Belum ada konfirmasi.</p> : <div className="divide-y divide-black/10">{wedding.rsvps.map((rsvp) => <article key={rsvp.id} className={`grid gap-4 py-5 md:grid-cols-[0.65fr_0.4fr_1fr_auto] md:items-start ${rsvp.isHidden ? 'opacity-45' : ''}`}><strong className="font-serif font-normal">{rsvp.name}</strong><select value={rsvp.status} onChange={(event) => updateRsvp(rsvp.id, { status: event.target.value as Rsvp['status'] })} className="bg-transparent text-[9px] uppercase tracking-wider text-black/55"><option value="HADIR">Hadir</option><option value="TIDAK_HADIR">Tidak hadir</option><option value="BELUM_TAHU">Belum tahu</option></select><p className="text-sm italic leading-6 text-black/55">{rsvp.message || 'Tanpa pesan'} · {rsvp.guestCount} orang</p><div className="flex gap-2"><button type="button" onClick={() => updateRsvp(rsvp.id, { isHidden: !rsvp.isHidden })} className="text-[9px] uppercase tracking-wider text-black/55">{rsvp.isHidden ? 'Tampilkan' : 'Sembunyikan'}</button><button type="button" onClick={() => deleteRsvp(rsvp.id)} className="text-[9px] uppercase tracking-wider text-red-700">Hapus</button></div></article>)}</div>}</section>

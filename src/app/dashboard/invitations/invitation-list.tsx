@@ -3,20 +3,23 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Check, Copy, MessageCircle } from 'lucide-react'
+import { getGuestInvitationPath } from '@/lib/guest-slug'
 import { generateInvitationMessage } from '@/lib/invitation-message'
+import { invitationLocaleOptions, type InvitationLocale } from '@/lib/invitation-locale'
 
 type Guest = {
   id: string
   name: string
   phone: string | null
   slug: string
+  locale: InvitationLocale
   isSent: boolean
   sentAt: string | null
   opened: number
   rsvpStatus: 'HADIR' | 'TIDAK_HADIR' | 'BELUM_TAHU' | null
 }
 
-type WeddingMessage = Omit<Parameters<typeof generateInvitationMessage>[0], 'guestName' | 'invitationUrl'>
+type WeddingMessage = Omit<Parameters<typeof generateInvitationMessage>[0], 'locale' | 'guestName' | 'invitationUrl'>
 
 export default function InvitationList({ weddingId, guests, wedding }: { weddingId: string; guests: Guest[]; wedding: WeddingMessage }) {
   const router = useRouter()
@@ -24,8 +27,9 @@ export default function InvitationList({ weddingId, guests, wedding }: { wedding
 
   const messageFor = (guest: Guest) => generateInvitationMessage({
     ...wedding,
+    locale: guest.locale,
     guestName: guest.name,
-    invitationUrl: `${window.location.origin}/i/${guest.slug}`,
+    invitationUrl: `${window.location.origin}${getGuestInvitationPath(guest.slug)}`,
   })
 
   const markAsSent = async (guestId: string) => {
@@ -63,6 +67,7 @@ export default function InvitationList({ weddingId, guests, wedding }: { wedding
           <div>
             <h2 className="font-serif text-xl">{guest.name}</h2>
             <p className="mt-1 text-xs text-black/40">/i/{guest.slug}{guest.phone ? ` · ${guest.phone}` : ''}</p>
+            <span className="mt-2 inline-block text-[8px] uppercase tracking-[0.12em] text-black/35">{invitationLocaleOptions.find((option) => option.value === guest.locale)?.context}</span>
           </div>
           <div className="flex flex-wrap gap-2">
             <span className={`px-3 py-1.5 text-[8px] uppercase tracking-wider ${guest.isSent ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'}`}>{guest.isSent ? 'Sudah dikirim' : 'Belum dikirim'}</span>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { normalizeGuestSlugParam } from '@/lib/guest-slug'
 import { normalizeIndonesianPhone } from '@/lib/phone'
 import { prisma } from '@/lib/prisma'
 
@@ -12,8 +13,9 @@ const rsvpSchema = z.object({
 })
 
 async function findGuest(slug: string) {
+  const normalizedSlug = normalizeGuestSlugParam(slug)
   return prisma.weddingGuest.findFirst({
-    where: { slug, isActive: true, wedding: { isPublished: true } },
+    where: { slug: { equals: normalizedSlug, mode: 'insensitive' }, isActive: true, wedding: { isPublished: true } },
   })
 }
 

@@ -1,0 +1,2 @@
+ALTER TABLE "WeddingGuest"
+ADD COLUMN "locale" TEXT NOT NULL DEFAULT 'id';
