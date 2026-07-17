@@ -1,4 +1,5 @@
 // lib/whatsapp.ts
+import { normalizeIndonesianPhone } from '@/lib/phone'
 interface WhatsAppMessage {
   target: string // Format: '08123456789|Name|Role' or '08123456789'
   message: string // Can include variables like {name}, {var1}
@@ -37,7 +38,7 @@ export function formatWhatsAppTarget(
   name: string,
   role: string = 'Guest'
 ): string {
-  return `${phone}|${name}|${role}`
+  return `${normalizeIndonesianPhone(phone) || phone}|${name}|${role}`
 }
 
 // Helper function to send invitation

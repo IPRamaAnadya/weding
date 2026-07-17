@@ -8,7 +8,7 @@ import {
 } from 'react'
 
 type AudioContextType = {
-  play: () => void
+  play: () => Promise<boolean>
   pause: () => void
   toggle: () => void
   unlock: () => Promise<void>
@@ -43,14 +43,20 @@ export function AudioProvider({
     }
   }
 
-  const play = () => {
+  const play = async () => {
     const audio = audioRef.current
-    if (!audio || !unlockedRef.current) return
+    if (!audio) return false
 
     audio.currentTime = START_AT_SECONDS
     audio.loop = false
 
-    audio.play().catch(console.error)
+    try {
+      await audio.play()
+      unlockedRef.current = true
+      return true
+    } catch {
+      return false
+    }
   }
 
   const pause = () => {
@@ -61,7 +67,8 @@ export function AudioProvider({
     const audio = audioRef.current
     if (!audio) return
 
-    audio.paused ? play() : pause()
+    if (audio.paused) void play()
+    else pause()
   }
 
   return (
@@ -72,7 +79,7 @@ export function AudioProvider({
         playsInline
         webkit-playsinline="true"
       >
-        <source src="/music/music.mp3" type="audio/mpeg" />
+        <source src="/music/nothing.mp3" type="audio/mpeg" />
       </audio>
       {children}
     </AudioContext.Provider>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
+import { normalizeIndonesianPhone } from '@/lib/phone'
 
 const invitationSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -11,9 +12,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const validatedData = invitationSchema.parse(body)
+    const phone = normalizeIndonesianPhone(validatedData.phone)
+    if (validatedData.phone && !phone) {
+      return NextResponse.json({ error: 'Nomor HP harus berupa nomor Indonesia yang valid.' }, { status: 400 })
+    }
 
     const invitation = await prisma.invitation.create({
-      data: validatedData,
+      data: { ...validatedData, phone },
     })
 
     return NextResponse.json(invitation, { status: 201 })
@@ -37,7 +42,7 @@ export async function GET() {
       orderBy: { createdAt: 'desc' },
     })
     return NextResponse.json(invitations)
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

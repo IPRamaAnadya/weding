@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
+import { normalizeIndonesianPhone } from '@/lib/phone'
 
 const attendanceSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -9,7 +10,12 @@ const attendanceSchema = z.object({
   message: z.string().optional(),
 })
 
-async function sendAdminNotification(attendance: any) {
+async function sendAdminNotification(attendance: {
+  name: string
+  phone: string | null
+  status: 'HADIR' | 'TIDAK_HADIR' | 'BELUM_TAHU'
+  message: string | null
+}) {
   try {
     const adminNumber = '6289638435307'
     const adminNumber2 = '6287784790482'
@@ -58,11 +64,14 @@ Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' })}`
       headers: {
         'Authorization': token,
       },
-      body: formData,
+      body: formData2,
     })
 
     if (!response.ok) {
       console.error('Failed to send WhatsApp notification:', await response.text())
+    }
+    if (!response2.ok) {
+      console.error('Failed to send second WhatsApp notification:', await response2.text())
     }
   } catch (error) {
     console.error('Error sending admin notification:', error)
@@ -73,9 +82,13 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const validatedData = attendanceSchema.parse(body)
+    const phone = normalizeIndonesianPhone(validatedData.phone)
+    if (validatedData.phone && !phone) {
+      return NextResponse.json({ error: 'Nomor HP harus berupa nomor Indonesia yang valid.' }, { status: 400 })
+    }
 
     const attendance = await prisma.attendance.create({
-      data: validatedData,
+      data: { ...validatedData, phone },
     })
 
     // Send WhatsApp notification to admin (non-blocking)

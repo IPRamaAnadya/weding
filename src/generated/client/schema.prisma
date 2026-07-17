@@ -44,6 +44,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  passwordHash  String?
+  isAdmin       Boolean   @default(false)
   accounts      Account[]
   sessions      Session[]
 }
@@ -75,8 +77,102 @@ model Attendance {
   updatedAt DateTime         @updatedAt
 }
 
+// Managed weddings live alongside the legacy Invitation/Attendance tables so
+// existing Sinta, Wulan, and Rama links keep working during the migration.
+model Wedding {
+  id              String             @id @default(cuid())
+  key             String             @unique @map("slug")
+  name            String
+  groomShortName  String
+  brideShortName  String
+  groomFullName   String
+  brideFullName   String
+  groomParents    String?
+  brideParents    String?
+  groomChildOrder String?
+  brideChildOrder String?
+  eventDate       DateTime?
+  dateLabel       String?
+  timeLabel       String?
+  venueName       String?
+  venueAddress    String?
+  mapUrl          String?
+  template        String             @default("RAMA")
+  isPublished     Boolean            @default(false)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  guests          WeddingGuest[]
+  rsvps           WeddingRsvp[]
+  analytics       WeddingAnalytics[]
+
+  @@index([isPublished])
+}
+
+model WeddingGuest {
+  id        String             @id @default(cuid())
+  weddingId String
+  name      String
+  phone     String?
+  groupName String?
+  maxGuests Int                @default(1)
+  slug      String             @unique @map("inviteToken")
+  isActive  Boolean            @default(true)
+  isSent    Boolean            @default(false)
+  sentAt    DateTime?
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  wedding   Wedding            @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  rsvp      WeddingRsvp?
+  analytics WeddingAnalytics[]
+
+  @@index([weddingId, createdAt])
+}
+
+model WeddingRsvp {
+  id         String           @id @default(cuid())
+  weddingId  String
+  guestId    String?          @unique
+  name       String
+  phone      String?
+  status     AttendanceStatus
+  guestCount Int              @default(1)
+  message    String?          @db.Text
+  isHidden   Boolean          @default(false)
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  wedding    Wedding          @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  guest      WeddingGuest?    @relation(fields: [guestId], references: [id], onDelete: SetNull)
+
+  @@index([weddingId, createdAt])
+  @@index([weddingId, status])
+}
+
+model WeddingAnalytics {
+  id         String                @id @default(cuid())
+  weddingId  String
+  guestId    String?
+  event      WeddingAnalyticsEvent
+  sessionKey String?
+  metadata   Json?
+  createdAt  DateTime              @default(now())
+  wedding    Wedding               @relation(fields: [weddingId], references: [id], onDelete: Cascade)
+  guest      WeddingGuest?         @relation(fields: [guestId], references: [id], onDelete: SetNull)
+
+  @@index([weddingId, event, createdAt])
+  @@index([guestId, event])
+  @@index([sessionKey])
+}
+
 enum AttendanceStatus {
   HADIR
   TIDAK_HADIR
   BELUM_TAHU
+}
+
+enum WeddingAnalyticsEvent {
+  PAGE_VIEW
+  OPEN_INVITATION
+  MAP_CLICK
+  CALENDAR_CLICK
+  RSVP_SUBMIT
 }

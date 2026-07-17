@@ -43,6 +43,26 @@ export type Invitation = $Result.DefaultSelection<Prisma.$InvitationPayload>
  * 
  */
 export type Attendance = $Result.DefaultSelection<Prisma.$AttendancePayload>
+/**
+ * Model Wedding
+ * 
+ */
+export type Wedding = $Result.DefaultSelection<Prisma.$WeddingPayload>
+/**
+ * Model WeddingGuest
+ * 
+ */
+export type WeddingGuest = $Result.DefaultSelection<Prisma.$WeddingGuestPayload>
+/**
+ * Model WeddingRsvp
+ * 
+ */
+export type WeddingRsvp = $Result.DefaultSelection<Prisma.$WeddingRsvpPayload>
+/**
+ * Model WeddingAnalytics
+ * 
+ */
+export type WeddingAnalytics = $Result.DefaultSelection<Prisma.$WeddingAnalyticsPayload>
 
 /**
  * Enums
@@ -56,11 +76,26 @@ export namespace $Enums {
 
 export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
 
+
+export const WeddingAnalyticsEvent: {
+  PAGE_VIEW: 'PAGE_VIEW',
+  OPEN_INVITATION: 'OPEN_INVITATION',
+  MAP_CLICK: 'MAP_CLICK',
+  CALENDAR_CLICK: 'CALENDAR_CLICK',
+  RSVP_SUBMIT: 'RSVP_SUBMIT'
+};
+
+export type WeddingAnalyticsEvent = (typeof WeddingAnalyticsEvent)[keyof typeof WeddingAnalyticsEvent]
+
 }
 
 export type AttendanceStatus = $Enums.AttendanceStatus
 
 export const AttendanceStatus: typeof $Enums.AttendanceStatus
+
+export type WeddingAnalyticsEvent = $Enums.WeddingAnalyticsEvent
+
+export const WeddingAnalyticsEvent: typeof $Enums.WeddingAnalyticsEvent
 
 /**
  * ##  Prisma Client ʲˢ
@@ -238,6 +273,46 @@ export class PrismaClient<
     * ```
     */
   get attendance(): Prisma.AttendanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.wedding`: Exposes CRUD operations for the **Wedding** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Weddings
+    * const weddings = await prisma.wedding.findMany()
+    * ```
+    */
+  get wedding(): Prisma.WeddingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.weddingGuest`: Exposes CRUD operations for the **WeddingGuest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WeddingGuests
+    * const weddingGuests = await prisma.weddingGuest.findMany()
+    * ```
+    */
+  get weddingGuest(): Prisma.WeddingGuestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.weddingRsvp`: Exposes CRUD operations for the **WeddingRsvp** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WeddingRsvps
+    * const weddingRsvps = await prisma.weddingRsvp.findMany()
+    * ```
+    */
+  get weddingRsvp(): Prisma.WeddingRsvpDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.weddingAnalytics`: Exposes CRUD operations for the **WeddingAnalytics** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WeddingAnalytics
+    * const weddingAnalytics = await prisma.weddingAnalytics.findMany()
+    * ```
+    */
+  get weddingAnalytics(): Prisma.WeddingAnalyticsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -677,7 +752,11 @@ export namespace Prisma {
     User: 'User',
     VerificationToken: 'VerificationToken',
     Invitation: 'Invitation',
-    Attendance: 'Attendance'
+    Attendance: 'Attendance',
+    Wedding: 'Wedding',
+    WeddingGuest: 'WeddingGuest',
+    WeddingRsvp: 'WeddingRsvp',
+    WeddingAnalytics: 'WeddingAnalytics'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -693,7 +772,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "user" | "verificationToken" | "invitation" | "attendance"
+      modelProps: "account" | "session" | "user" | "verificationToken" | "invitation" | "attendance" | "wedding" | "weddingGuest" | "weddingRsvp" | "weddingAnalytics"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1141,6 +1220,302 @@ export namespace Prisma {
           }
         }
       }
+      Wedding: {
+        payload: Prisma.$WeddingPayload<ExtArgs>
+        fields: Prisma.WeddingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WeddingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WeddingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>
+          }
+          findFirst: {
+            args: Prisma.WeddingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WeddingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>
+          }
+          findMany: {
+            args: Prisma.WeddingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>[]
+          }
+          create: {
+            args: Prisma.WeddingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>
+          }
+          createMany: {
+            args: Prisma.WeddingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WeddingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>[]
+          }
+          delete: {
+            args: Prisma.WeddingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>
+          }
+          update: {
+            args: Prisma.WeddingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>
+          }
+          deleteMany: {
+            args: Prisma.WeddingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WeddingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WeddingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>[]
+          }
+          upsert: {
+            args: Prisma.WeddingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingPayload>
+          }
+          aggregate: {
+            args: Prisma.WeddingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWedding>
+          }
+          groupBy: {
+            args: Prisma.WeddingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WeddingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WeddingCountArgs<ExtArgs>
+            result: $Utils.Optional<WeddingCountAggregateOutputType> | number
+          }
+        }
+      }
+      WeddingGuest: {
+        payload: Prisma.$WeddingGuestPayload<ExtArgs>
+        fields: Prisma.WeddingGuestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WeddingGuestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WeddingGuestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>
+          }
+          findFirst: {
+            args: Prisma.WeddingGuestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WeddingGuestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>
+          }
+          findMany: {
+            args: Prisma.WeddingGuestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>[]
+          }
+          create: {
+            args: Prisma.WeddingGuestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>
+          }
+          createMany: {
+            args: Prisma.WeddingGuestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WeddingGuestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>[]
+          }
+          delete: {
+            args: Prisma.WeddingGuestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>
+          }
+          update: {
+            args: Prisma.WeddingGuestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>
+          }
+          deleteMany: {
+            args: Prisma.WeddingGuestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WeddingGuestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WeddingGuestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>[]
+          }
+          upsert: {
+            args: Prisma.WeddingGuestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingGuestPayload>
+          }
+          aggregate: {
+            args: Prisma.WeddingGuestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWeddingGuest>
+          }
+          groupBy: {
+            args: Prisma.WeddingGuestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WeddingGuestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WeddingGuestCountArgs<ExtArgs>
+            result: $Utils.Optional<WeddingGuestCountAggregateOutputType> | number
+          }
+        }
+      }
+      WeddingRsvp: {
+        payload: Prisma.$WeddingRsvpPayload<ExtArgs>
+        fields: Prisma.WeddingRsvpFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WeddingRsvpFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WeddingRsvpFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>
+          }
+          findFirst: {
+            args: Prisma.WeddingRsvpFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WeddingRsvpFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>
+          }
+          findMany: {
+            args: Prisma.WeddingRsvpFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>[]
+          }
+          create: {
+            args: Prisma.WeddingRsvpCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>
+          }
+          createMany: {
+            args: Prisma.WeddingRsvpCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WeddingRsvpCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>[]
+          }
+          delete: {
+            args: Prisma.WeddingRsvpDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>
+          }
+          update: {
+            args: Prisma.WeddingRsvpUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>
+          }
+          deleteMany: {
+            args: Prisma.WeddingRsvpDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WeddingRsvpUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WeddingRsvpUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>[]
+          }
+          upsert: {
+            args: Prisma.WeddingRsvpUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingRsvpPayload>
+          }
+          aggregate: {
+            args: Prisma.WeddingRsvpAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWeddingRsvp>
+          }
+          groupBy: {
+            args: Prisma.WeddingRsvpGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WeddingRsvpGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WeddingRsvpCountArgs<ExtArgs>
+            result: $Utils.Optional<WeddingRsvpCountAggregateOutputType> | number
+          }
+        }
+      }
+      WeddingAnalytics: {
+        payload: Prisma.$WeddingAnalyticsPayload<ExtArgs>
+        fields: Prisma.WeddingAnalyticsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WeddingAnalyticsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WeddingAnalyticsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>
+          }
+          findFirst: {
+            args: Prisma.WeddingAnalyticsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WeddingAnalyticsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>
+          }
+          findMany: {
+            args: Prisma.WeddingAnalyticsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>[]
+          }
+          create: {
+            args: Prisma.WeddingAnalyticsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>
+          }
+          createMany: {
+            args: Prisma.WeddingAnalyticsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WeddingAnalyticsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>[]
+          }
+          delete: {
+            args: Prisma.WeddingAnalyticsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>
+          }
+          update: {
+            args: Prisma.WeddingAnalyticsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>
+          }
+          deleteMany: {
+            args: Prisma.WeddingAnalyticsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WeddingAnalyticsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WeddingAnalyticsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>[]
+          }
+          upsert: {
+            args: Prisma.WeddingAnalyticsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WeddingAnalyticsPayload>
+          }
+          aggregate: {
+            args: Prisma.WeddingAnalyticsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWeddingAnalytics>
+          }
+          groupBy: {
+            args: Prisma.WeddingAnalyticsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WeddingAnalyticsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WeddingAnalyticsCountArgs<ExtArgs>
+            result: $Utils.Optional<WeddingAnalyticsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1255,6 +1630,10 @@ export namespace Prisma {
     verificationToken?: VerificationTokenOmit
     invitation?: InvitationOmit
     attendance?: AttendanceOmit
+    wedding?: WeddingOmit
+    weddingGuest?: WeddingGuestOmit
+    weddingRsvp?: WeddingRsvpOmit
+    weddingAnalytics?: WeddingAnalyticsOmit
   }
 
   /* Types for Logging */
@@ -1367,6 +1746,86 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
+  }
+
+
+  /**
+   * Count Type WeddingCountOutputType
+   */
+
+  export type WeddingCountOutputType = {
+    guests: number
+    rsvps: number
+    analytics: number
+  }
+
+  export type WeddingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guests?: boolean | WeddingCountOutputTypeCountGuestsArgs
+    rsvps?: boolean | WeddingCountOutputTypeCountRsvpsArgs
+    analytics?: boolean | WeddingCountOutputTypeCountAnalyticsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WeddingCountOutputType without action
+   */
+  export type WeddingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingCountOutputType
+     */
+    select?: WeddingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WeddingCountOutputType without action
+   */
+  export type WeddingCountOutputTypeCountGuestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingGuestWhereInput
+  }
+
+  /**
+   * WeddingCountOutputType without action
+   */
+  export type WeddingCountOutputTypeCountRsvpsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingRsvpWhereInput
+  }
+
+  /**
+   * WeddingCountOutputType without action
+   */
+  export type WeddingCountOutputTypeCountAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingAnalyticsWhereInput
+  }
+
+
+  /**
+   * Count Type WeddingGuestCountOutputType
+   */
+
+  export type WeddingGuestCountOutputType = {
+    analytics: number
+  }
+
+  export type WeddingGuestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    analytics?: boolean | WeddingGuestCountOutputTypeCountAnalyticsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WeddingGuestCountOutputType without action
+   */
+  export type WeddingGuestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuestCountOutputType
+     */
+    select?: WeddingGuestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WeddingGuestCountOutputType without action
+   */
+  export type WeddingGuestCountOutputTypeCountAnalyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingAnalyticsWhereInput
   }
 
 
@@ -3618,6 +4077,8 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    passwordHash: string | null
+    isAdmin: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -3626,6 +4087,8 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    passwordHash: string | null
+    isAdmin: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -3634,6 +4097,8 @@ export namespace Prisma {
     email: number
     emailVerified: number
     image: number
+    passwordHash: number
+    isAdmin: number
     _all: number
   }
 
@@ -3644,6 +4109,8 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    passwordHash?: true
+    isAdmin?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -3652,6 +4119,8 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    passwordHash?: true
+    isAdmin?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -3660,6 +4129,8 @@ export namespace Prisma {
     email?: true
     emailVerified?: true
     image?: true
+    passwordHash?: true
+    isAdmin?: true
     _all?: true
   }
 
@@ -3741,6 +4212,8 @@ export namespace Prisma {
     email: string | null
     emailVerified: Date | null
     image: string | null
+    passwordHash: string | null
+    isAdmin: boolean
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -3766,6 +4239,8 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    passwordHash?: boolean
+    isAdmin?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -3777,6 +4252,8 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    passwordHash?: boolean
+    isAdmin?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3785,6 +4262,8 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    passwordHash?: boolean
+    isAdmin?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -3793,9 +4272,11 @@ export namespace Prisma {
     email?: boolean
     emailVerified?: boolean
     image?: boolean
+    passwordHash?: boolean
+    isAdmin?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "passwordHash" | "isAdmin", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -3816,6 +4297,8 @@ export namespace Prisma {
       email: string | null
       emailVerified: Date | null
       image: string | null
+      passwordHash: string | null
+      isAdmin: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -4246,6 +4729,8 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
+    readonly passwordHash: FieldRef<"User", 'String'>
+    readonly isAdmin: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -7686,6 +8171,4880 @@ export namespace Prisma {
 
 
   /**
+   * Model Wedding
+   */
+
+  export type AggregateWedding = {
+    _count: WeddingCountAggregateOutputType | null
+    _min: WeddingMinAggregateOutputType | null
+    _max: WeddingMaxAggregateOutputType | null
+  }
+
+  export type WeddingMinAggregateOutputType = {
+    id: string | null
+    key: string | null
+    name: string | null
+    groomShortName: string | null
+    brideShortName: string | null
+    groomFullName: string | null
+    brideFullName: string | null
+    groomParents: string | null
+    brideParents: string | null
+    groomChildOrder: string | null
+    brideChildOrder: string | null
+    eventDate: Date | null
+    dateLabel: string | null
+    timeLabel: string | null
+    venueName: string | null
+    venueAddress: string | null
+    mapUrl: string | null
+    template: string | null
+    isPublished: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeddingMaxAggregateOutputType = {
+    id: string | null
+    key: string | null
+    name: string | null
+    groomShortName: string | null
+    brideShortName: string | null
+    groomFullName: string | null
+    brideFullName: string | null
+    groomParents: string | null
+    brideParents: string | null
+    groomChildOrder: string | null
+    brideChildOrder: string | null
+    eventDate: Date | null
+    dateLabel: string | null
+    timeLabel: string | null
+    venueName: string | null
+    venueAddress: string | null
+    mapUrl: string | null
+    template: string | null
+    isPublished: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeddingCountAggregateOutputType = {
+    id: number
+    key: number
+    name: number
+    groomShortName: number
+    brideShortName: number
+    groomFullName: number
+    brideFullName: number
+    groomParents: number
+    brideParents: number
+    groomChildOrder: number
+    brideChildOrder: number
+    eventDate: number
+    dateLabel: number
+    timeLabel: number
+    venueName: number
+    venueAddress: number
+    mapUrl: number
+    template: number
+    isPublished: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WeddingMinAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    groomShortName?: true
+    brideShortName?: true
+    groomFullName?: true
+    brideFullName?: true
+    groomParents?: true
+    brideParents?: true
+    groomChildOrder?: true
+    brideChildOrder?: true
+    eventDate?: true
+    dateLabel?: true
+    timeLabel?: true
+    venueName?: true
+    venueAddress?: true
+    mapUrl?: true
+    template?: true
+    isPublished?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeddingMaxAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    groomShortName?: true
+    brideShortName?: true
+    groomFullName?: true
+    brideFullName?: true
+    groomParents?: true
+    brideParents?: true
+    groomChildOrder?: true
+    brideChildOrder?: true
+    eventDate?: true
+    dateLabel?: true
+    timeLabel?: true
+    venueName?: true
+    venueAddress?: true
+    mapUrl?: true
+    template?: true
+    isPublished?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeddingCountAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    groomShortName?: true
+    brideShortName?: true
+    groomFullName?: true
+    brideFullName?: true
+    groomParents?: true
+    brideParents?: true
+    groomChildOrder?: true
+    brideChildOrder?: true
+    eventDate?: true
+    dateLabel?: true
+    timeLabel?: true
+    venueName?: true
+    venueAddress?: true
+    mapUrl?: true
+    template?: true
+    isPublished?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WeddingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Wedding to aggregate.
+     */
+    where?: WeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Weddings to fetch.
+     */
+    orderBy?: WeddingOrderByWithRelationInput | WeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Weddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Weddings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Weddings
+    **/
+    _count?: true | WeddingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WeddingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WeddingMaxAggregateInputType
+  }
+
+  export type GetWeddingAggregateType<T extends WeddingAggregateArgs> = {
+        [P in keyof T & keyof AggregateWedding]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWedding[P]>
+      : GetScalarType<T[P], AggregateWedding[P]>
+  }
+
+
+
+
+  export type WeddingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingWhereInput
+    orderBy?: WeddingOrderByWithAggregationInput | WeddingOrderByWithAggregationInput[]
+    by: WeddingScalarFieldEnum[] | WeddingScalarFieldEnum
+    having?: WeddingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WeddingCountAggregateInputType | true
+    _min?: WeddingMinAggregateInputType
+    _max?: WeddingMaxAggregateInputType
+  }
+
+  export type WeddingGroupByOutputType = {
+    id: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents: string | null
+    brideParents: string | null
+    groomChildOrder: string | null
+    brideChildOrder: string | null
+    eventDate: Date | null
+    dateLabel: string | null
+    timeLabel: string | null
+    venueName: string | null
+    venueAddress: string | null
+    mapUrl: string | null
+    template: string
+    isPublished: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: WeddingCountAggregateOutputType | null
+    _min: WeddingMinAggregateOutputType | null
+    _max: WeddingMaxAggregateOutputType | null
+  }
+
+  type GetWeddingGroupByPayload<T extends WeddingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WeddingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WeddingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WeddingGroupByOutputType[P]>
+            : GetScalarType<T[P], WeddingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WeddingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    groomShortName?: boolean
+    brideShortName?: boolean
+    groomFullName?: boolean
+    brideFullName?: boolean
+    groomParents?: boolean
+    brideParents?: boolean
+    groomChildOrder?: boolean
+    brideChildOrder?: boolean
+    eventDate?: boolean
+    dateLabel?: boolean
+    timeLabel?: boolean
+    venueName?: boolean
+    venueAddress?: boolean
+    mapUrl?: boolean
+    template?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    guests?: boolean | Wedding$guestsArgs<ExtArgs>
+    rsvps?: boolean | Wedding$rsvpsArgs<ExtArgs>
+    analytics?: boolean | Wedding$analyticsArgs<ExtArgs>
+    _count?: boolean | WeddingCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["wedding"]>
+
+  export type WeddingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    groomShortName?: boolean
+    brideShortName?: boolean
+    groomFullName?: boolean
+    brideFullName?: boolean
+    groomParents?: boolean
+    brideParents?: boolean
+    groomChildOrder?: boolean
+    brideChildOrder?: boolean
+    eventDate?: boolean
+    dateLabel?: boolean
+    timeLabel?: boolean
+    venueName?: boolean
+    venueAddress?: boolean
+    mapUrl?: boolean
+    template?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["wedding"]>
+
+  export type WeddingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    groomShortName?: boolean
+    brideShortName?: boolean
+    groomFullName?: boolean
+    brideFullName?: boolean
+    groomParents?: boolean
+    brideParents?: boolean
+    groomChildOrder?: boolean
+    brideChildOrder?: boolean
+    eventDate?: boolean
+    dateLabel?: boolean
+    timeLabel?: boolean
+    venueName?: boolean
+    venueAddress?: boolean
+    mapUrl?: boolean
+    template?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["wedding"]>
+
+  export type WeddingSelectScalar = {
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    groomShortName?: boolean
+    brideShortName?: boolean
+    groomFullName?: boolean
+    brideFullName?: boolean
+    groomParents?: boolean
+    brideParents?: boolean
+    groomChildOrder?: boolean
+    brideChildOrder?: boolean
+    eventDate?: boolean
+    dateLabel?: boolean
+    timeLabel?: boolean
+    venueName?: boolean
+    venueAddress?: boolean
+    mapUrl?: boolean
+    template?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WeddingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "groomShortName" | "brideShortName" | "groomFullName" | "brideFullName" | "groomParents" | "brideParents" | "groomChildOrder" | "brideChildOrder" | "eventDate" | "dateLabel" | "timeLabel" | "venueName" | "venueAddress" | "mapUrl" | "template" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["wedding"]>
+  export type WeddingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guests?: boolean | Wedding$guestsArgs<ExtArgs>
+    rsvps?: boolean | Wedding$rsvpsArgs<ExtArgs>
+    analytics?: boolean | Wedding$analyticsArgs<ExtArgs>
+    _count?: boolean | WeddingCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WeddingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type WeddingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $WeddingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Wedding"
+    objects: {
+      guests: Prisma.$WeddingGuestPayload<ExtArgs>[]
+      rsvps: Prisma.$WeddingRsvpPayload<ExtArgs>[]
+      analytics: Prisma.$WeddingAnalyticsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      key: string
+      name: string
+      groomShortName: string
+      brideShortName: string
+      groomFullName: string
+      brideFullName: string
+      groomParents: string | null
+      brideParents: string | null
+      groomChildOrder: string | null
+      brideChildOrder: string | null
+      eventDate: Date | null
+      dateLabel: string | null
+      timeLabel: string | null
+      venueName: string | null
+      venueAddress: string | null
+      mapUrl: string | null
+      template: string
+      isPublished: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["wedding"]>
+    composites: {}
+  }
+
+  type WeddingGetPayload<S extends boolean | null | undefined | WeddingDefaultArgs> = $Result.GetResult<Prisma.$WeddingPayload, S>
+
+  type WeddingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WeddingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WeddingCountAggregateInputType | true
+    }
+
+  export interface WeddingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Wedding'], meta: { name: 'Wedding' } }
+    /**
+     * Find zero or one Wedding that matches the filter.
+     * @param {WeddingFindUniqueArgs} args - Arguments to find a Wedding
+     * @example
+     * // Get one Wedding
+     * const wedding = await prisma.wedding.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WeddingFindUniqueArgs>(args: SelectSubset<T, WeddingFindUniqueArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Wedding that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WeddingFindUniqueOrThrowArgs} args - Arguments to find a Wedding
+     * @example
+     * // Get one Wedding
+     * const wedding = await prisma.wedding.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WeddingFindUniqueOrThrowArgs>(args: SelectSubset<T, WeddingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Wedding that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingFindFirstArgs} args - Arguments to find a Wedding
+     * @example
+     * // Get one Wedding
+     * const wedding = await prisma.wedding.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WeddingFindFirstArgs>(args?: SelectSubset<T, WeddingFindFirstArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Wedding that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingFindFirstOrThrowArgs} args - Arguments to find a Wedding
+     * @example
+     * // Get one Wedding
+     * const wedding = await prisma.wedding.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WeddingFindFirstOrThrowArgs>(args?: SelectSubset<T, WeddingFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Weddings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Weddings
+     * const weddings = await prisma.wedding.findMany()
+     * 
+     * // Get first 10 Weddings
+     * const weddings = await prisma.wedding.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const weddingWithIdOnly = await prisma.wedding.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WeddingFindManyArgs>(args?: SelectSubset<T, WeddingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Wedding.
+     * @param {WeddingCreateArgs} args - Arguments to create a Wedding.
+     * @example
+     * // Create one Wedding
+     * const Wedding = await prisma.wedding.create({
+     *   data: {
+     *     // ... data to create a Wedding
+     *   }
+     * })
+     * 
+     */
+    create<T extends WeddingCreateArgs>(args: SelectSubset<T, WeddingCreateArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Weddings.
+     * @param {WeddingCreateManyArgs} args - Arguments to create many Weddings.
+     * @example
+     * // Create many Weddings
+     * const wedding = await prisma.wedding.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WeddingCreateManyArgs>(args?: SelectSubset<T, WeddingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Weddings and returns the data saved in the database.
+     * @param {WeddingCreateManyAndReturnArgs} args - Arguments to create many Weddings.
+     * @example
+     * // Create many Weddings
+     * const wedding = await prisma.wedding.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Weddings and only return the `id`
+     * const weddingWithIdOnly = await prisma.wedding.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WeddingCreateManyAndReturnArgs>(args?: SelectSubset<T, WeddingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Wedding.
+     * @param {WeddingDeleteArgs} args - Arguments to delete one Wedding.
+     * @example
+     * // Delete one Wedding
+     * const Wedding = await prisma.wedding.delete({
+     *   where: {
+     *     // ... filter to delete one Wedding
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WeddingDeleteArgs>(args: SelectSubset<T, WeddingDeleteArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Wedding.
+     * @param {WeddingUpdateArgs} args - Arguments to update one Wedding.
+     * @example
+     * // Update one Wedding
+     * const wedding = await prisma.wedding.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WeddingUpdateArgs>(args: SelectSubset<T, WeddingUpdateArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Weddings.
+     * @param {WeddingDeleteManyArgs} args - Arguments to filter Weddings to delete.
+     * @example
+     * // Delete a few Weddings
+     * const { count } = await prisma.wedding.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WeddingDeleteManyArgs>(args?: SelectSubset<T, WeddingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Weddings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Weddings
+     * const wedding = await prisma.wedding.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WeddingUpdateManyArgs>(args: SelectSubset<T, WeddingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Weddings and returns the data updated in the database.
+     * @param {WeddingUpdateManyAndReturnArgs} args - Arguments to update many Weddings.
+     * @example
+     * // Update many Weddings
+     * const wedding = await prisma.wedding.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Weddings and only return the `id`
+     * const weddingWithIdOnly = await prisma.wedding.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WeddingUpdateManyAndReturnArgs>(args: SelectSubset<T, WeddingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Wedding.
+     * @param {WeddingUpsertArgs} args - Arguments to update or create a Wedding.
+     * @example
+     * // Update or create a Wedding
+     * const wedding = await prisma.wedding.upsert({
+     *   create: {
+     *     // ... data to create a Wedding
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Wedding we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WeddingUpsertArgs>(args: SelectSubset<T, WeddingUpsertArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Weddings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingCountArgs} args - Arguments to filter Weddings to count.
+     * @example
+     * // Count the number of Weddings
+     * const count = await prisma.wedding.count({
+     *   where: {
+     *     // ... the filter for the Weddings we want to count
+     *   }
+     * })
+    **/
+    count<T extends WeddingCountArgs>(
+      args?: Subset<T, WeddingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WeddingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Wedding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WeddingAggregateArgs>(args: Subset<T, WeddingAggregateArgs>): Prisma.PrismaPromise<GetWeddingAggregateType<T>>
+
+    /**
+     * Group by Wedding.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WeddingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WeddingGroupByArgs['orderBy'] }
+        : { orderBy?: WeddingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WeddingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWeddingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Wedding model
+   */
+  readonly fields: WeddingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Wedding.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WeddingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guests<T extends Wedding$guestsArgs<ExtArgs> = {}>(args?: Subset<T, Wedding$guestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rsvps<T extends Wedding$rsvpsArgs<ExtArgs> = {}>(args?: Subset<T, Wedding$rsvpsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    analytics<T extends Wedding$analyticsArgs<ExtArgs> = {}>(args?: Subset<T, Wedding$analyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Wedding model
+   */
+  interface WeddingFieldRefs {
+    readonly id: FieldRef<"Wedding", 'String'>
+    readonly key: FieldRef<"Wedding", 'String'>
+    readonly name: FieldRef<"Wedding", 'String'>
+    readonly groomShortName: FieldRef<"Wedding", 'String'>
+    readonly brideShortName: FieldRef<"Wedding", 'String'>
+    readonly groomFullName: FieldRef<"Wedding", 'String'>
+    readonly brideFullName: FieldRef<"Wedding", 'String'>
+    readonly groomParents: FieldRef<"Wedding", 'String'>
+    readonly brideParents: FieldRef<"Wedding", 'String'>
+    readonly groomChildOrder: FieldRef<"Wedding", 'String'>
+    readonly brideChildOrder: FieldRef<"Wedding", 'String'>
+    readonly eventDate: FieldRef<"Wedding", 'DateTime'>
+    readonly dateLabel: FieldRef<"Wedding", 'String'>
+    readonly timeLabel: FieldRef<"Wedding", 'String'>
+    readonly venueName: FieldRef<"Wedding", 'String'>
+    readonly venueAddress: FieldRef<"Wedding", 'String'>
+    readonly mapUrl: FieldRef<"Wedding", 'String'>
+    readonly template: FieldRef<"Wedding", 'String'>
+    readonly isPublished: FieldRef<"Wedding", 'Boolean'>
+    readonly createdAt: FieldRef<"Wedding", 'DateTime'>
+    readonly updatedAt: FieldRef<"Wedding", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Wedding findUnique
+   */
+  export type WeddingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * Filter, which Wedding to fetch.
+     */
+    where: WeddingWhereUniqueInput
+  }
+
+  /**
+   * Wedding findUniqueOrThrow
+   */
+  export type WeddingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * Filter, which Wedding to fetch.
+     */
+    where: WeddingWhereUniqueInput
+  }
+
+  /**
+   * Wedding findFirst
+   */
+  export type WeddingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * Filter, which Wedding to fetch.
+     */
+    where?: WeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Weddings to fetch.
+     */
+    orderBy?: WeddingOrderByWithRelationInput | WeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Weddings.
+     */
+    cursor?: WeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Weddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Weddings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Weddings.
+     */
+    distinct?: WeddingScalarFieldEnum | WeddingScalarFieldEnum[]
+  }
+
+  /**
+   * Wedding findFirstOrThrow
+   */
+  export type WeddingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * Filter, which Wedding to fetch.
+     */
+    where?: WeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Weddings to fetch.
+     */
+    orderBy?: WeddingOrderByWithRelationInput | WeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Weddings.
+     */
+    cursor?: WeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Weddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Weddings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Weddings.
+     */
+    distinct?: WeddingScalarFieldEnum | WeddingScalarFieldEnum[]
+  }
+
+  /**
+   * Wedding findMany
+   */
+  export type WeddingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * Filter, which Weddings to fetch.
+     */
+    where?: WeddingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Weddings to fetch.
+     */
+    orderBy?: WeddingOrderByWithRelationInput | WeddingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Weddings.
+     */
+    cursor?: WeddingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Weddings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Weddings.
+     */
+    skip?: number
+    distinct?: WeddingScalarFieldEnum | WeddingScalarFieldEnum[]
+  }
+
+  /**
+   * Wedding create
+   */
+  export type WeddingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Wedding.
+     */
+    data: XOR<WeddingCreateInput, WeddingUncheckedCreateInput>
+  }
+
+  /**
+   * Wedding createMany
+   */
+  export type WeddingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Weddings.
+     */
+    data: WeddingCreateManyInput | WeddingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Wedding createManyAndReturn
+   */
+  export type WeddingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * The data used to create many Weddings.
+     */
+    data: WeddingCreateManyInput | WeddingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Wedding update
+   */
+  export type WeddingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Wedding.
+     */
+    data: XOR<WeddingUpdateInput, WeddingUncheckedUpdateInput>
+    /**
+     * Choose, which Wedding to update.
+     */
+    where: WeddingWhereUniqueInput
+  }
+
+  /**
+   * Wedding updateMany
+   */
+  export type WeddingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Weddings.
+     */
+    data: XOR<WeddingUpdateManyMutationInput, WeddingUncheckedUpdateManyInput>
+    /**
+     * Filter which Weddings to update
+     */
+    where?: WeddingWhereInput
+    /**
+     * Limit how many Weddings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Wedding updateManyAndReturn
+   */
+  export type WeddingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * The data used to update Weddings.
+     */
+    data: XOR<WeddingUpdateManyMutationInput, WeddingUncheckedUpdateManyInput>
+    /**
+     * Filter which Weddings to update
+     */
+    where?: WeddingWhereInput
+    /**
+     * Limit how many Weddings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Wedding upsert
+   */
+  export type WeddingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Wedding to update in case it exists.
+     */
+    where: WeddingWhereUniqueInput
+    /**
+     * In case the Wedding found by the `where` argument doesn't exist, create a new Wedding with this data.
+     */
+    create: XOR<WeddingCreateInput, WeddingUncheckedCreateInput>
+    /**
+     * In case the Wedding was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WeddingUpdateInput, WeddingUncheckedUpdateInput>
+  }
+
+  /**
+   * Wedding delete
+   */
+  export type WeddingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+    /**
+     * Filter which Wedding to delete.
+     */
+    where: WeddingWhereUniqueInput
+  }
+
+  /**
+   * Wedding deleteMany
+   */
+  export type WeddingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Weddings to delete
+     */
+    where?: WeddingWhereInput
+    /**
+     * Limit how many Weddings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Wedding.guests
+   */
+  export type Wedding$guestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    where?: WeddingGuestWhereInput
+    orderBy?: WeddingGuestOrderByWithRelationInput | WeddingGuestOrderByWithRelationInput[]
+    cursor?: WeddingGuestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WeddingGuestScalarFieldEnum | WeddingGuestScalarFieldEnum[]
+  }
+
+  /**
+   * Wedding.rsvps
+   */
+  export type Wedding$rsvpsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    where?: WeddingRsvpWhereInput
+    orderBy?: WeddingRsvpOrderByWithRelationInput | WeddingRsvpOrderByWithRelationInput[]
+    cursor?: WeddingRsvpWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WeddingRsvpScalarFieldEnum | WeddingRsvpScalarFieldEnum[]
+  }
+
+  /**
+   * Wedding.analytics
+   */
+  export type Wedding$analyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    where?: WeddingAnalyticsWhereInput
+    orderBy?: WeddingAnalyticsOrderByWithRelationInput | WeddingAnalyticsOrderByWithRelationInput[]
+    cursor?: WeddingAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WeddingAnalyticsScalarFieldEnum | WeddingAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * Wedding without action
+   */
+  export type WeddingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Wedding
+     */
+    select?: WeddingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Wedding
+     */
+    omit?: WeddingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WeddingGuest
+   */
+
+  export type AggregateWeddingGuest = {
+    _count: WeddingGuestCountAggregateOutputType | null
+    _avg: WeddingGuestAvgAggregateOutputType | null
+    _sum: WeddingGuestSumAggregateOutputType | null
+    _min: WeddingGuestMinAggregateOutputType | null
+    _max: WeddingGuestMaxAggregateOutputType | null
+  }
+
+  export type WeddingGuestAvgAggregateOutputType = {
+    maxGuests: number | null
+  }
+
+  export type WeddingGuestSumAggregateOutputType = {
+    maxGuests: number | null
+  }
+
+  export type WeddingGuestMinAggregateOutputType = {
+    id: string | null
+    weddingId: string | null
+    name: string | null
+    phone: string | null
+    groupName: string | null
+    maxGuests: number | null
+    slug: string | null
+    isActive: boolean | null
+    isSent: boolean | null
+    sentAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeddingGuestMaxAggregateOutputType = {
+    id: string | null
+    weddingId: string | null
+    name: string | null
+    phone: string | null
+    groupName: string | null
+    maxGuests: number | null
+    slug: string | null
+    isActive: boolean | null
+    isSent: boolean | null
+    sentAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeddingGuestCountAggregateOutputType = {
+    id: number
+    weddingId: number
+    name: number
+    phone: number
+    groupName: number
+    maxGuests: number
+    slug: number
+    isActive: number
+    isSent: number
+    sentAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WeddingGuestAvgAggregateInputType = {
+    maxGuests?: true
+  }
+
+  export type WeddingGuestSumAggregateInputType = {
+    maxGuests?: true
+  }
+
+  export type WeddingGuestMinAggregateInputType = {
+    id?: true
+    weddingId?: true
+    name?: true
+    phone?: true
+    groupName?: true
+    maxGuests?: true
+    slug?: true
+    isActive?: true
+    isSent?: true
+    sentAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeddingGuestMaxAggregateInputType = {
+    id?: true
+    weddingId?: true
+    name?: true
+    phone?: true
+    groupName?: true
+    maxGuests?: true
+    slug?: true
+    isActive?: true
+    isSent?: true
+    sentAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeddingGuestCountAggregateInputType = {
+    id?: true
+    weddingId?: true
+    name?: true
+    phone?: true
+    groupName?: true
+    maxGuests?: true
+    slug?: true
+    isActive?: true
+    isSent?: true
+    sentAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WeddingGuestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeddingGuest to aggregate.
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingGuests to fetch.
+     */
+    orderBy?: WeddingGuestOrderByWithRelationInput | WeddingGuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WeddingGuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingGuests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingGuests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WeddingGuests
+    **/
+    _count?: true | WeddingGuestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WeddingGuestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WeddingGuestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WeddingGuestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WeddingGuestMaxAggregateInputType
+  }
+
+  export type GetWeddingGuestAggregateType<T extends WeddingGuestAggregateArgs> = {
+        [P in keyof T & keyof AggregateWeddingGuest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWeddingGuest[P]>
+      : GetScalarType<T[P], AggregateWeddingGuest[P]>
+  }
+
+
+
+
+  export type WeddingGuestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingGuestWhereInput
+    orderBy?: WeddingGuestOrderByWithAggregationInput | WeddingGuestOrderByWithAggregationInput[]
+    by: WeddingGuestScalarFieldEnum[] | WeddingGuestScalarFieldEnum
+    having?: WeddingGuestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WeddingGuestCountAggregateInputType | true
+    _avg?: WeddingGuestAvgAggregateInputType
+    _sum?: WeddingGuestSumAggregateInputType
+    _min?: WeddingGuestMinAggregateInputType
+    _max?: WeddingGuestMaxAggregateInputType
+  }
+
+  export type WeddingGuestGroupByOutputType = {
+    id: string
+    weddingId: string
+    name: string
+    phone: string | null
+    groupName: string | null
+    maxGuests: number
+    slug: string
+    isActive: boolean
+    isSent: boolean
+    sentAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: WeddingGuestCountAggregateOutputType | null
+    _avg: WeddingGuestAvgAggregateOutputType | null
+    _sum: WeddingGuestSumAggregateOutputType | null
+    _min: WeddingGuestMinAggregateOutputType | null
+    _max: WeddingGuestMaxAggregateOutputType | null
+  }
+
+  type GetWeddingGuestGroupByPayload<T extends WeddingGuestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WeddingGuestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WeddingGuestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WeddingGuestGroupByOutputType[P]>
+            : GetScalarType<T[P], WeddingGuestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WeddingGuestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    name?: boolean
+    phone?: boolean
+    groupName?: boolean
+    maxGuests?: boolean
+    slug?: boolean
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    rsvp?: boolean | WeddingGuest$rsvpArgs<ExtArgs>
+    analytics?: boolean | WeddingGuest$analyticsArgs<ExtArgs>
+    _count?: boolean | WeddingGuestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingGuest"]>
+
+  export type WeddingGuestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    name?: boolean
+    phone?: boolean
+    groupName?: boolean
+    maxGuests?: boolean
+    slug?: boolean
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingGuest"]>
+
+  export type WeddingGuestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    name?: boolean
+    phone?: boolean
+    groupName?: boolean
+    maxGuests?: boolean
+    slug?: boolean
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingGuest"]>
+
+  export type WeddingGuestSelectScalar = {
+    id?: boolean
+    weddingId?: boolean
+    name?: boolean
+    phone?: boolean
+    groupName?: boolean
+    maxGuests?: boolean
+    slug?: boolean
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WeddingGuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingId" | "name" | "phone" | "groupName" | "maxGuests" | "slug" | "isActive" | "isSent" | "sentAt" | "createdAt" | "updatedAt", ExtArgs["result"]["weddingGuest"]>
+  export type WeddingGuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    rsvp?: boolean | WeddingGuest$rsvpArgs<ExtArgs>
+    analytics?: boolean | WeddingGuest$analyticsArgs<ExtArgs>
+    _count?: boolean | WeddingGuestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WeddingGuestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+  }
+  export type WeddingGuestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+  }
+
+  export type $WeddingGuestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WeddingGuest"
+    objects: {
+      wedding: Prisma.$WeddingPayload<ExtArgs>
+      rsvp: Prisma.$WeddingRsvpPayload<ExtArgs> | null
+      analytics: Prisma.$WeddingAnalyticsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      weddingId: string
+      name: string
+      phone: string | null
+      groupName: string | null
+      maxGuests: number
+      slug: string
+      isActive: boolean
+      isSent: boolean
+      sentAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["weddingGuest"]>
+    composites: {}
+  }
+
+  type WeddingGuestGetPayload<S extends boolean | null | undefined | WeddingGuestDefaultArgs> = $Result.GetResult<Prisma.$WeddingGuestPayload, S>
+
+  type WeddingGuestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WeddingGuestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WeddingGuestCountAggregateInputType | true
+    }
+
+  export interface WeddingGuestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WeddingGuest'], meta: { name: 'WeddingGuest' } }
+    /**
+     * Find zero or one WeddingGuest that matches the filter.
+     * @param {WeddingGuestFindUniqueArgs} args - Arguments to find a WeddingGuest
+     * @example
+     * // Get one WeddingGuest
+     * const weddingGuest = await prisma.weddingGuest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WeddingGuestFindUniqueArgs>(args: SelectSubset<T, WeddingGuestFindUniqueArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WeddingGuest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WeddingGuestFindUniqueOrThrowArgs} args - Arguments to find a WeddingGuest
+     * @example
+     * // Get one WeddingGuest
+     * const weddingGuest = await prisma.weddingGuest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WeddingGuestFindUniqueOrThrowArgs>(args: SelectSubset<T, WeddingGuestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeddingGuest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestFindFirstArgs} args - Arguments to find a WeddingGuest
+     * @example
+     * // Get one WeddingGuest
+     * const weddingGuest = await prisma.weddingGuest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WeddingGuestFindFirstArgs>(args?: SelectSubset<T, WeddingGuestFindFirstArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeddingGuest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestFindFirstOrThrowArgs} args - Arguments to find a WeddingGuest
+     * @example
+     * // Get one WeddingGuest
+     * const weddingGuest = await prisma.weddingGuest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WeddingGuestFindFirstOrThrowArgs>(args?: SelectSubset<T, WeddingGuestFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WeddingGuests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WeddingGuests
+     * const weddingGuests = await prisma.weddingGuest.findMany()
+     * 
+     * // Get first 10 WeddingGuests
+     * const weddingGuests = await prisma.weddingGuest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const weddingGuestWithIdOnly = await prisma.weddingGuest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WeddingGuestFindManyArgs>(args?: SelectSubset<T, WeddingGuestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WeddingGuest.
+     * @param {WeddingGuestCreateArgs} args - Arguments to create a WeddingGuest.
+     * @example
+     * // Create one WeddingGuest
+     * const WeddingGuest = await prisma.weddingGuest.create({
+     *   data: {
+     *     // ... data to create a WeddingGuest
+     *   }
+     * })
+     * 
+     */
+    create<T extends WeddingGuestCreateArgs>(args: SelectSubset<T, WeddingGuestCreateArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WeddingGuests.
+     * @param {WeddingGuestCreateManyArgs} args - Arguments to create many WeddingGuests.
+     * @example
+     * // Create many WeddingGuests
+     * const weddingGuest = await prisma.weddingGuest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WeddingGuestCreateManyArgs>(args?: SelectSubset<T, WeddingGuestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WeddingGuests and returns the data saved in the database.
+     * @param {WeddingGuestCreateManyAndReturnArgs} args - Arguments to create many WeddingGuests.
+     * @example
+     * // Create many WeddingGuests
+     * const weddingGuest = await prisma.weddingGuest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WeddingGuests and only return the `id`
+     * const weddingGuestWithIdOnly = await prisma.weddingGuest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WeddingGuestCreateManyAndReturnArgs>(args?: SelectSubset<T, WeddingGuestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WeddingGuest.
+     * @param {WeddingGuestDeleteArgs} args - Arguments to delete one WeddingGuest.
+     * @example
+     * // Delete one WeddingGuest
+     * const WeddingGuest = await prisma.weddingGuest.delete({
+     *   where: {
+     *     // ... filter to delete one WeddingGuest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WeddingGuestDeleteArgs>(args: SelectSubset<T, WeddingGuestDeleteArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WeddingGuest.
+     * @param {WeddingGuestUpdateArgs} args - Arguments to update one WeddingGuest.
+     * @example
+     * // Update one WeddingGuest
+     * const weddingGuest = await prisma.weddingGuest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WeddingGuestUpdateArgs>(args: SelectSubset<T, WeddingGuestUpdateArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WeddingGuests.
+     * @param {WeddingGuestDeleteManyArgs} args - Arguments to filter WeddingGuests to delete.
+     * @example
+     * // Delete a few WeddingGuests
+     * const { count } = await prisma.weddingGuest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WeddingGuestDeleteManyArgs>(args?: SelectSubset<T, WeddingGuestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeddingGuests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WeddingGuests
+     * const weddingGuest = await prisma.weddingGuest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WeddingGuestUpdateManyArgs>(args: SelectSubset<T, WeddingGuestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeddingGuests and returns the data updated in the database.
+     * @param {WeddingGuestUpdateManyAndReturnArgs} args - Arguments to update many WeddingGuests.
+     * @example
+     * // Update many WeddingGuests
+     * const weddingGuest = await prisma.weddingGuest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WeddingGuests and only return the `id`
+     * const weddingGuestWithIdOnly = await prisma.weddingGuest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WeddingGuestUpdateManyAndReturnArgs>(args: SelectSubset<T, WeddingGuestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WeddingGuest.
+     * @param {WeddingGuestUpsertArgs} args - Arguments to update or create a WeddingGuest.
+     * @example
+     * // Update or create a WeddingGuest
+     * const weddingGuest = await prisma.weddingGuest.upsert({
+     *   create: {
+     *     // ... data to create a WeddingGuest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WeddingGuest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WeddingGuestUpsertArgs>(args: SelectSubset<T, WeddingGuestUpsertArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WeddingGuests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestCountArgs} args - Arguments to filter WeddingGuests to count.
+     * @example
+     * // Count the number of WeddingGuests
+     * const count = await prisma.weddingGuest.count({
+     *   where: {
+     *     // ... the filter for the WeddingGuests we want to count
+     *   }
+     * })
+    **/
+    count<T extends WeddingGuestCountArgs>(
+      args?: Subset<T, WeddingGuestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WeddingGuestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WeddingGuest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WeddingGuestAggregateArgs>(args: Subset<T, WeddingGuestAggregateArgs>): Prisma.PrismaPromise<GetWeddingGuestAggregateType<T>>
+
+    /**
+     * Group by WeddingGuest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingGuestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WeddingGuestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WeddingGuestGroupByArgs['orderBy'] }
+        : { orderBy?: WeddingGuestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WeddingGuestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWeddingGuestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WeddingGuest model
+   */
+  readonly fields: WeddingGuestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WeddingGuest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WeddingGuestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    wedding<T extends WeddingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WeddingDefaultArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    rsvp<T extends WeddingGuest$rsvpArgs<ExtArgs> = {}>(args?: Subset<T, WeddingGuest$rsvpArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    analytics<T extends WeddingGuest$analyticsArgs<ExtArgs> = {}>(args?: Subset<T, WeddingGuest$analyticsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WeddingGuest model
+   */
+  interface WeddingGuestFieldRefs {
+    readonly id: FieldRef<"WeddingGuest", 'String'>
+    readonly weddingId: FieldRef<"WeddingGuest", 'String'>
+    readonly name: FieldRef<"WeddingGuest", 'String'>
+    readonly phone: FieldRef<"WeddingGuest", 'String'>
+    readonly groupName: FieldRef<"WeddingGuest", 'String'>
+    readonly maxGuests: FieldRef<"WeddingGuest", 'Int'>
+    readonly slug: FieldRef<"WeddingGuest", 'String'>
+    readonly isActive: FieldRef<"WeddingGuest", 'Boolean'>
+    readonly isSent: FieldRef<"WeddingGuest", 'Boolean'>
+    readonly sentAt: FieldRef<"WeddingGuest", 'DateTime'>
+    readonly createdAt: FieldRef<"WeddingGuest", 'DateTime'>
+    readonly updatedAt: FieldRef<"WeddingGuest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WeddingGuest findUnique
+   */
+  export type WeddingGuestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingGuest to fetch.
+     */
+    where: WeddingGuestWhereUniqueInput
+  }
+
+  /**
+   * WeddingGuest findUniqueOrThrow
+   */
+  export type WeddingGuestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingGuest to fetch.
+     */
+    where: WeddingGuestWhereUniqueInput
+  }
+
+  /**
+   * WeddingGuest findFirst
+   */
+  export type WeddingGuestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingGuest to fetch.
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingGuests to fetch.
+     */
+    orderBy?: WeddingGuestOrderByWithRelationInput | WeddingGuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WeddingGuests.
+     */
+    cursor?: WeddingGuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingGuests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingGuests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WeddingGuests.
+     */
+    distinct?: WeddingGuestScalarFieldEnum | WeddingGuestScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingGuest findFirstOrThrow
+   */
+  export type WeddingGuestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingGuest to fetch.
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingGuests to fetch.
+     */
+    orderBy?: WeddingGuestOrderByWithRelationInput | WeddingGuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WeddingGuests.
+     */
+    cursor?: WeddingGuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingGuests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingGuests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WeddingGuests.
+     */
+    distinct?: WeddingGuestScalarFieldEnum | WeddingGuestScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingGuest findMany
+   */
+  export type WeddingGuestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingGuests to fetch.
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingGuests to fetch.
+     */
+    orderBy?: WeddingGuestOrderByWithRelationInput | WeddingGuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WeddingGuests.
+     */
+    cursor?: WeddingGuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingGuests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingGuests.
+     */
+    skip?: number
+    distinct?: WeddingGuestScalarFieldEnum | WeddingGuestScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingGuest create
+   */
+  export type WeddingGuestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WeddingGuest.
+     */
+    data: XOR<WeddingGuestCreateInput, WeddingGuestUncheckedCreateInput>
+  }
+
+  /**
+   * WeddingGuest createMany
+   */
+  export type WeddingGuestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WeddingGuests.
+     */
+    data: WeddingGuestCreateManyInput | WeddingGuestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WeddingGuest createManyAndReturn
+   */
+  export type WeddingGuestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * The data used to create many WeddingGuests.
+     */
+    data: WeddingGuestCreateManyInput | WeddingGuestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WeddingGuest update
+   */
+  export type WeddingGuestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WeddingGuest.
+     */
+    data: XOR<WeddingGuestUpdateInput, WeddingGuestUncheckedUpdateInput>
+    /**
+     * Choose, which WeddingGuest to update.
+     */
+    where: WeddingGuestWhereUniqueInput
+  }
+
+  /**
+   * WeddingGuest updateMany
+   */
+  export type WeddingGuestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WeddingGuests.
+     */
+    data: XOR<WeddingGuestUpdateManyMutationInput, WeddingGuestUncheckedUpdateManyInput>
+    /**
+     * Filter which WeddingGuests to update
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * Limit how many WeddingGuests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeddingGuest updateManyAndReturn
+   */
+  export type WeddingGuestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * The data used to update WeddingGuests.
+     */
+    data: XOR<WeddingGuestUpdateManyMutationInput, WeddingGuestUncheckedUpdateManyInput>
+    /**
+     * Filter which WeddingGuests to update
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * Limit how many WeddingGuests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WeddingGuest upsert
+   */
+  export type WeddingGuestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WeddingGuest to update in case it exists.
+     */
+    where: WeddingGuestWhereUniqueInput
+    /**
+     * In case the WeddingGuest found by the `where` argument doesn't exist, create a new WeddingGuest with this data.
+     */
+    create: XOR<WeddingGuestCreateInput, WeddingGuestUncheckedCreateInput>
+    /**
+     * In case the WeddingGuest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WeddingGuestUpdateInput, WeddingGuestUncheckedUpdateInput>
+  }
+
+  /**
+   * WeddingGuest delete
+   */
+  export type WeddingGuestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    /**
+     * Filter which WeddingGuest to delete.
+     */
+    where: WeddingGuestWhereUniqueInput
+  }
+
+  /**
+   * WeddingGuest deleteMany
+   */
+  export type WeddingGuestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeddingGuests to delete
+     */
+    where?: WeddingGuestWhereInput
+    /**
+     * Limit how many WeddingGuests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeddingGuest.rsvp
+   */
+  export type WeddingGuest$rsvpArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    where?: WeddingRsvpWhereInput
+  }
+
+  /**
+   * WeddingGuest.analytics
+   */
+  export type WeddingGuest$analyticsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    where?: WeddingAnalyticsWhereInput
+    orderBy?: WeddingAnalyticsOrderByWithRelationInput | WeddingAnalyticsOrderByWithRelationInput[]
+    cursor?: WeddingAnalyticsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WeddingAnalyticsScalarFieldEnum | WeddingAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingGuest without action
+   */
+  export type WeddingGuestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WeddingRsvp
+   */
+
+  export type AggregateWeddingRsvp = {
+    _count: WeddingRsvpCountAggregateOutputType | null
+    _avg: WeddingRsvpAvgAggregateOutputType | null
+    _sum: WeddingRsvpSumAggregateOutputType | null
+    _min: WeddingRsvpMinAggregateOutputType | null
+    _max: WeddingRsvpMaxAggregateOutputType | null
+  }
+
+  export type WeddingRsvpAvgAggregateOutputType = {
+    guestCount: number | null
+  }
+
+  export type WeddingRsvpSumAggregateOutputType = {
+    guestCount: number | null
+  }
+
+  export type WeddingRsvpMinAggregateOutputType = {
+    id: string | null
+    weddingId: string | null
+    guestId: string | null
+    name: string | null
+    phone: string | null
+    status: $Enums.AttendanceStatus | null
+    guestCount: number | null
+    message: string | null
+    isHidden: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeddingRsvpMaxAggregateOutputType = {
+    id: string | null
+    weddingId: string | null
+    guestId: string | null
+    name: string | null
+    phone: string | null
+    status: $Enums.AttendanceStatus | null
+    guestCount: number | null
+    message: string | null
+    isHidden: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WeddingRsvpCountAggregateOutputType = {
+    id: number
+    weddingId: number
+    guestId: number
+    name: number
+    phone: number
+    status: number
+    guestCount: number
+    message: number
+    isHidden: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WeddingRsvpAvgAggregateInputType = {
+    guestCount?: true
+  }
+
+  export type WeddingRsvpSumAggregateInputType = {
+    guestCount?: true
+  }
+
+  export type WeddingRsvpMinAggregateInputType = {
+    id?: true
+    weddingId?: true
+    guestId?: true
+    name?: true
+    phone?: true
+    status?: true
+    guestCount?: true
+    message?: true
+    isHidden?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeddingRsvpMaxAggregateInputType = {
+    id?: true
+    weddingId?: true
+    guestId?: true
+    name?: true
+    phone?: true
+    status?: true
+    guestCount?: true
+    message?: true
+    isHidden?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WeddingRsvpCountAggregateInputType = {
+    id?: true
+    weddingId?: true
+    guestId?: true
+    name?: true
+    phone?: true
+    status?: true
+    guestCount?: true
+    message?: true
+    isHidden?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WeddingRsvpAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeddingRsvp to aggregate.
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingRsvps to fetch.
+     */
+    orderBy?: WeddingRsvpOrderByWithRelationInput | WeddingRsvpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WeddingRsvpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingRsvps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingRsvps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WeddingRsvps
+    **/
+    _count?: true | WeddingRsvpCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: WeddingRsvpAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: WeddingRsvpSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WeddingRsvpMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WeddingRsvpMaxAggregateInputType
+  }
+
+  export type GetWeddingRsvpAggregateType<T extends WeddingRsvpAggregateArgs> = {
+        [P in keyof T & keyof AggregateWeddingRsvp]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWeddingRsvp[P]>
+      : GetScalarType<T[P], AggregateWeddingRsvp[P]>
+  }
+
+
+
+
+  export type WeddingRsvpGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingRsvpWhereInput
+    orderBy?: WeddingRsvpOrderByWithAggregationInput | WeddingRsvpOrderByWithAggregationInput[]
+    by: WeddingRsvpScalarFieldEnum[] | WeddingRsvpScalarFieldEnum
+    having?: WeddingRsvpScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WeddingRsvpCountAggregateInputType | true
+    _avg?: WeddingRsvpAvgAggregateInputType
+    _sum?: WeddingRsvpSumAggregateInputType
+    _min?: WeddingRsvpMinAggregateInputType
+    _max?: WeddingRsvpMaxAggregateInputType
+  }
+
+  export type WeddingRsvpGroupByOutputType = {
+    id: string
+    weddingId: string
+    guestId: string | null
+    name: string
+    phone: string | null
+    status: $Enums.AttendanceStatus
+    guestCount: number
+    message: string | null
+    isHidden: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: WeddingRsvpCountAggregateOutputType | null
+    _avg: WeddingRsvpAvgAggregateOutputType | null
+    _sum: WeddingRsvpSumAggregateOutputType | null
+    _min: WeddingRsvpMinAggregateOutputType | null
+    _max: WeddingRsvpMaxAggregateOutputType | null
+  }
+
+  type GetWeddingRsvpGroupByPayload<T extends WeddingRsvpGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WeddingRsvpGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WeddingRsvpGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WeddingRsvpGroupByOutputType[P]>
+            : GetScalarType<T[P], WeddingRsvpGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WeddingRsvpSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    name?: boolean
+    phone?: boolean
+    status?: boolean
+    guestCount?: boolean
+    message?: boolean
+    isHidden?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingRsvp$guestArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingRsvp"]>
+
+  export type WeddingRsvpSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    name?: boolean
+    phone?: boolean
+    status?: boolean
+    guestCount?: boolean
+    message?: boolean
+    isHidden?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingRsvp$guestArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingRsvp"]>
+
+  export type WeddingRsvpSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    name?: boolean
+    phone?: boolean
+    status?: boolean
+    guestCount?: boolean
+    message?: boolean
+    isHidden?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingRsvp$guestArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingRsvp"]>
+
+  export type WeddingRsvpSelectScalar = {
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    name?: boolean
+    phone?: boolean
+    status?: boolean
+    guestCount?: boolean
+    message?: boolean
+    isHidden?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WeddingRsvpOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingId" | "guestId" | "name" | "phone" | "status" | "guestCount" | "message" | "isHidden" | "createdAt" | "updatedAt", ExtArgs["result"]["weddingRsvp"]>
+  export type WeddingRsvpInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingRsvp$guestArgs<ExtArgs>
+  }
+  export type WeddingRsvpIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingRsvp$guestArgs<ExtArgs>
+  }
+  export type WeddingRsvpIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingRsvp$guestArgs<ExtArgs>
+  }
+
+  export type $WeddingRsvpPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WeddingRsvp"
+    objects: {
+      wedding: Prisma.$WeddingPayload<ExtArgs>
+      guest: Prisma.$WeddingGuestPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      weddingId: string
+      guestId: string | null
+      name: string
+      phone: string | null
+      status: $Enums.AttendanceStatus
+      guestCount: number
+      message: string | null
+      isHidden: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["weddingRsvp"]>
+    composites: {}
+  }
+
+  type WeddingRsvpGetPayload<S extends boolean | null | undefined | WeddingRsvpDefaultArgs> = $Result.GetResult<Prisma.$WeddingRsvpPayload, S>
+
+  type WeddingRsvpCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WeddingRsvpFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WeddingRsvpCountAggregateInputType | true
+    }
+
+  export interface WeddingRsvpDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WeddingRsvp'], meta: { name: 'WeddingRsvp' } }
+    /**
+     * Find zero or one WeddingRsvp that matches the filter.
+     * @param {WeddingRsvpFindUniqueArgs} args - Arguments to find a WeddingRsvp
+     * @example
+     * // Get one WeddingRsvp
+     * const weddingRsvp = await prisma.weddingRsvp.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WeddingRsvpFindUniqueArgs>(args: SelectSubset<T, WeddingRsvpFindUniqueArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WeddingRsvp that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WeddingRsvpFindUniqueOrThrowArgs} args - Arguments to find a WeddingRsvp
+     * @example
+     * // Get one WeddingRsvp
+     * const weddingRsvp = await prisma.weddingRsvp.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WeddingRsvpFindUniqueOrThrowArgs>(args: SelectSubset<T, WeddingRsvpFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeddingRsvp that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpFindFirstArgs} args - Arguments to find a WeddingRsvp
+     * @example
+     * // Get one WeddingRsvp
+     * const weddingRsvp = await prisma.weddingRsvp.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WeddingRsvpFindFirstArgs>(args?: SelectSubset<T, WeddingRsvpFindFirstArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeddingRsvp that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpFindFirstOrThrowArgs} args - Arguments to find a WeddingRsvp
+     * @example
+     * // Get one WeddingRsvp
+     * const weddingRsvp = await prisma.weddingRsvp.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WeddingRsvpFindFirstOrThrowArgs>(args?: SelectSubset<T, WeddingRsvpFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WeddingRsvps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WeddingRsvps
+     * const weddingRsvps = await prisma.weddingRsvp.findMany()
+     * 
+     * // Get first 10 WeddingRsvps
+     * const weddingRsvps = await prisma.weddingRsvp.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const weddingRsvpWithIdOnly = await prisma.weddingRsvp.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WeddingRsvpFindManyArgs>(args?: SelectSubset<T, WeddingRsvpFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WeddingRsvp.
+     * @param {WeddingRsvpCreateArgs} args - Arguments to create a WeddingRsvp.
+     * @example
+     * // Create one WeddingRsvp
+     * const WeddingRsvp = await prisma.weddingRsvp.create({
+     *   data: {
+     *     // ... data to create a WeddingRsvp
+     *   }
+     * })
+     * 
+     */
+    create<T extends WeddingRsvpCreateArgs>(args: SelectSubset<T, WeddingRsvpCreateArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WeddingRsvps.
+     * @param {WeddingRsvpCreateManyArgs} args - Arguments to create many WeddingRsvps.
+     * @example
+     * // Create many WeddingRsvps
+     * const weddingRsvp = await prisma.weddingRsvp.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WeddingRsvpCreateManyArgs>(args?: SelectSubset<T, WeddingRsvpCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WeddingRsvps and returns the data saved in the database.
+     * @param {WeddingRsvpCreateManyAndReturnArgs} args - Arguments to create many WeddingRsvps.
+     * @example
+     * // Create many WeddingRsvps
+     * const weddingRsvp = await prisma.weddingRsvp.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WeddingRsvps and only return the `id`
+     * const weddingRsvpWithIdOnly = await prisma.weddingRsvp.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WeddingRsvpCreateManyAndReturnArgs>(args?: SelectSubset<T, WeddingRsvpCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WeddingRsvp.
+     * @param {WeddingRsvpDeleteArgs} args - Arguments to delete one WeddingRsvp.
+     * @example
+     * // Delete one WeddingRsvp
+     * const WeddingRsvp = await prisma.weddingRsvp.delete({
+     *   where: {
+     *     // ... filter to delete one WeddingRsvp
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WeddingRsvpDeleteArgs>(args: SelectSubset<T, WeddingRsvpDeleteArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WeddingRsvp.
+     * @param {WeddingRsvpUpdateArgs} args - Arguments to update one WeddingRsvp.
+     * @example
+     * // Update one WeddingRsvp
+     * const weddingRsvp = await prisma.weddingRsvp.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WeddingRsvpUpdateArgs>(args: SelectSubset<T, WeddingRsvpUpdateArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WeddingRsvps.
+     * @param {WeddingRsvpDeleteManyArgs} args - Arguments to filter WeddingRsvps to delete.
+     * @example
+     * // Delete a few WeddingRsvps
+     * const { count } = await prisma.weddingRsvp.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WeddingRsvpDeleteManyArgs>(args?: SelectSubset<T, WeddingRsvpDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeddingRsvps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WeddingRsvps
+     * const weddingRsvp = await prisma.weddingRsvp.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WeddingRsvpUpdateManyArgs>(args: SelectSubset<T, WeddingRsvpUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeddingRsvps and returns the data updated in the database.
+     * @param {WeddingRsvpUpdateManyAndReturnArgs} args - Arguments to update many WeddingRsvps.
+     * @example
+     * // Update many WeddingRsvps
+     * const weddingRsvp = await prisma.weddingRsvp.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WeddingRsvps and only return the `id`
+     * const weddingRsvpWithIdOnly = await prisma.weddingRsvp.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WeddingRsvpUpdateManyAndReturnArgs>(args: SelectSubset<T, WeddingRsvpUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WeddingRsvp.
+     * @param {WeddingRsvpUpsertArgs} args - Arguments to update or create a WeddingRsvp.
+     * @example
+     * // Update or create a WeddingRsvp
+     * const weddingRsvp = await prisma.weddingRsvp.upsert({
+     *   create: {
+     *     // ... data to create a WeddingRsvp
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WeddingRsvp we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WeddingRsvpUpsertArgs>(args: SelectSubset<T, WeddingRsvpUpsertArgs<ExtArgs>>): Prisma__WeddingRsvpClient<$Result.GetResult<Prisma.$WeddingRsvpPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WeddingRsvps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpCountArgs} args - Arguments to filter WeddingRsvps to count.
+     * @example
+     * // Count the number of WeddingRsvps
+     * const count = await prisma.weddingRsvp.count({
+     *   where: {
+     *     // ... the filter for the WeddingRsvps we want to count
+     *   }
+     * })
+    **/
+    count<T extends WeddingRsvpCountArgs>(
+      args?: Subset<T, WeddingRsvpCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WeddingRsvpCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WeddingRsvp.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WeddingRsvpAggregateArgs>(args: Subset<T, WeddingRsvpAggregateArgs>): Prisma.PrismaPromise<GetWeddingRsvpAggregateType<T>>
+
+    /**
+     * Group by WeddingRsvp.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingRsvpGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WeddingRsvpGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WeddingRsvpGroupByArgs['orderBy'] }
+        : { orderBy?: WeddingRsvpGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WeddingRsvpGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWeddingRsvpGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WeddingRsvp model
+   */
+  readonly fields: WeddingRsvpFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WeddingRsvp.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WeddingRsvpClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    wedding<T extends WeddingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WeddingDefaultArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    guest<T extends WeddingRsvp$guestArgs<ExtArgs> = {}>(args?: Subset<T, WeddingRsvp$guestArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WeddingRsvp model
+   */
+  interface WeddingRsvpFieldRefs {
+    readonly id: FieldRef<"WeddingRsvp", 'String'>
+    readonly weddingId: FieldRef<"WeddingRsvp", 'String'>
+    readonly guestId: FieldRef<"WeddingRsvp", 'String'>
+    readonly name: FieldRef<"WeddingRsvp", 'String'>
+    readonly phone: FieldRef<"WeddingRsvp", 'String'>
+    readonly status: FieldRef<"WeddingRsvp", 'AttendanceStatus'>
+    readonly guestCount: FieldRef<"WeddingRsvp", 'Int'>
+    readonly message: FieldRef<"WeddingRsvp", 'String'>
+    readonly isHidden: FieldRef<"WeddingRsvp", 'Boolean'>
+    readonly createdAt: FieldRef<"WeddingRsvp", 'DateTime'>
+    readonly updatedAt: FieldRef<"WeddingRsvp", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WeddingRsvp findUnique
+   */
+  export type WeddingRsvpFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingRsvp to fetch.
+     */
+    where: WeddingRsvpWhereUniqueInput
+  }
+
+  /**
+   * WeddingRsvp findUniqueOrThrow
+   */
+  export type WeddingRsvpFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingRsvp to fetch.
+     */
+    where: WeddingRsvpWhereUniqueInput
+  }
+
+  /**
+   * WeddingRsvp findFirst
+   */
+  export type WeddingRsvpFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingRsvp to fetch.
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingRsvps to fetch.
+     */
+    orderBy?: WeddingRsvpOrderByWithRelationInput | WeddingRsvpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WeddingRsvps.
+     */
+    cursor?: WeddingRsvpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingRsvps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingRsvps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WeddingRsvps.
+     */
+    distinct?: WeddingRsvpScalarFieldEnum | WeddingRsvpScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingRsvp findFirstOrThrow
+   */
+  export type WeddingRsvpFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingRsvp to fetch.
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingRsvps to fetch.
+     */
+    orderBy?: WeddingRsvpOrderByWithRelationInput | WeddingRsvpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WeddingRsvps.
+     */
+    cursor?: WeddingRsvpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingRsvps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingRsvps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WeddingRsvps.
+     */
+    distinct?: WeddingRsvpScalarFieldEnum | WeddingRsvpScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingRsvp findMany
+   */
+  export type WeddingRsvpFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingRsvps to fetch.
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingRsvps to fetch.
+     */
+    orderBy?: WeddingRsvpOrderByWithRelationInput | WeddingRsvpOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WeddingRsvps.
+     */
+    cursor?: WeddingRsvpWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingRsvps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingRsvps.
+     */
+    skip?: number
+    distinct?: WeddingRsvpScalarFieldEnum | WeddingRsvpScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingRsvp create
+   */
+  export type WeddingRsvpCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WeddingRsvp.
+     */
+    data: XOR<WeddingRsvpCreateInput, WeddingRsvpUncheckedCreateInput>
+  }
+
+  /**
+   * WeddingRsvp createMany
+   */
+  export type WeddingRsvpCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WeddingRsvps.
+     */
+    data: WeddingRsvpCreateManyInput | WeddingRsvpCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WeddingRsvp createManyAndReturn
+   */
+  export type WeddingRsvpCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * The data used to create many WeddingRsvps.
+     */
+    data: WeddingRsvpCreateManyInput | WeddingRsvpCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WeddingRsvp update
+   */
+  export type WeddingRsvpUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WeddingRsvp.
+     */
+    data: XOR<WeddingRsvpUpdateInput, WeddingRsvpUncheckedUpdateInput>
+    /**
+     * Choose, which WeddingRsvp to update.
+     */
+    where: WeddingRsvpWhereUniqueInput
+  }
+
+  /**
+   * WeddingRsvp updateMany
+   */
+  export type WeddingRsvpUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WeddingRsvps.
+     */
+    data: XOR<WeddingRsvpUpdateManyMutationInput, WeddingRsvpUncheckedUpdateManyInput>
+    /**
+     * Filter which WeddingRsvps to update
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * Limit how many WeddingRsvps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeddingRsvp updateManyAndReturn
+   */
+  export type WeddingRsvpUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * The data used to update WeddingRsvps.
+     */
+    data: XOR<WeddingRsvpUpdateManyMutationInput, WeddingRsvpUncheckedUpdateManyInput>
+    /**
+     * Filter which WeddingRsvps to update
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * Limit how many WeddingRsvps to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WeddingRsvp upsert
+   */
+  export type WeddingRsvpUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WeddingRsvp to update in case it exists.
+     */
+    where: WeddingRsvpWhereUniqueInput
+    /**
+     * In case the WeddingRsvp found by the `where` argument doesn't exist, create a new WeddingRsvp with this data.
+     */
+    create: XOR<WeddingRsvpCreateInput, WeddingRsvpUncheckedCreateInput>
+    /**
+     * In case the WeddingRsvp was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WeddingRsvpUpdateInput, WeddingRsvpUncheckedUpdateInput>
+  }
+
+  /**
+   * WeddingRsvp delete
+   */
+  export type WeddingRsvpDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+    /**
+     * Filter which WeddingRsvp to delete.
+     */
+    where: WeddingRsvpWhereUniqueInput
+  }
+
+  /**
+   * WeddingRsvp deleteMany
+   */
+  export type WeddingRsvpDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeddingRsvps to delete
+     */
+    where?: WeddingRsvpWhereInput
+    /**
+     * Limit how many WeddingRsvps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeddingRsvp.guest
+   */
+  export type WeddingRsvp$guestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    where?: WeddingGuestWhereInput
+  }
+
+  /**
+   * WeddingRsvp without action
+   */
+  export type WeddingRsvpDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingRsvp
+     */
+    select?: WeddingRsvpSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingRsvp
+     */
+    omit?: WeddingRsvpOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingRsvpInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WeddingAnalytics
+   */
+
+  export type AggregateWeddingAnalytics = {
+    _count: WeddingAnalyticsCountAggregateOutputType | null
+    _min: WeddingAnalyticsMinAggregateOutputType | null
+    _max: WeddingAnalyticsMaxAggregateOutputType | null
+  }
+
+  export type WeddingAnalyticsMinAggregateOutputType = {
+    id: string | null
+    weddingId: string | null
+    guestId: string | null
+    event: $Enums.WeddingAnalyticsEvent | null
+    sessionKey: string | null
+    createdAt: Date | null
+  }
+
+  export type WeddingAnalyticsMaxAggregateOutputType = {
+    id: string | null
+    weddingId: string | null
+    guestId: string | null
+    event: $Enums.WeddingAnalyticsEvent | null
+    sessionKey: string | null
+    createdAt: Date | null
+  }
+
+  export type WeddingAnalyticsCountAggregateOutputType = {
+    id: number
+    weddingId: number
+    guestId: number
+    event: number
+    sessionKey: number
+    metadata: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type WeddingAnalyticsMinAggregateInputType = {
+    id?: true
+    weddingId?: true
+    guestId?: true
+    event?: true
+    sessionKey?: true
+    createdAt?: true
+  }
+
+  export type WeddingAnalyticsMaxAggregateInputType = {
+    id?: true
+    weddingId?: true
+    guestId?: true
+    event?: true
+    sessionKey?: true
+    createdAt?: true
+  }
+
+  export type WeddingAnalyticsCountAggregateInputType = {
+    id?: true
+    weddingId?: true
+    guestId?: true
+    event?: true
+    sessionKey?: true
+    metadata?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type WeddingAnalyticsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeddingAnalytics to aggregate.
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingAnalytics to fetch.
+     */
+    orderBy?: WeddingAnalyticsOrderByWithRelationInput | WeddingAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WeddingAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WeddingAnalytics
+    **/
+    _count?: true | WeddingAnalyticsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WeddingAnalyticsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WeddingAnalyticsMaxAggregateInputType
+  }
+
+  export type GetWeddingAnalyticsAggregateType<T extends WeddingAnalyticsAggregateArgs> = {
+        [P in keyof T & keyof AggregateWeddingAnalytics]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWeddingAnalytics[P]>
+      : GetScalarType<T[P], AggregateWeddingAnalytics[P]>
+  }
+
+
+
+
+  export type WeddingAnalyticsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WeddingAnalyticsWhereInput
+    orderBy?: WeddingAnalyticsOrderByWithAggregationInput | WeddingAnalyticsOrderByWithAggregationInput[]
+    by: WeddingAnalyticsScalarFieldEnum[] | WeddingAnalyticsScalarFieldEnum
+    having?: WeddingAnalyticsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WeddingAnalyticsCountAggregateInputType | true
+    _min?: WeddingAnalyticsMinAggregateInputType
+    _max?: WeddingAnalyticsMaxAggregateInputType
+  }
+
+  export type WeddingAnalyticsGroupByOutputType = {
+    id: string
+    weddingId: string
+    guestId: string | null
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey: string | null
+    metadata: JsonValue | null
+    createdAt: Date
+    _count: WeddingAnalyticsCountAggregateOutputType | null
+    _min: WeddingAnalyticsMinAggregateOutputType | null
+    _max: WeddingAnalyticsMaxAggregateOutputType | null
+  }
+
+  type GetWeddingAnalyticsGroupByPayload<T extends WeddingAnalyticsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WeddingAnalyticsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WeddingAnalyticsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WeddingAnalyticsGroupByOutputType[P]>
+            : GetScalarType<T[P], WeddingAnalyticsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WeddingAnalyticsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    event?: boolean
+    sessionKey?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingAnalytics$guestArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingAnalytics"]>
+
+  export type WeddingAnalyticsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    event?: boolean
+    sessionKey?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingAnalytics$guestArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingAnalytics"]>
+
+  export type WeddingAnalyticsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    event?: boolean
+    sessionKey?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingAnalytics$guestArgs<ExtArgs>
+  }, ExtArgs["result"]["weddingAnalytics"]>
+
+  export type WeddingAnalyticsSelectScalar = {
+    id?: boolean
+    weddingId?: boolean
+    guestId?: boolean
+    event?: boolean
+    sessionKey?: boolean
+    metadata?: boolean
+    createdAt?: boolean
+  }
+
+  export type WeddingAnalyticsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "weddingId" | "guestId" | "event" | "sessionKey" | "metadata" | "createdAt", ExtArgs["result"]["weddingAnalytics"]>
+  export type WeddingAnalyticsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingAnalytics$guestArgs<ExtArgs>
+  }
+  export type WeddingAnalyticsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingAnalytics$guestArgs<ExtArgs>
+  }
+  export type WeddingAnalyticsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    wedding?: boolean | WeddingDefaultArgs<ExtArgs>
+    guest?: boolean | WeddingAnalytics$guestArgs<ExtArgs>
+  }
+
+  export type $WeddingAnalyticsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WeddingAnalytics"
+    objects: {
+      wedding: Prisma.$WeddingPayload<ExtArgs>
+      guest: Prisma.$WeddingGuestPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      weddingId: string
+      guestId: string | null
+      event: $Enums.WeddingAnalyticsEvent
+      sessionKey: string | null
+      metadata: Prisma.JsonValue | null
+      createdAt: Date
+    }, ExtArgs["result"]["weddingAnalytics"]>
+    composites: {}
+  }
+
+  type WeddingAnalyticsGetPayload<S extends boolean | null | undefined | WeddingAnalyticsDefaultArgs> = $Result.GetResult<Prisma.$WeddingAnalyticsPayload, S>
+
+  type WeddingAnalyticsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WeddingAnalyticsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WeddingAnalyticsCountAggregateInputType | true
+    }
+
+  export interface WeddingAnalyticsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WeddingAnalytics'], meta: { name: 'WeddingAnalytics' } }
+    /**
+     * Find zero or one WeddingAnalytics that matches the filter.
+     * @param {WeddingAnalyticsFindUniqueArgs} args - Arguments to find a WeddingAnalytics
+     * @example
+     * // Get one WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WeddingAnalyticsFindUniqueArgs>(args: SelectSubset<T, WeddingAnalyticsFindUniqueArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WeddingAnalytics that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WeddingAnalyticsFindUniqueOrThrowArgs} args - Arguments to find a WeddingAnalytics
+     * @example
+     * // Get one WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WeddingAnalyticsFindUniqueOrThrowArgs>(args: SelectSubset<T, WeddingAnalyticsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeddingAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsFindFirstArgs} args - Arguments to find a WeddingAnalytics
+     * @example
+     * // Get one WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WeddingAnalyticsFindFirstArgs>(args?: SelectSubset<T, WeddingAnalyticsFindFirstArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WeddingAnalytics that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsFindFirstOrThrowArgs} args - Arguments to find a WeddingAnalytics
+     * @example
+     * // Get one WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WeddingAnalyticsFindFirstOrThrowArgs>(args?: SelectSubset<T, WeddingAnalyticsFindFirstOrThrowArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WeddingAnalytics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.findMany()
+     * 
+     * // Get first 10 WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const weddingAnalyticsWithIdOnly = await prisma.weddingAnalytics.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WeddingAnalyticsFindManyArgs>(args?: SelectSubset<T, WeddingAnalyticsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WeddingAnalytics.
+     * @param {WeddingAnalyticsCreateArgs} args - Arguments to create a WeddingAnalytics.
+     * @example
+     * // Create one WeddingAnalytics
+     * const WeddingAnalytics = await prisma.weddingAnalytics.create({
+     *   data: {
+     *     // ... data to create a WeddingAnalytics
+     *   }
+     * })
+     * 
+     */
+    create<T extends WeddingAnalyticsCreateArgs>(args: SelectSubset<T, WeddingAnalyticsCreateArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WeddingAnalytics.
+     * @param {WeddingAnalyticsCreateManyArgs} args - Arguments to create many WeddingAnalytics.
+     * @example
+     * // Create many WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WeddingAnalyticsCreateManyArgs>(args?: SelectSubset<T, WeddingAnalyticsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WeddingAnalytics and returns the data saved in the database.
+     * @param {WeddingAnalyticsCreateManyAndReturnArgs} args - Arguments to create many WeddingAnalytics.
+     * @example
+     * // Create many WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WeddingAnalytics and only return the `id`
+     * const weddingAnalyticsWithIdOnly = await prisma.weddingAnalytics.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WeddingAnalyticsCreateManyAndReturnArgs>(args?: SelectSubset<T, WeddingAnalyticsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WeddingAnalytics.
+     * @param {WeddingAnalyticsDeleteArgs} args - Arguments to delete one WeddingAnalytics.
+     * @example
+     * // Delete one WeddingAnalytics
+     * const WeddingAnalytics = await prisma.weddingAnalytics.delete({
+     *   where: {
+     *     // ... filter to delete one WeddingAnalytics
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WeddingAnalyticsDeleteArgs>(args: SelectSubset<T, WeddingAnalyticsDeleteArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WeddingAnalytics.
+     * @param {WeddingAnalyticsUpdateArgs} args - Arguments to update one WeddingAnalytics.
+     * @example
+     * // Update one WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WeddingAnalyticsUpdateArgs>(args: SelectSubset<T, WeddingAnalyticsUpdateArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WeddingAnalytics.
+     * @param {WeddingAnalyticsDeleteManyArgs} args - Arguments to filter WeddingAnalytics to delete.
+     * @example
+     * // Delete a few WeddingAnalytics
+     * const { count } = await prisma.weddingAnalytics.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WeddingAnalyticsDeleteManyArgs>(args?: SelectSubset<T, WeddingAnalyticsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeddingAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WeddingAnalyticsUpdateManyArgs>(args: SelectSubset<T, WeddingAnalyticsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WeddingAnalytics and returns the data updated in the database.
+     * @param {WeddingAnalyticsUpdateManyAndReturnArgs} args - Arguments to update many WeddingAnalytics.
+     * @example
+     * // Update many WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WeddingAnalytics and only return the `id`
+     * const weddingAnalyticsWithIdOnly = await prisma.weddingAnalytics.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WeddingAnalyticsUpdateManyAndReturnArgs>(args: SelectSubset<T, WeddingAnalyticsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WeddingAnalytics.
+     * @param {WeddingAnalyticsUpsertArgs} args - Arguments to update or create a WeddingAnalytics.
+     * @example
+     * // Update or create a WeddingAnalytics
+     * const weddingAnalytics = await prisma.weddingAnalytics.upsert({
+     *   create: {
+     *     // ... data to create a WeddingAnalytics
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WeddingAnalytics we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WeddingAnalyticsUpsertArgs>(args: SelectSubset<T, WeddingAnalyticsUpsertArgs<ExtArgs>>): Prisma__WeddingAnalyticsClient<$Result.GetResult<Prisma.$WeddingAnalyticsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WeddingAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsCountArgs} args - Arguments to filter WeddingAnalytics to count.
+     * @example
+     * // Count the number of WeddingAnalytics
+     * const count = await prisma.weddingAnalytics.count({
+     *   where: {
+     *     // ... the filter for the WeddingAnalytics we want to count
+     *   }
+     * })
+    **/
+    count<T extends WeddingAnalyticsCountArgs>(
+      args?: Subset<T, WeddingAnalyticsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WeddingAnalyticsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WeddingAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WeddingAnalyticsAggregateArgs>(args: Subset<T, WeddingAnalyticsAggregateArgs>): Prisma.PrismaPromise<GetWeddingAnalyticsAggregateType<T>>
+
+    /**
+     * Group by WeddingAnalytics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WeddingAnalyticsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WeddingAnalyticsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WeddingAnalyticsGroupByArgs['orderBy'] }
+        : { orderBy?: WeddingAnalyticsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WeddingAnalyticsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWeddingAnalyticsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WeddingAnalytics model
+   */
+  readonly fields: WeddingAnalyticsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WeddingAnalytics.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WeddingAnalyticsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    wedding<T extends WeddingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WeddingDefaultArgs<ExtArgs>>): Prisma__WeddingClient<$Result.GetResult<Prisma.$WeddingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    guest<T extends WeddingAnalytics$guestArgs<ExtArgs> = {}>(args?: Subset<T, WeddingAnalytics$guestArgs<ExtArgs>>): Prisma__WeddingGuestClient<$Result.GetResult<Prisma.$WeddingGuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WeddingAnalytics model
+   */
+  interface WeddingAnalyticsFieldRefs {
+    readonly id: FieldRef<"WeddingAnalytics", 'String'>
+    readonly weddingId: FieldRef<"WeddingAnalytics", 'String'>
+    readonly guestId: FieldRef<"WeddingAnalytics", 'String'>
+    readonly event: FieldRef<"WeddingAnalytics", 'WeddingAnalyticsEvent'>
+    readonly sessionKey: FieldRef<"WeddingAnalytics", 'String'>
+    readonly metadata: FieldRef<"WeddingAnalytics", 'Json'>
+    readonly createdAt: FieldRef<"WeddingAnalytics", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WeddingAnalytics findUnique
+   */
+  export type WeddingAnalyticsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingAnalytics to fetch.
+     */
+    where: WeddingAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * WeddingAnalytics findUniqueOrThrow
+   */
+  export type WeddingAnalyticsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingAnalytics to fetch.
+     */
+    where: WeddingAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * WeddingAnalytics findFirst
+   */
+  export type WeddingAnalyticsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingAnalytics to fetch.
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingAnalytics to fetch.
+     */
+    orderBy?: WeddingAnalyticsOrderByWithRelationInput | WeddingAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WeddingAnalytics.
+     */
+    cursor?: WeddingAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WeddingAnalytics.
+     */
+    distinct?: WeddingAnalyticsScalarFieldEnum | WeddingAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingAnalytics findFirstOrThrow
+   */
+  export type WeddingAnalyticsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingAnalytics to fetch.
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingAnalytics to fetch.
+     */
+    orderBy?: WeddingAnalyticsOrderByWithRelationInput | WeddingAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WeddingAnalytics.
+     */
+    cursor?: WeddingAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingAnalytics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WeddingAnalytics.
+     */
+    distinct?: WeddingAnalyticsScalarFieldEnum | WeddingAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingAnalytics findMany
+   */
+  export type WeddingAnalyticsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter, which WeddingAnalytics to fetch.
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WeddingAnalytics to fetch.
+     */
+    orderBy?: WeddingAnalyticsOrderByWithRelationInput | WeddingAnalyticsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WeddingAnalytics.
+     */
+    cursor?: WeddingAnalyticsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WeddingAnalytics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WeddingAnalytics.
+     */
+    skip?: number
+    distinct?: WeddingAnalyticsScalarFieldEnum | WeddingAnalyticsScalarFieldEnum[]
+  }
+
+  /**
+   * WeddingAnalytics create
+   */
+  export type WeddingAnalyticsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WeddingAnalytics.
+     */
+    data: XOR<WeddingAnalyticsCreateInput, WeddingAnalyticsUncheckedCreateInput>
+  }
+
+  /**
+   * WeddingAnalytics createMany
+   */
+  export type WeddingAnalyticsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WeddingAnalytics.
+     */
+    data: WeddingAnalyticsCreateManyInput | WeddingAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WeddingAnalytics createManyAndReturn
+   */
+  export type WeddingAnalyticsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to create many WeddingAnalytics.
+     */
+    data: WeddingAnalyticsCreateManyInput | WeddingAnalyticsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WeddingAnalytics update
+   */
+  export type WeddingAnalyticsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WeddingAnalytics.
+     */
+    data: XOR<WeddingAnalyticsUpdateInput, WeddingAnalyticsUncheckedUpdateInput>
+    /**
+     * Choose, which WeddingAnalytics to update.
+     */
+    where: WeddingAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * WeddingAnalytics updateMany
+   */
+  export type WeddingAnalyticsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WeddingAnalytics.
+     */
+    data: XOR<WeddingAnalyticsUpdateManyMutationInput, WeddingAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which WeddingAnalytics to update
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * Limit how many WeddingAnalytics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeddingAnalytics updateManyAndReturn
+   */
+  export type WeddingAnalyticsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * The data used to update WeddingAnalytics.
+     */
+    data: XOR<WeddingAnalyticsUpdateManyMutationInput, WeddingAnalyticsUncheckedUpdateManyInput>
+    /**
+     * Filter which WeddingAnalytics to update
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * Limit how many WeddingAnalytics to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WeddingAnalytics upsert
+   */
+  export type WeddingAnalyticsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WeddingAnalytics to update in case it exists.
+     */
+    where: WeddingAnalyticsWhereUniqueInput
+    /**
+     * In case the WeddingAnalytics found by the `where` argument doesn't exist, create a new WeddingAnalytics with this data.
+     */
+    create: XOR<WeddingAnalyticsCreateInput, WeddingAnalyticsUncheckedCreateInput>
+    /**
+     * In case the WeddingAnalytics was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WeddingAnalyticsUpdateInput, WeddingAnalyticsUncheckedUpdateInput>
+  }
+
+  /**
+   * WeddingAnalytics delete
+   */
+  export type WeddingAnalyticsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+    /**
+     * Filter which WeddingAnalytics to delete.
+     */
+    where: WeddingAnalyticsWhereUniqueInput
+  }
+
+  /**
+   * WeddingAnalytics deleteMany
+   */
+  export type WeddingAnalyticsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WeddingAnalytics to delete
+     */
+    where?: WeddingAnalyticsWhereInput
+    /**
+     * Limit how many WeddingAnalytics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WeddingAnalytics.guest
+   */
+  export type WeddingAnalytics$guestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingGuest
+     */
+    select?: WeddingGuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingGuest
+     */
+    omit?: WeddingGuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingGuestInclude<ExtArgs> | null
+    where?: WeddingGuestWhereInput
+  }
+
+  /**
+   * WeddingAnalytics without action
+   */
+  export type WeddingAnalyticsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WeddingAnalytics
+     */
+    select?: WeddingAnalyticsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WeddingAnalytics
+     */
+    omit?: WeddingAnalyticsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WeddingAnalyticsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7732,7 +13091,9 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     emailVerified: 'emailVerified',
-    image: 'image'
+    image: 'image',
+    passwordHash: 'passwordHash',
+    isAdmin: 'isAdmin'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -7771,12 +13132,95 @@ export namespace Prisma {
   export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
 
 
+  export const WeddingScalarFieldEnum: {
+    id: 'id',
+    key: 'key',
+    name: 'name',
+    groomShortName: 'groomShortName',
+    brideShortName: 'brideShortName',
+    groomFullName: 'groomFullName',
+    brideFullName: 'brideFullName',
+    groomParents: 'groomParents',
+    brideParents: 'brideParents',
+    groomChildOrder: 'groomChildOrder',
+    brideChildOrder: 'brideChildOrder',
+    eventDate: 'eventDate',
+    dateLabel: 'dateLabel',
+    timeLabel: 'timeLabel',
+    venueName: 'venueName',
+    venueAddress: 'venueAddress',
+    mapUrl: 'mapUrl',
+    template: 'template',
+    isPublished: 'isPublished',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WeddingScalarFieldEnum = (typeof WeddingScalarFieldEnum)[keyof typeof WeddingScalarFieldEnum]
+
+
+  export const WeddingGuestScalarFieldEnum: {
+    id: 'id',
+    weddingId: 'weddingId',
+    name: 'name',
+    phone: 'phone',
+    groupName: 'groupName',
+    maxGuests: 'maxGuests',
+    slug: 'slug',
+    isActive: 'isActive',
+    isSent: 'isSent',
+    sentAt: 'sentAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WeddingGuestScalarFieldEnum = (typeof WeddingGuestScalarFieldEnum)[keyof typeof WeddingGuestScalarFieldEnum]
+
+
+  export const WeddingRsvpScalarFieldEnum: {
+    id: 'id',
+    weddingId: 'weddingId',
+    guestId: 'guestId',
+    name: 'name',
+    phone: 'phone',
+    status: 'status',
+    guestCount: 'guestCount',
+    message: 'message',
+    isHidden: 'isHidden',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WeddingRsvpScalarFieldEnum = (typeof WeddingRsvpScalarFieldEnum)[keyof typeof WeddingRsvpScalarFieldEnum]
+
+
+  export const WeddingAnalyticsScalarFieldEnum: {
+    id: 'id',
+    weddingId: 'weddingId',
+    guestId: 'guestId',
+    event: 'event',
+    sessionKey: 'sessionKey',
+    metadata: 'metadata',
+    createdAt: 'createdAt'
+  };
+
+  export type WeddingAnalyticsScalarFieldEnum = (typeof WeddingAnalyticsScalarFieldEnum)[keyof typeof WeddingAnalyticsScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -7793,6 +13237,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -7843,6 +13296,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'AttendanceStatus'
    */
   export type EnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus'>
@@ -7853,6 +13313,34 @@ export namespace Prisma {
    * Reference to a field of type 'AttendanceStatus[]'
    */
   export type ListEnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'WeddingAnalyticsEvent'
+   */
+  export type EnumWeddingAnalyticsEventFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WeddingAnalyticsEvent'>
+    
+
+
+  /**
+   * Reference to a field of type 'WeddingAnalyticsEvent[]'
+   */
+  export type ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WeddingAnalyticsEvent[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -8025,6 +13513,8 @@ export namespace Prisma {
     email?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
+    isAdmin?: BoolFilter<"User"> | boolean
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
   }
@@ -8035,6 +13525,8 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    passwordHash?: SortOrderInput | SortOrder
+    isAdmin?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
   }
@@ -8048,6 +13540,8 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
+    passwordHash?: StringNullableFilter<"User"> | string | null
+    isAdmin?: BoolFilter<"User"> | boolean
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
   }, "id" | "email">
@@ -8058,6 +13552,8 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    passwordHash?: SortOrderInput | SortOrder
+    isAdmin?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -8072,6 +13568,8 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    passwordHash?: StringNullableWithAggregatesFilter<"User"> | string | null
+    isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type VerificationTokenWhereInput = {
@@ -8229,6 +13727,403 @@ export namespace Prisma {
     message?: StringNullableWithAggregatesFilter<"Attendance"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Attendance"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Attendance"> | Date | string
+  }
+
+  export type WeddingWhereInput = {
+    AND?: WeddingWhereInput | WeddingWhereInput[]
+    OR?: WeddingWhereInput[]
+    NOT?: WeddingWhereInput | WeddingWhereInput[]
+    id?: StringFilter<"Wedding"> | string
+    key?: StringFilter<"Wedding"> | string
+    name?: StringFilter<"Wedding"> | string
+    groomShortName?: StringFilter<"Wedding"> | string
+    brideShortName?: StringFilter<"Wedding"> | string
+    groomFullName?: StringFilter<"Wedding"> | string
+    brideFullName?: StringFilter<"Wedding"> | string
+    groomParents?: StringNullableFilter<"Wedding"> | string | null
+    brideParents?: StringNullableFilter<"Wedding"> | string | null
+    groomChildOrder?: StringNullableFilter<"Wedding"> | string | null
+    brideChildOrder?: StringNullableFilter<"Wedding"> | string | null
+    eventDate?: DateTimeNullableFilter<"Wedding"> | Date | string | null
+    dateLabel?: StringNullableFilter<"Wedding"> | string | null
+    timeLabel?: StringNullableFilter<"Wedding"> | string | null
+    venueName?: StringNullableFilter<"Wedding"> | string | null
+    venueAddress?: StringNullableFilter<"Wedding"> | string | null
+    mapUrl?: StringNullableFilter<"Wedding"> | string | null
+    template?: StringFilter<"Wedding"> | string
+    isPublished?: BoolFilter<"Wedding"> | boolean
+    createdAt?: DateTimeFilter<"Wedding"> | Date | string
+    updatedAt?: DateTimeFilter<"Wedding"> | Date | string
+    guests?: WeddingGuestListRelationFilter
+    rsvps?: WeddingRsvpListRelationFilter
+    analytics?: WeddingAnalyticsListRelationFilter
+  }
+
+  export type WeddingOrderByWithRelationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    groomShortName?: SortOrder
+    brideShortName?: SortOrder
+    groomFullName?: SortOrder
+    brideFullName?: SortOrder
+    groomParents?: SortOrderInput | SortOrder
+    brideParents?: SortOrderInput | SortOrder
+    groomChildOrder?: SortOrderInput | SortOrder
+    brideChildOrder?: SortOrderInput | SortOrder
+    eventDate?: SortOrderInput | SortOrder
+    dateLabel?: SortOrderInput | SortOrder
+    timeLabel?: SortOrderInput | SortOrder
+    venueName?: SortOrderInput | SortOrder
+    venueAddress?: SortOrderInput | SortOrder
+    mapUrl?: SortOrderInput | SortOrder
+    template?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    guests?: WeddingGuestOrderByRelationAggregateInput
+    rsvps?: WeddingRsvpOrderByRelationAggregateInput
+    analytics?: WeddingAnalyticsOrderByRelationAggregateInput
+  }
+
+  export type WeddingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    key?: string
+    AND?: WeddingWhereInput | WeddingWhereInput[]
+    OR?: WeddingWhereInput[]
+    NOT?: WeddingWhereInput | WeddingWhereInput[]
+    name?: StringFilter<"Wedding"> | string
+    groomShortName?: StringFilter<"Wedding"> | string
+    brideShortName?: StringFilter<"Wedding"> | string
+    groomFullName?: StringFilter<"Wedding"> | string
+    brideFullName?: StringFilter<"Wedding"> | string
+    groomParents?: StringNullableFilter<"Wedding"> | string | null
+    brideParents?: StringNullableFilter<"Wedding"> | string | null
+    groomChildOrder?: StringNullableFilter<"Wedding"> | string | null
+    brideChildOrder?: StringNullableFilter<"Wedding"> | string | null
+    eventDate?: DateTimeNullableFilter<"Wedding"> | Date | string | null
+    dateLabel?: StringNullableFilter<"Wedding"> | string | null
+    timeLabel?: StringNullableFilter<"Wedding"> | string | null
+    venueName?: StringNullableFilter<"Wedding"> | string | null
+    venueAddress?: StringNullableFilter<"Wedding"> | string | null
+    mapUrl?: StringNullableFilter<"Wedding"> | string | null
+    template?: StringFilter<"Wedding"> | string
+    isPublished?: BoolFilter<"Wedding"> | boolean
+    createdAt?: DateTimeFilter<"Wedding"> | Date | string
+    updatedAt?: DateTimeFilter<"Wedding"> | Date | string
+    guests?: WeddingGuestListRelationFilter
+    rsvps?: WeddingRsvpListRelationFilter
+    analytics?: WeddingAnalyticsListRelationFilter
+  }, "id" | "key">
+
+  export type WeddingOrderByWithAggregationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    groomShortName?: SortOrder
+    brideShortName?: SortOrder
+    groomFullName?: SortOrder
+    brideFullName?: SortOrder
+    groomParents?: SortOrderInput | SortOrder
+    brideParents?: SortOrderInput | SortOrder
+    groomChildOrder?: SortOrderInput | SortOrder
+    brideChildOrder?: SortOrderInput | SortOrder
+    eventDate?: SortOrderInput | SortOrder
+    dateLabel?: SortOrderInput | SortOrder
+    timeLabel?: SortOrderInput | SortOrder
+    venueName?: SortOrderInput | SortOrder
+    venueAddress?: SortOrderInput | SortOrder
+    mapUrl?: SortOrderInput | SortOrder
+    template?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WeddingCountOrderByAggregateInput
+    _max?: WeddingMaxOrderByAggregateInput
+    _min?: WeddingMinOrderByAggregateInput
+  }
+
+  export type WeddingScalarWhereWithAggregatesInput = {
+    AND?: WeddingScalarWhereWithAggregatesInput | WeddingScalarWhereWithAggregatesInput[]
+    OR?: WeddingScalarWhereWithAggregatesInput[]
+    NOT?: WeddingScalarWhereWithAggregatesInput | WeddingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Wedding"> | string
+    key?: StringWithAggregatesFilter<"Wedding"> | string
+    name?: StringWithAggregatesFilter<"Wedding"> | string
+    groomShortName?: StringWithAggregatesFilter<"Wedding"> | string
+    brideShortName?: StringWithAggregatesFilter<"Wedding"> | string
+    groomFullName?: StringWithAggregatesFilter<"Wedding"> | string
+    brideFullName?: StringWithAggregatesFilter<"Wedding"> | string
+    groomParents?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    brideParents?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    groomChildOrder?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    brideChildOrder?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    eventDate?: DateTimeNullableWithAggregatesFilter<"Wedding"> | Date | string | null
+    dateLabel?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    timeLabel?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    venueName?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    venueAddress?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    mapUrl?: StringNullableWithAggregatesFilter<"Wedding"> | string | null
+    template?: StringWithAggregatesFilter<"Wedding"> | string
+    isPublished?: BoolWithAggregatesFilter<"Wedding"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Wedding"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Wedding"> | Date | string
+  }
+
+  export type WeddingGuestWhereInput = {
+    AND?: WeddingGuestWhereInput | WeddingGuestWhereInput[]
+    OR?: WeddingGuestWhereInput[]
+    NOT?: WeddingGuestWhereInput | WeddingGuestWhereInput[]
+    id?: StringFilter<"WeddingGuest"> | string
+    weddingId?: StringFilter<"WeddingGuest"> | string
+    name?: StringFilter<"WeddingGuest"> | string
+    phone?: StringNullableFilter<"WeddingGuest"> | string | null
+    groupName?: StringNullableFilter<"WeddingGuest"> | string | null
+    maxGuests?: IntFilter<"WeddingGuest"> | number
+    slug?: StringFilter<"WeddingGuest"> | string
+    isActive?: BoolFilter<"WeddingGuest"> | boolean
+    isSent?: BoolFilter<"WeddingGuest"> | boolean
+    sentAt?: DateTimeNullableFilter<"WeddingGuest"> | Date | string | null
+    createdAt?: DateTimeFilter<"WeddingGuest"> | Date | string
+    updatedAt?: DateTimeFilter<"WeddingGuest"> | Date | string
+    wedding?: XOR<WeddingScalarRelationFilter, WeddingWhereInput>
+    rsvp?: XOR<WeddingRsvpNullableScalarRelationFilter, WeddingRsvpWhereInput> | null
+    analytics?: WeddingAnalyticsListRelationFilter
+  }
+
+  export type WeddingGuestOrderByWithRelationInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    groupName?: SortOrderInput | SortOrder
+    maxGuests?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    isSent?: SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    wedding?: WeddingOrderByWithRelationInput
+    rsvp?: WeddingRsvpOrderByWithRelationInput
+    analytics?: WeddingAnalyticsOrderByRelationAggregateInput
+  }
+
+  export type WeddingGuestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: WeddingGuestWhereInput | WeddingGuestWhereInput[]
+    OR?: WeddingGuestWhereInput[]
+    NOT?: WeddingGuestWhereInput | WeddingGuestWhereInput[]
+    weddingId?: StringFilter<"WeddingGuest"> | string
+    name?: StringFilter<"WeddingGuest"> | string
+    phone?: StringNullableFilter<"WeddingGuest"> | string | null
+    groupName?: StringNullableFilter<"WeddingGuest"> | string | null
+    maxGuests?: IntFilter<"WeddingGuest"> | number
+    isActive?: BoolFilter<"WeddingGuest"> | boolean
+    isSent?: BoolFilter<"WeddingGuest"> | boolean
+    sentAt?: DateTimeNullableFilter<"WeddingGuest"> | Date | string | null
+    createdAt?: DateTimeFilter<"WeddingGuest"> | Date | string
+    updatedAt?: DateTimeFilter<"WeddingGuest"> | Date | string
+    wedding?: XOR<WeddingScalarRelationFilter, WeddingWhereInput>
+    rsvp?: XOR<WeddingRsvpNullableScalarRelationFilter, WeddingRsvpWhereInput> | null
+    analytics?: WeddingAnalyticsListRelationFilter
+  }, "id" | "slug">
+
+  export type WeddingGuestOrderByWithAggregationInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    groupName?: SortOrderInput | SortOrder
+    maxGuests?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    isSent?: SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WeddingGuestCountOrderByAggregateInput
+    _avg?: WeddingGuestAvgOrderByAggregateInput
+    _max?: WeddingGuestMaxOrderByAggregateInput
+    _min?: WeddingGuestMinOrderByAggregateInput
+    _sum?: WeddingGuestSumOrderByAggregateInput
+  }
+
+  export type WeddingGuestScalarWhereWithAggregatesInput = {
+    AND?: WeddingGuestScalarWhereWithAggregatesInput | WeddingGuestScalarWhereWithAggregatesInput[]
+    OR?: WeddingGuestScalarWhereWithAggregatesInput[]
+    NOT?: WeddingGuestScalarWhereWithAggregatesInput | WeddingGuestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WeddingGuest"> | string
+    weddingId?: StringWithAggregatesFilter<"WeddingGuest"> | string
+    name?: StringWithAggregatesFilter<"WeddingGuest"> | string
+    phone?: StringNullableWithAggregatesFilter<"WeddingGuest"> | string | null
+    groupName?: StringNullableWithAggregatesFilter<"WeddingGuest"> | string | null
+    maxGuests?: IntWithAggregatesFilter<"WeddingGuest"> | number
+    slug?: StringWithAggregatesFilter<"WeddingGuest"> | string
+    isActive?: BoolWithAggregatesFilter<"WeddingGuest"> | boolean
+    isSent?: BoolWithAggregatesFilter<"WeddingGuest"> | boolean
+    sentAt?: DateTimeNullableWithAggregatesFilter<"WeddingGuest"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"WeddingGuest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WeddingGuest"> | Date | string
+  }
+
+  export type WeddingRsvpWhereInput = {
+    AND?: WeddingRsvpWhereInput | WeddingRsvpWhereInput[]
+    OR?: WeddingRsvpWhereInput[]
+    NOT?: WeddingRsvpWhereInput | WeddingRsvpWhereInput[]
+    id?: StringFilter<"WeddingRsvp"> | string
+    weddingId?: StringFilter<"WeddingRsvp"> | string
+    guestId?: StringNullableFilter<"WeddingRsvp"> | string | null
+    name?: StringFilter<"WeddingRsvp"> | string
+    phone?: StringNullableFilter<"WeddingRsvp"> | string | null
+    status?: EnumAttendanceStatusFilter<"WeddingRsvp"> | $Enums.AttendanceStatus
+    guestCount?: IntFilter<"WeddingRsvp"> | number
+    message?: StringNullableFilter<"WeddingRsvp"> | string | null
+    isHidden?: BoolFilter<"WeddingRsvp"> | boolean
+    createdAt?: DateTimeFilter<"WeddingRsvp"> | Date | string
+    updatedAt?: DateTimeFilter<"WeddingRsvp"> | Date | string
+    wedding?: XOR<WeddingScalarRelationFilter, WeddingWhereInput>
+    guest?: XOR<WeddingGuestNullableScalarRelationFilter, WeddingGuestWhereInput> | null
+  }
+
+  export type WeddingRsvpOrderByWithRelationInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    status?: SortOrder
+    guestCount?: SortOrder
+    message?: SortOrderInput | SortOrder
+    isHidden?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    wedding?: WeddingOrderByWithRelationInput
+    guest?: WeddingGuestOrderByWithRelationInput
+  }
+
+  export type WeddingRsvpWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    guestId?: string
+    AND?: WeddingRsvpWhereInput | WeddingRsvpWhereInput[]
+    OR?: WeddingRsvpWhereInput[]
+    NOT?: WeddingRsvpWhereInput | WeddingRsvpWhereInput[]
+    weddingId?: StringFilter<"WeddingRsvp"> | string
+    name?: StringFilter<"WeddingRsvp"> | string
+    phone?: StringNullableFilter<"WeddingRsvp"> | string | null
+    status?: EnumAttendanceStatusFilter<"WeddingRsvp"> | $Enums.AttendanceStatus
+    guestCount?: IntFilter<"WeddingRsvp"> | number
+    message?: StringNullableFilter<"WeddingRsvp"> | string | null
+    isHidden?: BoolFilter<"WeddingRsvp"> | boolean
+    createdAt?: DateTimeFilter<"WeddingRsvp"> | Date | string
+    updatedAt?: DateTimeFilter<"WeddingRsvp"> | Date | string
+    wedding?: XOR<WeddingScalarRelationFilter, WeddingWhereInput>
+    guest?: XOR<WeddingGuestNullableScalarRelationFilter, WeddingGuestWhereInput> | null
+  }, "id" | "guestId">
+
+  export type WeddingRsvpOrderByWithAggregationInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    status?: SortOrder
+    guestCount?: SortOrder
+    message?: SortOrderInput | SortOrder
+    isHidden?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WeddingRsvpCountOrderByAggregateInput
+    _avg?: WeddingRsvpAvgOrderByAggregateInput
+    _max?: WeddingRsvpMaxOrderByAggregateInput
+    _min?: WeddingRsvpMinOrderByAggregateInput
+    _sum?: WeddingRsvpSumOrderByAggregateInput
+  }
+
+  export type WeddingRsvpScalarWhereWithAggregatesInput = {
+    AND?: WeddingRsvpScalarWhereWithAggregatesInput | WeddingRsvpScalarWhereWithAggregatesInput[]
+    OR?: WeddingRsvpScalarWhereWithAggregatesInput[]
+    NOT?: WeddingRsvpScalarWhereWithAggregatesInput | WeddingRsvpScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WeddingRsvp"> | string
+    weddingId?: StringWithAggregatesFilter<"WeddingRsvp"> | string
+    guestId?: StringNullableWithAggregatesFilter<"WeddingRsvp"> | string | null
+    name?: StringWithAggregatesFilter<"WeddingRsvp"> | string
+    phone?: StringNullableWithAggregatesFilter<"WeddingRsvp"> | string | null
+    status?: EnumAttendanceStatusWithAggregatesFilter<"WeddingRsvp"> | $Enums.AttendanceStatus
+    guestCount?: IntWithAggregatesFilter<"WeddingRsvp"> | number
+    message?: StringNullableWithAggregatesFilter<"WeddingRsvp"> | string | null
+    isHidden?: BoolWithAggregatesFilter<"WeddingRsvp"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"WeddingRsvp"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WeddingRsvp"> | Date | string
+  }
+
+  export type WeddingAnalyticsWhereInput = {
+    AND?: WeddingAnalyticsWhereInput | WeddingAnalyticsWhereInput[]
+    OR?: WeddingAnalyticsWhereInput[]
+    NOT?: WeddingAnalyticsWhereInput | WeddingAnalyticsWhereInput[]
+    id?: StringFilter<"WeddingAnalytics"> | string
+    weddingId?: StringFilter<"WeddingAnalytics"> | string
+    guestId?: StringNullableFilter<"WeddingAnalytics"> | string | null
+    event?: EnumWeddingAnalyticsEventFilter<"WeddingAnalytics"> | $Enums.WeddingAnalyticsEvent
+    sessionKey?: StringNullableFilter<"WeddingAnalytics"> | string | null
+    metadata?: JsonNullableFilter<"WeddingAnalytics">
+    createdAt?: DateTimeFilter<"WeddingAnalytics"> | Date | string
+    wedding?: XOR<WeddingScalarRelationFilter, WeddingWhereInput>
+    guest?: XOR<WeddingGuestNullableScalarRelationFilter, WeddingGuestWhereInput> | null
+  }
+
+  export type WeddingAnalyticsOrderByWithRelationInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrderInput | SortOrder
+    event?: SortOrder
+    sessionKey?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    wedding?: WeddingOrderByWithRelationInput
+    guest?: WeddingGuestOrderByWithRelationInput
+  }
+
+  export type WeddingAnalyticsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WeddingAnalyticsWhereInput | WeddingAnalyticsWhereInput[]
+    OR?: WeddingAnalyticsWhereInput[]
+    NOT?: WeddingAnalyticsWhereInput | WeddingAnalyticsWhereInput[]
+    weddingId?: StringFilter<"WeddingAnalytics"> | string
+    guestId?: StringNullableFilter<"WeddingAnalytics"> | string | null
+    event?: EnumWeddingAnalyticsEventFilter<"WeddingAnalytics"> | $Enums.WeddingAnalyticsEvent
+    sessionKey?: StringNullableFilter<"WeddingAnalytics"> | string | null
+    metadata?: JsonNullableFilter<"WeddingAnalytics">
+    createdAt?: DateTimeFilter<"WeddingAnalytics"> | Date | string
+    wedding?: XOR<WeddingScalarRelationFilter, WeddingWhereInput>
+    guest?: XOR<WeddingGuestNullableScalarRelationFilter, WeddingGuestWhereInput> | null
+  }, "id">
+
+  export type WeddingAnalyticsOrderByWithAggregationInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrderInput | SortOrder
+    event?: SortOrder
+    sessionKey?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: WeddingAnalyticsCountOrderByAggregateInput
+    _max?: WeddingAnalyticsMaxOrderByAggregateInput
+    _min?: WeddingAnalyticsMinOrderByAggregateInput
+  }
+
+  export type WeddingAnalyticsScalarWhereWithAggregatesInput = {
+    AND?: WeddingAnalyticsScalarWhereWithAggregatesInput | WeddingAnalyticsScalarWhereWithAggregatesInput[]
+    OR?: WeddingAnalyticsScalarWhereWithAggregatesInput[]
+    NOT?: WeddingAnalyticsScalarWhereWithAggregatesInput | WeddingAnalyticsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WeddingAnalytics"> | string
+    weddingId?: StringWithAggregatesFilter<"WeddingAnalytics"> | string
+    guestId?: StringNullableWithAggregatesFilter<"WeddingAnalytics"> | string | null
+    event?: EnumWeddingAnalyticsEventWithAggregatesFilter<"WeddingAnalytics"> | $Enums.WeddingAnalyticsEvent
+    sessionKey?: StringNullableWithAggregatesFilter<"WeddingAnalytics"> | string | null
+    metadata?: JsonNullableWithAggregatesFilter<"WeddingAnalytics">
+    createdAt?: DateTimeWithAggregatesFilter<"WeddingAnalytics"> | Date | string
   }
 
   export type AccountCreateInput = {
@@ -8389,6 +14284,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
@@ -8399,6 +14296,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8409,6 +14308,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
@@ -8419,6 +14320,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -8429,6 +14332,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -8437,6 +14342,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -8445,6 +14352,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type VerificationTokenCreateInput = {
@@ -8613,6 +14522,462 @@ export namespace Prisma {
     message?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingCreateInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: WeddingGuestCreateNestedManyWithoutWeddingInput
+    rsvps?: WeddingRsvpCreateNestedManyWithoutWeddingInput
+    analytics?: WeddingAnalyticsCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingUncheckedCreateInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: WeddingGuestUncheckedCreateNestedManyWithoutWeddingInput
+    rsvps?: WeddingRsvpUncheckedCreateNestedManyWithoutWeddingInput
+    analytics?: WeddingAnalyticsUncheckedCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: WeddingGuestUpdateManyWithoutWeddingNestedInput
+    rsvps?: WeddingRsvpUpdateManyWithoutWeddingNestedInput
+    analytics?: WeddingAnalyticsUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: WeddingGuestUncheckedUpdateManyWithoutWeddingNestedInput
+    rsvps?: WeddingRsvpUncheckedUpdateManyWithoutWeddingNestedInput
+    analytics?: WeddingAnalyticsUncheckedUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingCreateManyInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingGuestCreateInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutGuestsInput
+    rsvp?: WeddingRsvpCreateNestedOneWithoutGuestInput
+    analytics?: WeddingAnalyticsCreateNestedManyWithoutGuestInput
+  }
+
+  export type WeddingGuestUncheckedCreateInput = {
+    id?: string
+    weddingId: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rsvp?: WeddingRsvpUncheckedCreateNestedOneWithoutGuestInput
+    analytics?: WeddingAnalyticsUncheckedCreateNestedManyWithoutGuestInput
+  }
+
+  export type WeddingGuestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutGuestsNestedInput
+    rsvp?: WeddingRsvpUpdateOneWithoutGuestNestedInput
+    analytics?: WeddingAnalyticsUpdateManyWithoutGuestNestedInput
+  }
+
+  export type WeddingGuestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rsvp?: WeddingRsvpUncheckedUpdateOneWithoutGuestNestedInput
+    analytics?: WeddingAnalyticsUncheckedUpdateManyWithoutGuestNestedInput
+  }
+
+  export type WeddingGuestCreateManyInput = {
+    id?: string
+    weddingId: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingGuestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingGuestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingRsvpCreateInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutRsvpsInput
+    guest?: WeddingGuestCreateNestedOneWithoutRsvpInput
+  }
+
+  export type WeddingRsvpUncheckedCreateInput = {
+    id?: string
+    weddingId: string
+    guestId?: string | null
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingRsvpUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutRsvpsNestedInput
+    guest?: WeddingGuestUpdateOneWithoutRsvpNestedInput
+  }
+
+  export type WeddingRsvpUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingRsvpCreateManyInput = {
+    id?: string
+    weddingId: string
+    guestId?: string | null
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingRsvpUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingRsvpUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsCreateInput = {
+    id?: string
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutAnalyticsInput
+    guest?: WeddingGuestCreateNestedOneWithoutAnalyticsInput
+  }
+
+  export type WeddingAnalyticsUncheckedCreateInput = {
+    id?: string
+    weddingId: string
+    guestId?: string | null
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type WeddingAnalyticsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutAnalyticsNestedInput
+    guest?: WeddingGuestUpdateOneWithoutAnalyticsNestedInput
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsCreateManyInput = {
+    id?: string
+    weddingId: string
+    guestId?: string | null
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type WeddingAnalyticsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -8833,6 +15198,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -8859,6 +15229,8 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    passwordHash?: SortOrder
+    isAdmin?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -8867,6 +15239,8 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    passwordHash?: SortOrder
+    isAdmin?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -8875,6 +15249,8 @@ export namespace Prisma {
     email?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
+    passwordHash?: SortOrder
+    isAdmin?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8889,6 +15265,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
@@ -8985,6 +15369,347 @@ export namespace Prisma {
     _max?: NestedEnumAttendanceStatusFilter<$PrismaModel>
   }
 
+  export type WeddingGuestListRelationFilter = {
+    every?: WeddingGuestWhereInput
+    some?: WeddingGuestWhereInput
+    none?: WeddingGuestWhereInput
+  }
+
+  export type WeddingRsvpListRelationFilter = {
+    every?: WeddingRsvpWhereInput
+    some?: WeddingRsvpWhereInput
+    none?: WeddingRsvpWhereInput
+  }
+
+  export type WeddingAnalyticsListRelationFilter = {
+    every?: WeddingAnalyticsWhereInput
+    some?: WeddingAnalyticsWhereInput
+    none?: WeddingAnalyticsWhereInput
+  }
+
+  export type WeddingGuestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WeddingRsvpOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WeddingAnalyticsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WeddingCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    groomShortName?: SortOrder
+    brideShortName?: SortOrder
+    groomFullName?: SortOrder
+    brideFullName?: SortOrder
+    groomParents?: SortOrder
+    brideParents?: SortOrder
+    groomChildOrder?: SortOrder
+    brideChildOrder?: SortOrder
+    eventDate?: SortOrder
+    dateLabel?: SortOrder
+    timeLabel?: SortOrder
+    venueName?: SortOrder
+    venueAddress?: SortOrder
+    mapUrl?: SortOrder
+    template?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    groomShortName?: SortOrder
+    brideShortName?: SortOrder
+    groomFullName?: SortOrder
+    brideFullName?: SortOrder
+    groomParents?: SortOrder
+    brideParents?: SortOrder
+    groomChildOrder?: SortOrder
+    brideChildOrder?: SortOrder
+    eventDate?: SortOrder
+    dateLabel?: SortOrder
+    timeLabel?: SortOrder
+    venueName?: SortOrder
+    venueAddress?: SortOrder
+    mapUrl?: SortOrder
+    template?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    groomShortName?: SortOrder
+    brideShortName?: SortOrder
+    groomFullName?: SortOrder
+    brideFullName?: SortOrder
+    groomParents?: SortOrder
+    brideParents?: SortOrder
+    groomChildOrder?: SortOrder
+    brideChildOrder?: SortOrder
+    eventDate?: SortOrder
+    dateLabel?: SortOrder
+    timeLabel?: SortOrder
+    venueName?: SortOrder
+    venueAddress?: SortOrder
+    mapUrl?: SortOrder
+    template?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type WeddingScalarRelationFilter = {
+    is?: WeddingWhereInput
+    isNot?: WeddingWhereInput
+  }
+
+  export type WeddingRsvpNullableScalarRelationFilter = {
+    is?: WeddingRsvpWhereInput | null
+    isNot?: WeddingRsvpWhereInput | null
+  }
+
+  export type WeddingGuestCountOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    groupName?: SortOrder
+    maxGuests?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    isSent?: SortOrder
+    sentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingGuestAvgOrderByAggregateInput = {
+    maxGuests?: SortOrder
+  }
+
+  export type WeddingGuestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    groupName?: SortOrder
+    maxGuests?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    isSent?: SortOrder
+    sentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingGuestMinOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    groupName?: SortOrder
+    maxGuests?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    isSent?: SortOrder
+    sentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingGuestSumOrderByAggregateInput = {
+    maxGuests?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type WeddingGuestNullableScalarRelationFilter = {
+    is?: WeddingGuestWhereInput | null
+    isNot?: WeddingGuestWhereInput | null
+  }
+
+  export type WeddingRsvpCountOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    status?: SortOrder
+    guestCount?: SortOrder
+    message?: SortOrder
+    isHidden?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingRsvpAvgOrderByAggregateInput = {
+    guestCount?: SortOrder
+  }
+
+  export type WeddingRsvpMaxOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    status?: SortOrder
+    guestCount?: SortOrder
+    message?: SortOrder
+    isHidden?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingRsvpMinOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    status?: SortOrder
+    guestCount?: SortOrder
+    message?: SortOrder
+    isHidden?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WeddingRsvpSumOrderByAggregateInput = {
+    guestCount?: SortOrder
+  }
+
+  export type EnumWeddingAnalyticsEventFilter<$PrismaModel = never> = {
+    equals?: $Enums.WeddingAnalyticsEvent | EnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    in?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    not?: NestedEnumWeddingAnalyticsEventFilter<$PrismaModel> | $Enums.WeddingAnalyticsEvent
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type WeddingAnalyticsCountOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrder
+    event?: SortOrder
+    sessionKey?: SortOrder
+    metadata?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type WeddingAnalyticsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrder
+    event?: SortOrder
+    sessionKey?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type WeddingAnalyticsMinOrderByAggregateInput = {
+    id?: SortOrder
+    weddingId?: SortOrder
+    guestId?: SortOrder
+    event?: SortOrder
+    sessionKey?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumWeddingAnalyticsEventWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WeddingAnalyticsEvent | EnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    in?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    not?: NestedEnumWeddingAnalyticsEventWithAggregatesFilter<$PrismaModel> | $Enums.WeddingAnalyticsEvent
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWeddingAnalyticsEventFilter<$PrismaModel>
+    _max?: NestedEnumWeddingAnalyticsEventFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -9065,6 +15790,10 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type AccountUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -9123,6 +15852,292 @@ export namespace Prisma {
 
   export type EnumAttendanceStatusFieldUpdateOperationsInput = {
     set?: $Enums.AttendanceStatus
+  }
+
+  export type WeddingGuestCreateNestedManyWithoutWeddingInput = {
+    create?: XOR<WeddingGuestCreateWithoutWeddingInput, WeddingGuestUncheckedCreateWithoutWeddingInput> | WeddingGuestCreateWithoutWeddingInput[] | WeddingGuestUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutWeddingInput | WeddingGuestCreateOrConnectWithoutWeddingInput[]
+    createMany?: WeddingGuestCreateManyWeddingInputEnvelope
+    connect?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+  }
+
+  export type WeddingRsvpCreateNestedManyWithoutWeddingInput = {
+    create?: XOR<WeddingRsvpCreateWithoutWeddingInput, WeddingRsvpUncheckedCreateWithoutWeddingInput> | WeddingRsvpCreateWithoutWeddingInput[] | WeddingRsvpUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutWeddingInput | WeddingRsvpCreateOrConnectWithoutWeddingInput[]
+    createMany?: WeddingRsvpCreateManyWeddingInputEnvelope
+    connect?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+  }
+
+  export type WeddingAnalyticsCreateNestedManyWithoutWeddingInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutWeddingInput, WeddingAnalyticsUncheckedCreateWithoutWeddingInput> | WeddingAnalyticsCreateWithoutWeddingInput[] | WeddingAnalyticsUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutWeddingInput | WeddingAnalyticsCreateOrConnectWithoutWeddingInput[]
+    createMany?: WeddingAnalyticsCreateManyWeddingInputEnvelope
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+  }
+
+  export type WeddingGuestUncheckedCreateNestedManyWithoutWeddingInput = {
+    create?: XOR<WeddingGuestCreateWithoutWeddingInput, WeddingGuestUncheckedCreateWithoutWeddingInput> | WeddingGuestCreateWithoutWeddingInput[] | WeddingGuestUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutWeddingInput | WeddingGuestCreateOrConnectWithoutWeddingInput[]
+    createMany?: WeddingGuestCreateManyWeddingInputEnvelope
+    connect?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+  }
+
+  export type WeddingRsvpUncheckedCreateNestedManyWithoutWeddingInput = {
+    create?: XOR<WeddingRsvpCreateWithoutWeddingInput, WeddingRsvpUncheckedCreateWithoutWeddingInput> | WeddingRsvpCreateWithoutWeddingInput[] | WeddingRsvpUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutWeddingInput | WeddingRsvpCreateOrConnectWithoutWeddingInput[]
+    createMany?: WeddingRsvpCreateManyWeddingInputEnvelope
+    connect?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+  }
+
+  export type WeddingAnalyticsUncheckedCreateNestedManyWithoutWeddingInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutWeddingInput, WeddingAnalyticsUncheckedCreateWithoutWeddingInput> | WeddingAnalyticsCreateWithoutWeddingInput[] | WeddingAnalyticsUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutWeddingInput | WeddingAnalyticsCreateOrConnectWithoutWeddingInput[]
+    createMany?: WeddingAnalyticsCreateManyWeddingInputEnvelope
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+  }
+
+  export type WeddingGuestUpdateManyWithoutWeddingNestedInput = {
+    create?: XOR<WeddingGuestCreateWithoutWeddingInput, WeddingGuestUncheckedCreateWithoutWeddingInput> | WeddingGuestCreateWithoutWeddingInput[] | WeddingGuestUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutWeddingInput | WeddingGuestCreateOrConnectWithoutWeddingInput[]
+    upsert?: WeddingGuestUpsertWithWhereUniqueWithoutWeddingInput | WeddingGuestUpsertWithWhereUniqueWithoutWeddingInput[]
+    createMany?: WeddingGuestCreateManyWeddingInputEnvelope
+    set?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    disconnect?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    delete?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    connect?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    update?: WeddingGuestUpdateWithWhereUniqueWithoutWeddingInput | WeddingGuestUpdateWithWhereUniqueWithoutWeddingInput[]
+    updateMany?: WeddingGuestUpdateManyWithWhereWithoutWeddingInput | WeddingGuestUpdateManyWithWhereWithoutWeddingInput[]
+    deleteMany?: WeddingGuestScalarWhereInput | WeddingGuestScalarWhereInput[]
+  }
+
+  export type WeddingRsvpUpdateManyWithoutWeddingNestedInput = {
+    create?: XOR<WeddingRsvpCreateWithoutWeddingInput, WeddingRsvpUncheckedCreateWithoutWeddingInput> | WeddingRsvpCreateWithoutWeddingInput[] | WeddingRsvpUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutWeddingInput | WeddingRsvpCreateOrConnectWithoutWeddingInput[]
+    upsert?: WeddingRsvpUpsertWithWhereUniqueWithoutWeddingInput | WeddingRsvpUpsertWithWhereUniqueWithoutWeddingInput[]
+    createMany?: WeddingRsvpCreateManyWeddingInputEnvelope
+    set?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    disconnect?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    delete?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    connect?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    update?: WeddingRsvpUpdateWithWhereUniqueWithoutWeddingInput | WeddingRsvpUpdateWithWhereUniqueWithoutWeddingInput[]
+    updateMany?: WeddingRsvpUpdateManyWithWhereWithoutWeddingInput | WeddingRsvpUpdateManyWithWhereWithoutWeddingInput[]
+    deleteMany?: WeddingRsvpScalarWhereInput | WeddingRsvpScalarWhereInput[]
+  }
+
+  export type WeddingAnalyticsUpdateManyWithoutWeddingNestedInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutWeddingInput, WeddingAnalyticsUncheckedCreateWithoutWeddingInput> | WeddingAnalyticsCreateWithoutWeddingInput[] | WeddingAnalyticsUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutWeddingInput | WeddingAnalyticsCreateOrConnectWithoutWeddingInput[]
+    upsert?: WeddingAnalyticsUpsertWithWhereUniqueWithoutWeddingInput | WeddingAnalyticsUpsertWithWhereUniqueWithoutWeddingInput[]
+    createMany?: WeddingAnalyticsCreateManyWeddingInputEnvelope
+    set?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    disconnect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    delete?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    update?: WeddingAnalyticsUpdateWithWhereUniqueWithoutWeddingInput | WeddingAnalyticsUpdateWithWhereUniqueWithoutWeddingInput[]
+    updateMany?: WeddingAnalyticsUpdateManyWithWhereWithoutWeddingInput | WeddingAnalyticsUpdateManyWithWhereWithoutWeddingInput[]
+    deleteMany?: WeddingAnalyticsScalarWhereInput | WeddingAnalyticsScalarWhereInput[]
+  }
+
+  export type WeddingGuestUncheckedUpdateManyWithoutWeddingNestedInput = {
+    create?: XOR<WeddingGuestCreateWithoutWeddingInput, WeddingGuestUncheckedCreateWithoutWeddingInput> | WeddingGuestCreateWithoutWeddingInput[] | WeddingGuestUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutWeddingInput | WeddingGuestCreateOrConnectWithoutWeddingInput[]
+    upsert?: WeddingGuestUpsertWithWhereUniqueWithoutWeddingInput | WeddingGuestUpsertWithWhereUniqueWithoutWeddingInput[]
+    createMany?: WeddingGuestCreateManyWeddingInputEnvelope
+    set?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    disconnect?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    delete?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    connect?: WeddingGuestWhereUniqueInput | WeddingGuestWhereUniqueInput[]
+    update?: WeddingGuestUpdateWithWhereUniqueWithoutWeddingInput | WeddingGuestUpdateWithWhereUniqueWithoutWeddingInput[]
+    updateMany?: WeddingGuestUpdateManyWithWhereWithoutWeddingInput | WeddingGuestUpdateManyWithWhereWithoutWeddingInput[]
+    deleteMany?: WeddingGuestScalarWhereInput | WeddingGuestScalarWhereInput[]
+  }
+
+  export type WeddingRsvpUncheckedUpdateManyWithoutWeddingNestedInput = {
+    create?: XOR<WeddingRsvpCreateWithoutWeddingInput, WeddingRsvpUncheckedCreateWithoutWeddingInput> | WeddingRsvpCreateWithoutWeddingInput[] | WeddingRsvpUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutWeddingInput | WeddingRsvpCreateOrConnectWithoutWeddingInput[]
+    upsert?: WeddingRsvpUpsertWithWhereUniqueWithoutWeddingInput | WeddingRsvpUpsertWithWhereUniqueWithoutWeddingInput[]
+    createMany?: WeddingRsvpCreateManyWeddingInputEnvelope
+    set?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    disconnect?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    delete?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    connect?: WeddingRsvpWhereUniqueInput | WeddingRsvpWhereUniqueInput[]
+    update?: WeddingRsvpUpdateWithWhereUniqueWithoutWeddingInput | WeddingRsvpUpdateWithWhereUniqueWithoutWeddingInput[]
+    updateMany?: WeddingRsvpUpdateManyWithWhereWithoutWeddingInput | WeddingRsvpUpdateManyWithWhereWithoutWeddingInput[]
+    deleteMany?: WeddingRsvpScalarWhereInput | WeddingRsvpScalarWhereInput[]
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateManyWithoutWeddingNestedInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutWeddingInput, WeddingAnalyticsUncheckedCreateWithoutWeddingInput> | WeddingAnalyticsCreateWithoutWeddingInput[] | WeddingAnalyticsUncheckedCreateWithoutWeddingInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutWeddingInput | WeddingAnalyticsCreateOrConnectWithoutWeddingInput[]
+    upsert?: WeddingAnalyticsUpsertWithWhereUniqueWithoutWeddingInput | WeddingAnalyticsUpsertWithWhereUniqueWithoutWeddingInput[]
+    createMany?: WeddingAnalyticsCreateManyWeddingInputEnvelope
+    set?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    disconnect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    delete?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    update?: WeddingAnalyticsUpdateWithWhereUniqueWithoutWeddingInput | WeddingAnalyticsUpdateWithWhereUniqueWithoutWeddingInput[]
+    updateMany?: WeddingAnalyticsUpdateManyWithWhereWithoutWeddingInput | WeddingAnalyticsUpdateManyWithWhereWithoutWeddingInput[]
+    deleteMany?: WeddingAnalyticsScalarWhereInput | WeddingAnalyticsScalarWhereInput[]
+  }
+
+  export type WeddingCreateNestedOneWithoutGuestsInput = {
+    create?: XOR<WeddingCreateWithoutGuestsInput, WeddingUncheckedCreateWithoutGuestsInput>
+    connectOrCreate?: WeddingCreateOrConnectWithoutGuestsInput
+    connect?: WeddingWhereUniqueInput
+  }
+
+  export type WeddingRsvpCreateNestedOneWithoutGuestInput = {
+    create?: XOR<WeddingRsvpCreateWithoutGuestInput, WeddingRsvpUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutGuestInput
+    connect?: WeddingRsvpWhereUniqueInput
+  }
+
+  export type WeddingAnalyticsCreateNestedManyWithoutGuestInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutGuestInput, WeddingAnalyticsUncheckedCreateWithoutGuestInput> | WeddingAnalyticsCreateWithoutGuestInput[] | WeddingAnalyticsUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutGuestInput | WeddingAnalyticsCreateOrConnectWithoutGuestInput[]
+    createMany?: WeddingAnalyticsCreateManyGuestInputEnvelope
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+  }
+
+  export type WeddingRsvpUncheckedCreateNestedOneWithoutGuestInput = {
+    create?: XOR<WeddingRsvpCreateWithoutGuestInput, WeddingRsvpUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutGuestInput
+    connect?: WeddingRsvpWhereUniqueInput
+  }
+
+  export type WeddingAnalyticsUncheckedCreateNestedManyWithoutGuestInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutGuestInput, WeddingAnalyticsUncheckedCreateWithoutGuestInput> | WeddingAnalyticsCreateWithoutGuestInput[] | WeddingAnalyticsUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutGuestInput | WeddingAnalyticsCreateOrConnectWithoutGuestInput[]
+    createMany?: WeddingAnalyticsCreateManyGuestInputEnvelope
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type WeddingUpdateOneRequiredWithoutGuestsNestedInput = {
+    create?: XOR<WeddingCreateWithoutGuestsInput, WeddingUncheckedCreateWithoutGuestsInput>
+    connectOrCreate?: WeddingCreateOrConnectWithoutGuestsInput
+    upsert?: WeddingUpsertWithoutGuestsInput
+    connect?: WeddingWhereUniqueInput
+    update?: XOR<XOR<WeddingUpdateToOneWithWhereWithoutGuestsInput, WeddingUpdateWithoutGuestsInput>, WeddingUncheckedUpdateWithoutGuestsInput>
+  }
+
+  export type WeddingRsvpUpdateOneWithoutGuestNestedInput = {
+    create?: XOR<WeddingRsvpCreateWithoutGuestInput, WeddingRsvpUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutGuestInput
+    upsert?: WeddingRsvpUpsertWithoutGuestInput
+    disconnect?: WeddingRsvpWhereInput | boolean
+    delete?: WeddingRsvpWhereInput | boolean
+    connect?: WeddingRsvpWhereUniqueInput
+    update?: XOR<XOR<WeddingRsvpUpdateToOneWithWhereWithoutGuestInput, WeddingRsvpUpdateWithoutGuestInput>, WeddingRsvpUncheckedUpdateWithoutGuestInput>
+  }
+
+  export type WeddingAnalyticsUpdateManyWithoutGuestNestedInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutGuestInput, WeddingAnalyticsUncheckedCreateWithoutGuestInput> | WeddingAnalyticsCreateWithoutGuestInput[] | WeddingAnalyticsUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutGuestInput | WeddingAnalyticsCreateOrConnectWithoutGuestInput[]
+    upsert?: WeddingAnalyticsUpsertWithWhereUniqueWithoutGuestInput | WeddingAnalyticsUpsertWithWhereUniqueWithoutGuestInput[]
+    createMany?: WeddingAnalyticsCreateManyGuestInputEnvelope
+    set?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    disconnect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    delete?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    update?: WeddingAnalyticsUpdateWithWhereUniqueWithoutGuestInput | WeddingAnalyticsUpdateWithWhereUniqueWithoutGuestInput[]
+    updateMany?: WeddingAnalyticsUpdateManyWithWhereWithoutGuestInput | WeddingAnalyticsUpdateManyWithWhereWithoutGuestInput[]
+    deleteMany?: WeddingAnalyticsScalarWhereInput | WeddingAnalyticsScalarWhereInput[]
+  }
+
+  export type WeddingRsvpUncheckedUpdateOneWithoutGuestNestedInput = {
+    create?: XOR<WeddingRsvpCreateWithoutGuestInput, WeddingRsvpUncheckedCreateWithoutGuestInput>
+    connectOrCreate?: WeddingRsvpCreateOrConnectWithoutGuestInput
+    upsert?: WeddingRsvpUpsertWithoutGuestInput
+    disconnect?: WeddingRsvpWhereInput | boolean
+    delete?: WeddingRsvpWhereInput | boolean
+    connect?: WeddingRsvpWhereUniqueInput
+    update?: XOR<XOR<WeddingRsvpUpdateToOneWithWhereWithoutGuestInput, WeddingRsvpUpdateWithoutGuestInput>, WeddingRsvpUncheckedUpdateWithoutGuestInput>
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateManyWithoutGuestNestedInput = {
+    create?: XOR<WeddingAnalyticsCreateWithoutGuestInput, WeddingAnalyticsUncheckedCreateWithoutGuestInput> | WeddingAnalyticsCreateWithoutGuestInput[] | WeddingAnalyticsUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: WeddingAnalyticsCreateOrConnectWithoutGuestInput | WeddingAnalyticsCreateOrConnectWithoutGuestInput[]
+    upsert?: WeddingAnalyticsUpsertWithWhereUniqueWithoutGuestInput | WeddingAnalyticsUpsertWithWhereUniqueWithoutGuestInput[]
+    createMany?: WeddingAnalyticsCreateManyGuestInputEnvelope
+    set?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    disconnect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    delete?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    connect?: WeddingAnalyticsWhereUniqueInput | WeddingAnalyticsWhereUniqueInput[]
+    update?: WeddingAnalyticsUpdateWithWhereUniqueWithoutGuestInput | WeddingAnalyticsUpdateWithWhereUniqueWithoutGuestInput[]
+    updateMany?: WeddingAnalyticsUpdateManyWithWhereWithoutGuestInput | WeddingAnalyticsUpdateManyWithWhereWithoutGuestInput[]
+    deleteMany?: WeddingAnalyticsScalarWhereInput | WeddingAnalyticsScalarWhereInput[]
+  }
+
+  export type WeddingCreateNestedOneWithoutRsvpsInput = {
+    create?: XOR<WeddingCreateWithoutRsvpsInput, WeddingUncheckedCreateWithoutRsvpsInput>
+    connectOrCreate?: WeddingCreateOrConnectWithoutRsvpsInput
+    connect?: WeddingWhereUniqueInput
+  }
+
+  export type WeddingGuestCreateNestedOneWithoutRsvpInput = {
+    create?: XOR<WeddingGuestCreateWithoutRsvpInput, WeddingGuestUncheckedCreateWithoutRsvpInput>
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutRsvpInput
+    connect?: WeddingGuestWhereUniqueInput
+  }
+
+  export type WeddingUpdateOneRequiredWithoutRsvpsNestedInput = {
+    create?: XOR<WeddingCreateWithoutRsvpsInput, WeddingUncheckedCreateWithoutRsvpsInput>
+    connectOrCreate?: WeddingCreateOrConnectWithoutRsvpsInput
+    upsert?: WeddingUpsertWithoutRsvpsInput
+    connect?: WeddingWhereUniqueInput
+    update?: XOR<XOR<WeddingUpdateToOneWithWhereWithoutRsvpsInput, WeddingUpdateWithoutRsvpsInput>, WeddingUncheckedUpdateWithoutRsvpsInput>
+  }
+
+  export type WeddingGuestUpdateOneWithoutRsvpNestedInput = {
+    create?: XOR<WeddingGuestCreateWithoutRsvpInput, WeddingGuestUncheckedCreateWithoutRsvpInput>
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutRsvpInput
+    upsert?: WeddingGuestUpsertWithoutRsvpInput
+    disconnect?: WeddingGuestWhereInput | boolean
+    delete?: WeddingGuestWhereInput | boolean
+    connect?: WeddingGuestWhereUniqueInput
+    update?: XOR<XOR<WeddingGuestUpdateToOneWithWhereWithoutRsvpInput, WeddingGuestUpdateWithoutRsvpInput>, WeddingGuestUncheckedUpdateWithoutRsvpInput>
+  }
+
+  export type WeddingCreateNestedOneWithoutAnalyticsInput = {
+    create?: XOR<WeddingCreateWithoutAnalyticsInput, WeddingUncheckedCreateWithoutAnalyticsInput>
+    connectOrCreate?: WeddingCreateOrConnectWithoutAnalyticsInput
+    connect?: WeddingWhereUniqueInput
+  }
+
+  export type WeddingGuestCreateNestedOneWithoutAnalyticsInput = {
+    create?: XOR<WeddingGuestCreateWithoutAnalyticsInput, WeddingGuestUncheckedCreateWithoutAnalyticsInput>
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutAnalyticsInput
+    connect?: WeddingGuestWhereUniqueInput
+  }
+
+  export type EnumWeddingAnalyticsEventFieldUpdateOperationsInput = {
+    set?: $Enums.WeddingAnalyticsEvent
+  }
+
+  export type WeddingUpdateOneRequiredWithoutAnalyticsNestedInput = {
+    create?: XOR<WeddingCreateWithoutAnalyticsInput, WeddingUncheckedCreateWithoutAnalyticsInput>
+    connectOrCreate?: WeddingCreateOrConnectWithoutAnalyticsInput
+    upsert?: WeddingUpsertWithoutAnalyticsInput
+    connect?: WeddingWhereUniqueInput
+    update?: XOR<XOR<WeddingUpdateToOneWithWhereWithoutAnalyticsInput, WeddingUpdateWithoutAnalyticsInput>, WeddingUncheckedUpdateWithoutAnalyticsInput>
+  }
+
+  export type WeddingGuestUpdateOneWithoutAnalyticsNestedInput = {
+    create?: XOR<WeddingGuestCreateWithoutAnalyticsInput, WeddingGuestUncheckedCreateWithoutAnalyticsInput>
+    connectOrCreate?: WeddingGuestCreateOrConnectWithoutAnalyticsInput
+    upsert?: WeddingGuestUpsertWithoutAnalyticsInput
+    disconnect?: WeddingGuestWhereInput | boolean
+    delete?: WeddingGuestWhereInput | boolean
+    connect?: WeddingGuestWhereUniqueInput
+    update?: XOR<XOR<WeddingGuestUpdateToOneWithWhereWithoutAnalyticsInput, WeddingGuestUpdateWithoutAnalyticsInput>, WeddingGuestUncheckedUpdateWithoutAnalyticsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9272,6 +16287,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -9284,6 +16304,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumAttendanceStatusFilter<$PrismaModel = never> = {
@@ -9303,12 +16331,81 @@ export namespace Prisma {
     _max?: NestedEnumAttendanceStatusFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumWeddingAnalyticsEventFilter<$PrismaModel = never> = {
+    equals?: $Enums.WeddingAnalyticsEvent | EnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    in?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    not?: NestedEnumWeddingAnalyticsEventFilter<$PrismaModel> | $Enums.WeddingAnalyticsEvent
+  }
+
+  export type NestedEnumWeddingAnalyticsEventWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.WeddingAnalyticsEvent | EnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    in?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    notIn?: $Enums.WeddingAnalyticsEvent[] | ListEnumWeddingAnalyticsEventFieldRefInput<$PrismaModel>
+    not?: NestedEnumWeddingAnalyticsEventWithAggregatesFilter<$PrismaModel> | $Enums.WeddingAnalyticsEvent
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumWeddingAnalyticsEventFilter<$PrismaModel>
+    _max?: NestedEnumWeddingAnalyticsEventFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
@@ -9318,6 +16415,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -9343,6 +16442,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
@@ -9352,6 +16453,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -9361,6 +16464,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
     accounts?: AccountCreateNestedManyWithoutUserInput
   }
 
@@ -9370,6 +16475,8 @@ export namespace Prisma {
     email?: string | null
     emailVerified?: Date | string | null
     image?: string | null
+    passwordHash?: string | null
+    isAdmin?: boolean
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -9395,6 +16502,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUpdateManyWithoutUserNestedInput
   }
 
@@ -9404,6 +16513,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -9527,6 +16638,840 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type WeddingGuestCreateWithoutWeddingInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rsvp?: WeddingRsvpCreateNestedOneWithoutGuestInput
+    analytics?: WeddingAnalyticsCreateNestedManyWithoutGuestInput
+  }
+
+  export type WeddingGuestUncheckedCreateWithoutWeddingInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rsvp?: WeddingRsvpUncheckedCreateNestedOneWithoutGuestInput
+    analytics?: WeddingAnalyticsUncheckedCreateNestedManyWithoutGuestInput
+  }
+
+  export type WeddingGuestCreateOrConnectWithoutWeddingInput = {
+    where: WeddingGuestWhereUniqueInput
+    create: XOR<WeddingGuestCreateWithoutWeddingInput, WeddingGuestUncheckedCreateWithoutWeddingInput>
+  }
+
+  export type WeddingGuestCreateManyWeddingInputEnvelope = {
+    data: WeddingGuestCreateManyWeddingInput | WeddingGuestCreateManyWeddingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WeddingRsvpCreateWithoutWeddingInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest?: WeddingGuestCreateNestedOneWithoutRsvpInput
+  }
+
+  export type WeddingRsvpUncheckedCreateWithoutWeddingInput = {
+    id?: string
+    guestId?: string | null
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingRsvpCreateOrConnectWithoutWeddingInput = {
+    where: WeddingRsvpWhereUniqueInput
+    create: XOR<WeddingRsvpCreateWithoutWeddingInput, WeddingRsvpUncheckedCreateWithoutWeddingInput>
+  }
+
+  export type WeddingRsvpCreateManyWeddingInputEnvelope = {
+    data: WeddingRsvpCreateManyWeddingInput | WeddingRsvpCreateManyWeddingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WeddingAnalyticsCreateWithoutWeddingInput = {
+    id?: string
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    guest?: WeddingGuestCreateNestedOneWithoutAnalyticsInput
+  }
+
+  export type WeddingAnalyticsUncheckedCreateWithoutWeddingInput = {
+    id?: string
+    guestId?: string | null
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type WeddingAnalyticsCreateOrConnectWithoutWeddingInput = {
+    where: WeddingAnalyticsWhereUniqueInput
+    create: XOR<WeddingAnalyticsCreateWithoutWeddingInput, WeddingAnalyticsUncheckedCreateWithoutWeddingInput>
+  }
+
+  export type WeddingAnalyticsCreateManyWeddingInputEnvelope = {
+    data: WeddingAnalyticsCreateManyWeddingInput | WeddingAnalyticsCreateManyWeddingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WeddingGuestUpsertWithWhereUniqueWithoutWeddingInput = {
+    where: WeddingGuestWhereUniqueInput
+    update: XOR<WeddingGuestUpdateWithoutWeddingInput, WeddingGuestUncheckedUpdateWithoutWeddingInput>
+    create: XOR<WeddingGuestCreateWithoutWeddingInput, WeddingGuestUncheckedCreateWithoutWeddingInput>
+  }
+
+  export type WeddingGuestUpdateWithWhereUniqueWithoutWeddingInput = {
+    where: WeddingGuestWhereUniqueInput
+    data: XOR<WeddingGuestUpdateWithoutWeddingInput, WeddingGuestUncheckedUpdateWithoutWeddingInput>
+  }
+
+  export type WeddingGuestUpdateManyWithWhereWithoutWeddingInput = {
+    where: WeddingGuestScalarWhereInput
+    data: XOR<WeddingGuestUpdateManyMutationInput, WeddingGuestUncheckedUpdateManyWithoutWeddingInput>
+  }
+
+  export type WeddingGuestScalarWhereInput = {
+    AND?: WeddingGuestScalarWhereInput | WeddingGuestScalarWhereInput[]
+    OR?: WeddingGuestScalarWhereInput[]
+    NOT?: WeddingGuestScalarWhereInput | WeddingGuestScalarWhereInput[]
+    id?: StringFilter<"WeddingGuest"> | string
+    weddingId?: StringFilter<"WeddingGuest"> | string
+    name?: StringFilter<"WeddingGuest"> | string
+    phone?: StringNullableFilter<"WeddingGuest"> | string | null
+    groupName?: StringNullableFilter<"WeddingGuest"> | string | null
+    maxGuests?: IntFilter<"WeddingGuest"> | number
+    slug?: StringFilter<"WeddingGuest"> | string
+    isActive?: BoolFilter<"WeddingGuest"> | boolean
+    isSent?: BoolFilter<"WeddingGuest"> | boolean
+    sentAt?: DateTimeNullableFilter<"WeddingGuest"> | Date | string | null
+    createdAt?: DateTimeFilter<"WeddingGuest"> | Date | string
+    updatedAt?: DateTimeFilter<"WeddingGuest"> | Date | string
+  }
+
+  export type WeddingRsvpUpsertWithWhereUniqueWithoutWeddingInput = {
+    where: WeddingRsvpWhereUniqueInput
+    update: XOR<WeddingRsvpUpdateWithoutWeddingInput, WeddingRsvpUncheckedUpdateWithoutWeddingInput>
+    create: XOR<WeddingRsvpCreateWithoutWeddingInput, WeddingRsvpUncheckedCreateWithoutWeddingInput>
+  }
+
+  export type WeddingRsvpUpdateWithWhereUniqueWithoutWeddingInput = {
+    where: WeddingRsvpWhereUniqueInput
+    data: XOR<WeddingRsvpUpdateWithoutWeddingInput, WeddingRsvpUncheckedUpdateWithoutWeddingInput>
+  }
+
+  export type WeddingRsvpUpdateManyWithWhereWithoutWeddingInput = {
+    where: WeddingRsvpScalarWhereInput
+    data: XOR<WeddingRsvpUpdateManyMutationInput, WeddingRsvpUncheckedUpdateManyWithoutWeddingInput>
+  }
+
+  export type WeddingRsvpScalarWhereInput = {
+    AND?: WeddingRsvpScalarWhereInput | WeddingRsvpScalarWhereInput[]
+    OR?: WeddingRsvpScalarWhereInput[]
+    NOT?: WeddingRsvpScalarWhereInput | WeddingRsvpScalarWhereInput[]
+    id?: StringFilter<"WeddingRsvp"> | string
+    weddingId?: StringFilter<"WeddingRsvp"> | string
+    guestId?: StringNullableFilter<"WeddingRsvp"> | string | null
+    name?: StringFilter<"WeddingRsvp"> | string
+    phone?: StringNullableFilter<"WeddingRsvp"> | string | null
+    status?: EnumAttendanceStatusFilter<"WeddingRsvp"> | $Enums.AttendanceStatus
+    guestCount?: IntFilter<"WeddingRsvp"> | number
+    message?: StringNullableFilter<"WeddingRsvp"> | string | null
+    isHidden?: BoolFilter<"WeddingRsvp"> | boolean
+    createdAt?: DateTimeFilter<"WeddingRsvp"> | Date | string
+    updatedAt?: DateTimeFilter<"WeddingRsvp"> | Date | string
+  }
+
+  export type WeddingAnalyticsUpsertWithWhereUniqueWithoutWeddingInput = {
+    where: WeddingAnalyticsWhereUniqueInput
+    update: XOR<WeddingAnalyticsUpdateWithoutWeddingInput, WeddingAnalyticsUncheckedUpdateWithoutWeddingInput>
+    create: XOR<WeddingAnalyticsCreateWithoutWeddingInput, WeddingAnalyticsUncheckedCreateWithoutWeddingInput>
+  }
+
+  export type WeddingAnalyticsUpdateWithWhereUniqueWithoutWeddingInput = {
+    where: WeddingAnalyticsWhereUniqueInput
+    data: XOR<WeddingAnalyticsUpdateWithoutWeddingInput, WeddingAnalyticsUncheckedUpdateWithoutWeddingInput>
+  }
+
+  export type WeddingAnalyticsUpdateManyWithWhereWithoutWeddingInput = {
+    where: WeddingAnalyticsScalarWhereInput
+    data: XOR<WeddingAnalyticsUpdateManyMutationInput, WeddingAnalyticsUncheckedUpdateManyWithoutWeddingInput>
+  }
+
+  export type WeddingAnalyticsScalarWhereInput = {
+    AND?: WeddingAnalyticsScalarWhereInput | WeddingAnalyticsScalarWhereInput[]
+    OR?: WeddingAnalyticsScalarWhereInput[]
+    NOT?: WeddingAnalyticsScalarWhereInput | WeddingAnalyticsScalarWhereInput[]
+    id?: StringFilter<"WeddingAnalytics"> | string
+    weddingId?: StringFilter<"WeddingAnalytics"> | string
+    guestId?: StringNullableFilter<"WeddingAnalytics"> | string | null
+    event?: EnumWeddingAnalyticsEventFilter<"WeddingAnalytics"> | $Enums.WeddingAnalyticsEvent
+    sessionKey?: StringNullableFilter<"WeddingAnalytics"> | string | null
+    metadata?: JsonNullableFilter<"WeddingAnalytics">
+    createdAt?: DateTimeFilter<"WeddingAnalytics"> | Date | string
+  }
+
+  export type WeddingCreateWithoutGuestsInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rsvps?: WeddingRsvpCreateNestedManyWithoutWeddingInput
+    analytics?: WeddingAnalyticsCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingUncheckedCreateWithoutGuestsInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rsvps?: WeddingRsvpUncheckedCreateNestedManyWithoutWeddingInput
+    analytics?: WeddingAnalyticsUncheckedCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingCreateOrConnectWithoutGuestsInput = {
+    where: WeddingWhereUniqueInput
+    create: XOR<WeddingCreateWithoutGuestsInput, WeddingUncheckedCreateWithoutGuestsInput>
+  }
+
+  export type WeddingRsvpCreateWithoutGuestInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutRsvpsInput
+  }
+
+  export type WeddingRsvpUncheckedCreateWithoutGuestInput = {
+    id?: string
+    weddingId: string
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingRsvpCreateOrConnectWithoutGuestInput = {
+    where: WeddingRsvpWhereUniqueInput
+    create: XOR<WeddingRsvpCreateWithoutGuestInput, WeddingRsvpUncheckedCreateWithoutGuestInput>
+  }
+
+  export type WeddingAnalyticsCreateWithoutGuestInput = {
+    id?: string
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutAnalyticsInput
+  }
+
+  export type WeddingAnalyticsUncheckedCreateWithoutGuestInput = {
+    id?: string
+    weddingId: string
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type WeddingAnalyticsCreateOrConnectWithoutGuestInput = {
+    where: WeddingAnalyticsWhereUniqueInput
+    create: XOR<WeddingAnalyticsCreateWithoutGuestInput, WeddingAnalyticsUncheckedCreateWithoutGuestInput>
+  }
+
+  export type WeddingAnalyticsCreateManyGuestInputEnvelope = {
+    data: WeddingAnalyticsCreateManyGuestInput | WeddingAnalyticsCreateManyGuestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WeddingUpsertWithoutGuestsInput = {
+    update: XOR<WeddingUpdateWithoutGuestsInput, WeddingUncheckedUpdateWithoutGuestsInput>
+    create: XOR<WeddingCreateWithoutGuestsInput, WeddingUncheckedCreateWithoutGuestsInput>
+    where?: WeddingWhereInput
+  }
+
+  export type WeddingUpdateToOneWithWhereWithoutGuestsInput = {
+    where?: WeddingWhereInput
+    data: XOR<WeddingUpdateWithoutGuestsInput, WeddingUncheckedUpdateWithoutGuestsInput>
+  }
+
+  export type WeddingUpdateWithoutGuestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rsvps?: WeddingRsvpUpdateManyWithoutWeddingNestedInput
+    analytics?: WeddingAnalyticsUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingUncheckedUpdateWithoutGuestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rsvps?: WeddingRsvpUncheckedUpdateManyWithoutWeddingNestedInput
+    analytics?: WeddingAnalyticsUncheckedUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingRsvpUpsertWithoutGuestInput = {
+    update: XOR<WeddingRsvpUpdateWithoutGuestInput, WeddingRsvpUncheckedUpdateWithoutGuestInput>
+    create: XOR<WeddingRsvpCreateWithoutGuestInput, WeddingRsvpUncheckedCreateWithoutGuestInput>
+    where?: WeddingRsvpWhereInput
+  }
+
+  export type WeddingRsvpUpdateToOneWithWhereWithoutGuestInput = {
+    where?: WeddingRsvpWhereInput
+    data: XOR<WeddingRsvpUpdateWithoutGuestInput, WeddingRsvpUncheckedUpdateWithoutGuestInput>
+  }
+
+  export type WeddingRsvpUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutRsvpsNestedInput
+  }
+
+  export type WeddingRsvpUncheckedUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsUpsertWithWhereUniqueWithoutGuestInput = {
+    where: WeddingAnalyticsWhereUniqueInput
+    update: XOR<WeddingAnalyticsUpdateWithoutGuestInput, WeddingAnalyticsUncheckedUpdateWithoutGuestInput>
+    create: XOR<WeddingAnalyticsCreateWithoutGuestInput, WeddingAnalyticsUncheckedCreateWithoutGuestInput>
+  }
+
+  export type WeddingAnalyticsUpdateWithWhereUniqueWithoutGuestInput = {
+    where: WeddingAnalyticsWhereUniqueInput
+    data: XOR<WeddingAnalyticsUpdateWithoutGuestInput, WeddingAnalyticsUncheckedUpdateWithoutGuestInput>
+  }
+
+  export type WeddingAnalyticsUpdateManyWithWhereWithoutGuestInput = {
+    where: WeddingAnalyticsScalarWhereInput
+    data: XOR<WeddingAnalyticsUpdateManyMutationInput, WeddingAnalyticsUncheckedUpdateManyWithoutGuestInput>
+  }
+
+  export type WeddingCreateWithoutRsvpsInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: WeddingGuestCreateNestedManyWithoutWeddingInput
+    analytics?: WeddingAnalyticsCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingUncheckedCreateWithoutRsvpsInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: WeddingGuestUncheckedCreateNestedManyWithoutWeddingInput
+    analytics?: WeddingAnalyticsUncheckedCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingCreateOrConnectWithoutRsvpsInput = {
+    where: WeddingWhereUniqueInput
+    create: XOR<WeddingCreateWithoutRsvpsInput, WeddingUncheckedCreateWithoutRsvpsInput>
+  }
+
+  export type WeddingGuestCreateWithoutRsvpInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutGuestsInput
+    analytics?: WeddingAnalyticsCreateNestedManyWithoutGuestInput
+  }
+
+  export type WeddingGuestUncheckedCreateWithoutRsvpInput = {
+    id?: string
+    weddingId: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    analytics?: WeddingAnalyticsUncheckedCreateNestedManyWithoutGuestInput
+  }
+
+  export type WeddingGuestCreateOrConnectWithoutRsvpInput = {
+    where: WeddingGuestWhereUniqueInput
+    create: XOR<WeddingGuestCreateWithoutRsvpInput, WeddingGuestUncheckedCreateWithoutRsvpInput>
+  }
+
+  export type WeddingUpsertWithoutRsvpsInput = {
+    update: XOR<WeddingUpdateWithoutRsvpsInput, WeddingUncheckedUpdateWithoutRsvpsInput>
+    create: XOR<WeddingCreateWithoutRsvpsInput, WeddingUncheckedCreateWithoutRsvpsInput>
+    where?: WeddingWhereInput
+  }
+
+  export type WeddingUpdateToOneWithWhereWithoutRsvpsInput = {
+    where?: WeddingWhereInput
+    data: XOR<WeddingUpdateWithoutRsvpsInput, WeddingUncheckedUpdateWithoutRsvpsInput>
+  }
+
+  export type WeddingUpdateWithoutRsvpsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: WeddingGuestUpdateManyWithoutWeddingNestedInput
+    analytics?: WeddingAnalyticsUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingUncheckedUpdateWithoutRsvpsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: WeddingGuestUncheckedUpdateManyWithoutWeddingNestedInput
+    analytics?: WeddingAnalyticsUncheckedUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingGuestUpsertWithoutRsvpInput = {
+    update: XOR<WeddingGuestUpdateWithoutRsvpInput, WeddingGuestUncheckedUpdateWithoutRsvpInput>
+    create: XOR<WeddingGuestCreateWithoutRsvpInput, WeddingGuestUncheckedCreateWithoutRsvpInput>
+    where?: WeddingGuestWhereInput
+  }
+
+  export type WeddingGuestUpdateToOneWithWhereWithoutRsvpInput = {
+    where?: WeddingGuestWhereInput
+    data: XOR<WeddingGuestUpdateWithoutRsvpInput, WeddingGuestUncheckedUpdateWithoutRsvpInput>
+  }
+
+  export type WeddingGuestUpdateWithoutRsvpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutGuestsNestedInput
+    analytics?: WeddingAnalyticsUpdateManyWithoutGuestNestedInput
+  }
+
+  export type WeddingGuestUncheckedUpdateWithoutRsvpInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    analytics?: WeddingAnalyticsUncheckedUpdateManyWithoutGuestNestedInput
+  }
+
+  export type WeddingCreateWithoutAnalyticsInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: WeddingGuestCreateNestedManyWithoutWeddingInput
+    rsvps?: WeddingRsvpCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingUncheckedCreateWithoutAnalyticsInput = {
+    id?: string
+    key: string
+    name: string
+    groomShortName: string
+    brideShortName: string
+    groomFullName: string
+    brideFullName: string
+    groomParents?: string | null
+    brideParents?: string | null
+    groomChildOrder?: string | null
+    brideChildOrder?: string | null
+    eventDate?: Date | string | null
+    dateLabel?: string | null
+    timeLabel?: string | null
+    venueName?: string | null
+    venueAddress?: string | null
+    mapUrl?: string | null
+    template?: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guests?: WeddingGuestUncheckedCreateNestedManyWithoutWeddingInput
+    rsvps?: WeddingRsvpUncheckedCreateNestedManyWithoutWeddingInput
+  }
+
+  export type WeddingCreateOrConnectWithoutAnalyticsInput = {
+    where: WeddingWhereUniqueInput
+    create: XOR<WeddingCreateWithoutAnalyticsInput, WeddingUncheckedCreateWithoutAnalyticsInput>
+  }
+
+  export type WeddingGuestCreateWithoutAnalyticsInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wedding: WeddingCreateNestedOneWithoutGuestsInput
+    rsvp?: WeddingRsvpCreateNestedOneWithoutGuestInput
+  }
+
+  export type WeddingGuestUncheckedCreateWithoutAnalyticsInput = {
+    id?: string
+    weddingId: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    rsvp?: WeddingRsvpUncheckedCreateNestedOneWithoutGuestInput
+  }
+
+  export type WeddingGuestCreateOrConnectWithoutAnalyticsInput = {
+    where: WeddingGuestWhereUniqueInput
+    create: XOR<WeddingGuestCreateWithoutAnalyticsInput, WeddingGuestUncheckedCreateWithoutAnalyticsInput>
+  }
+
+  export type WeddingUpsertWithoutAnalyticsInput = {
+    update: XOR<WeddingUpdateWithoutAnalyticsInput, WeddingUncheckedUpdateWithoutAnalyticsInput>
+    create: XOR<WeddingCreateWithoutAnalyticsInput, WeddingUncheckedCreateWithoutAnalyticsInput>
+    where?: WeddingWhereInput
+  }
+
+  export type WeddingUpdateToOneWithWhereWithoutAnalyticsInput = {
+    where?: WeddingWhereInput
+    data: XOR<WeddingUpdateWithoutAnalyticsInput, WeddingUncheckedUpdateWithoutAnalyticsInput>
+  }
+
+  export type WeddingUpdateWithoutAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: WeddingGuestUpdateManyWithoutWeddingNestedInput
+    rsvps?: WeddingRsvpUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingUncheckedUpdateWithoutAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    groomShortName?: StringFieldUpdateOperationsInput | string
+    brideShortName?: StringFieldUpdateOperationsInput | string
+    groomFullName?: StringFieldUpdateOperationsInput | string
+    brideFullName?: StringFieldUpdateOperationsInput | string
+    groomParents?: NullableStringFieldUpdateOperationsInput | string | null
+    brideParents?: NullableStringFieldUpdateOperationsInput | string | null
+    groomChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    brideChildOrder?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    timeLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    venueName?: NullableStringFieldUpdateOperationsInput | string | null
+    venueAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mapUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    template?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guests?: WeddingGuestUncheckedUpdateManyWithoutWeddingNestedInput
+    rsvps?: WeddingRsvpUncheckedUpdateManyWithoutWeddingNestedInput
+  }
+
+  export type WeddingGuestUpsertWithoutAnalyticsInput = {
+    update: XOR<WeddingGuestUpdateWithoutAnalyticsInput, WeddingGuestUncheckedUpdateWithoutAnalyticsInput>
+    create: XOR<WeddingGuestCreateWithoutAnalyticsInput, WeddingGuestUncheckedCreateWithoutAnalyticsInput>
+    where?: WeddingGuestWhereInput
+  }
+
+  export type WeddingGuestUpdateToOneWithWhereWithoutAnalyticsInput = {
+    where?: WeddingGuestWhereInput
+    data: XOR<WeddingGuestUpdateWithoutAnalyticsInput, WeddingGuestUncheckedUpdateWithoutAnalyticsInput>
+  }
+
+  export type WeddingGuestUpdateWithoutAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutGuestsNestedInput
+    rsvp?: WeddingRsvpUpdateOneWithoutGuestNestedInput
+  }
+
+  export type WeddingGuestUncheckedUpdateWithoutAnalyticsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rsvp?: WeddingRsvpUncheckedUpdateOneWithoutGuestNestedInput
+  }
+
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -9605,6 +17550,190 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingGuestCreateManyWeddingInput = {
+    id?: string
+    name: string
+    phone?: string | null
+    groupName?: string | null
+    maxGuests?: number
+    slug: string
+    isActive?: boolean
+    isSent?: boolean
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingRsvpCreateManyWeddingInput = {
+    id?: string
+    guestId?: string | null
+    name: string
+    phone?: string | null
+    status: $Enums.AttendanceStatus
+    guestCount?: number
+    message?: string | null
+    isHidden?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WeddingAnalyticsCreateManyWeddingInput = {
+    id?: string
+    guestId?: string | null
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type WeddingGuestUpdateWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rsvp?: WeddingRsvpUpdateOneWithoutGuestNestedInput
+    analytics?: WeddingAnalyticsUpdateManyWithoutGuestNestedInput
+  }
+
+  export type WeddingGuestUncheckedUpdateWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rsvp?: WeddingRsvpUncheckedUpdateOneWithoutGuestNestedInput
+    analytics?: WeddingAnalyticsUncheckedUpdateManyWithoutGuestNestedInput
+  }
+
+  export type WeddingGuestUncheckedUpdateManyWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    groupName?: NullableStringFieldUpdateOperationsInput | string | null
+    maxGuests?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isSent?: BoolFieldUpdateOperationsInput | boolean
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingRsvpUpdateWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: WeddingGuestUpdateOneWithoutRsvpNestedInput
+  }
+
+  export type WeddingRsvpUncheckedUpdateWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingRsvpUncheckedUpdateManyWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    guestCount?: IntFieldUpdateOperationsInput | number
+    message?: NullableStringFieldUpdateOperationsInput | string | null
+    isHidden?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsUpdateWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: WeddingGuestUpdateOneWithoutAnalyticsNestedInput
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateManyWithoutWeddingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsCreateManyGuestInput = {
+    id?: string
+    weddingId: string
+    event: $Enums.WeddingAnalyticsEvent
+    sessionKey?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type WeddingAnalyticsUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wedding?: WeddingUpdateOneRequiredWithoutAnalyticsNestedInput
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WeddingAnalyticsUncheckedUpdateManyWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weddingId?: StringFieldUpdateOperationsInput | string
+    event?: EnumWeddingAnalyticsEventFieldUpdateOperationsInput | $Enums.WeddingAnalyticsEvent
+    sessionKey?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

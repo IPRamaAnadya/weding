@@ -57,7 +57,7 @@ export function useAudioPlayer(
 
   const Audio = () => (
     <audio ref={audioRef} preload="auto">
-      <source src="/music/music.mp3" type="audio/mpeg" />
+      <source src="/music/nothing.mp3" type="audio/mpeg" />
     </audio>
   )
 

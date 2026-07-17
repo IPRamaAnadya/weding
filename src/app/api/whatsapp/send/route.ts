@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { normalizeIndonesianPhone } from '@/lib/phone'
 
 interface SendMessageRequest {
   target: string // Phone number(s) with format: 08123456789|Name|Role
@@ -21,6 +22,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const [targetPhone, ...targetDetails] = target.split('|')
+    const normalizedPhone = normalizeIndonesianPhone(targetPhone)
+    if (!normalizedPhone) {
+      return NextResponse.json({ error: 'Target harus berupa nomor Indonesia yang valid.' }, { status: 400 })
+    }
+    const normalizedTarget = [normalizedPhone, ...targetDetails].join('|')
+
     const token = process.env.FONNTE_API_TOKEN
     if (!token) {
       return NextResponse.json(
@@ -31,7 +39,7 @@ export async function POST(request: NextRequest) {
 
     // Prepare form data
     const formData = new FormData()
-    formData.append('target', target)
+    formData.append('target', normalizedTarget)
     formData.append('message', message)
     formData.append('countryCode', countryCode)
     formData.append('delay', delay)

@@ -147,7 +147,9 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image'
+  image: 'image',
+  passwordHash: 'passwordHash',
+  isAdmin: 'isAdmin'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -174,9 +176,77 @@ exports.Prisma.AttendanceScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.WeddingScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  groomShortName: 'groomShortName',
+  brideShortName: 'brideShortName',
+  groomFullName: 'groomFullName',
+  brideFullName: 'brideFullName',
+  groomParents: 'groomParents',
+  brideParents: 'brideParents',
+  groomChildOrder: 'groomChildOrder',
+  brideChildOrder: 'brideChildOrder',
+  eventDate: 'eventDate',
+  dateLabel: 'dateLabel',
+  timeLabel: 'timeLabel',
+  venueName: 'venueName',
+  venueAddress: 'venueAddress',
+  mapUrl: 'mapUrl',
+  template: 'template',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WeddingGuestScalarFieldEnum = {
+  id: 'id',
+  weddingId: 'weddingId',
+  name: 'name',
+  phone: 'phone',
+  groupName: 'groupName',
+  maxGuests: 'maxGuests',
+  slug: 'slug',
+  isActive: 'isActive',
+  isSent: 'isSent',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WeddingRsvpScalarFieldEnum = {
+  id: 'id',
+  weddingId: 'weddingId',
+  guestId: 'guestId',
+  name: 'name',
+  phone: 'phone',
+  status: 'status',
+  guestCount: 'guestCount',
+  message: 'message',
+  isHidden: 'isHidden',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WeddingAnalyticsScalarFieldEnum = {
+  id: 'id',
+  weddingId: 'weddingId',
+  guestId: 'guestId',
+  event: 'event',
+  sessionKey: 'sessionKey',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -188,10 +258,24 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
 exports.AttendanceStatus = exports.$Enums.AttendanceStatus = {
   HADIR: 'HADIR',
   TIDAK_HADIR: 'TIDAK_HADIR',
   BELUM_TAHU: 'BELUM_TAHU'
+};
+
+exports.WeddingAnalyticsEvent = exports.$Enums.WeddingAnalyticsEvent = {
+  PAGE_VIEW: 'PAGE_VIEW',
+  OPEN_INVITATION: 'OPEN_INVITATION',
+  MAP_CLICK: 'MAP_CLICK',
+  CALENDAR_CLICK: 'CALENDAR_CLICK',
+  RSVP_SUBMIT: 'RSVP_SUBMIT'
 };
 
 exports.Prisma.ModelName = {
@@ -200,7 +284,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   VerificationToken: 'VerificationToken',
   Invitation: 'Invitation',
-  Attendance: 'Attendance'
+  Attendance: 'Attendance',
+  Wedding: 'Wedding',
+  WeddingGuest: 'WeddingGuest',
+  WeddingRsvp: 'WeddingRsvp',
+  WeddingAnalytics: 'WeddingAnalytics'
 };
 
 /**

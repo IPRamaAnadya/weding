@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:wedding": "node --env-file=.env scripts/seed-wedding.mjs",
+    "seed:admin": "node --env-file=.env --env-file=.env.local scripts/seed-admin.mjs",
+    "seed": "npm run seed:wedding && npm run seed:admin"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
