@@ -201,7 +201,6 @@ export default function RamaInvitation({
 }: RamaInvitationProps) {
   const wedding = { ...defaultRamaWedding, ...weddingData }
   const weddingDateTime = useMemo(() => new Date(wedding.eventDate), [wedding.eventDate])
-  const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Pawiwahan ${wedding.groomShortName} & ${wedding.brideShortName}`)}&dates=${weddingDateTime.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}%2F${new Date(weddingDateTime.getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}&details=${encodeURIComponent(`Pawiwahan ${wedding.groomFullName} dan ${wedding.brideFullName}`)}&location=${encodeURIComponent(`${wedding.venueName}, ${wedding.venueAddress}`)}`
   const [introPhase, setIntroPhase] = useState<IntroPhase>('preload')
   const [montageIndex, setMontageIndex] = useState(0)
   const [splashStep, setSplashStep] = useState<1 | 2>(1)
@@ -231,6 +230,7 @@ export default function RamaInvitation({
   const galleryAnimationFrameRef = useRef<number | null>(null)
   const { play, toggle, unlock } = useAudio()
   const t = ramaTranslations[locale]
+  const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(t.calendarTitle(wedding.groomShortName, wedding.brideShortName))}&dates=${weddingDateTime.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}%2F${new Date(weddingDateTime.getTime() + 8 * 60 * 60 * 1000).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}&details=${encodeURIComponent(t.calendarDescription(wedding.groomFullName, wedding.brideFullName))}&location=${encodeURIComponent(`${wedding.venueName}, ${wedding.venueAddress}`)}`
   const intlLocale = locale === 'id' ? 'id-ID' : locale === 'en' ? 'en-US' : locale === 'yue' ? 'zh-HK' : 'ja-JP'
   const localizedDateLabel = locale === 'id'
     ? wedding.dateLabel
@@ -700,7 +700,7 @@ export default function RamaInvitation({
               </h1>
               <div className={styles.coverGuest}>
                 <span>{t.dearGuest}</span>
-                <strong>{guestName}</strong>
+                <strong>{locale === 'ja' ? `${guestName} 様` : guestName}</strong>
               </div>
               <button className={styles.openButton} onClick={openInvitation} type="button">
                 {t.openInvitation}
@@ -816,7 +816,7 @@ export default function RamaInvitation({
         </section>
 
         <section className={styles.welcome} id="welcome">
-          <motion.p className={styles.sanskrit} {...reveal}>ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ</motion.p>
+          <motion.p className={styles.sanskrit} {...reveal}>{t.ceremonialGreeting}</motion.p>
           <motion.h2 className={styles.welcomeTitle} {...reveal}>
             {t.welcomeTitle.split('\n').map((line, index) => (
               <span key={line}>{index > 0 && <br />}{line}</span>

@@ -81,9 +81,7 @@ Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i
 function englishMessage(data: InvitationMessageData, date: string, time: string) {
   return `Dear *${data.guestName}*,
 
-Om Swastiastu,
-
-With the blessings of Ida Sang Hyang Widhi Wasa, we warmly invite you to join our Balinese wedding ceremony (pawiwahan):
+Together with our families, we are delighted to invite you to celebrate our wedding:
 
 *${data.groomName} & ${data.brideName}*
 ${data.groomFullName}
@@ -103,17 +101,13 @@ ${data.venueAddress}
 Google Maps:
 ${data.mapUrl}
 
-It would be an honour and a joy to celebrate with you. Thank you for your presence, prayers, and blessings.
-
-Om Shanti, Shanti, Shanti Om`
+It would be an honour and a joy to celebrate this special day with you. We look forward to sharing it together.`
 }
 
 function cantoneseMessage(data: InvitationMessageData, date: string, time: string) {
   return `敬愛的 *${data.guestName}*：
 
-Om Swastiastu，
-
-承蒙 Ida Sang Hyang Widhi Wasa 賜福，我哋誠意邀請您出席我哋嘅巴厘傳統婚禮（Pawiwahan）：
+我哋即將舉行婚禮，誠意邀請您蒞臨見證，同我哋一齊分享呢個重要時刻：
 
 *${data.groomName} & ${data.brideName}*
 ${data.groomFullName}
@@ -133,9 +127,7 @@ ${data.venueAddress}
 Google Maps：
 ${data.mapUrl}
 
-您嘅蒞臨同祝福，將會係我哋莫大嘅榮幸與喜悅。衷心感謝您嘅關愛同祝福。
-
-Om Shanti, Shanti, Shanti Om`
+您嘅蒞臨將會係我哋莫大嘅榮幸與喜悅。期待婚禮當日同您見面。`
 }
 
 function japaneseMessage(data: InvitationMessageData, date: string, time: string) {
@@ -143,7 +135,9 @@ function japaneseMessage(data: InvitationMessageData, date: string, time: string
 
 謹啓
 
-Ida Sang Hyang Widhi Wasaのご加護のもと、私たちはバリの伝統的な結婚式（Pawiwahan）を執り行う運びとなりました。謹んでご案内申し上げます。
+このたび 私たちは結婚式を挙げることとなりました
+日頃お世話になっている皆様に感謝を込めて ささやかな宴を催したく存じます
+ぜひご出席賜りますよう 謹んでご案内申し上げます
 
 *${data.groomName} & ${data.brideName}*
 ${data.groomFullName}

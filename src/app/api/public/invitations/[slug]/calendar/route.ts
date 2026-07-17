@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { normalizeGuestSlugParam } from '@/lib/guest-slug'
+import { normalizeInvitationLocale } from '@/lib/invitation-locale'
 import { prisma } from '@/lib/prisma'
 
 function icsDate(date: Date) {
@@ -17,10 +18,30 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
     where: { slug: { equals: normalizedSlug, mode: 'insensitive' }, isActive: true, wedding: { isPublished: true } },
     include: { wedding: true },
   })
-  const wedding = invitation?.wedding
-  if (!wedding?.eventDate) return new NextResponse('Calendar not available', { status: 404 })
+  const eventDate = invitation?.wedding.eventDate
+  if (!eventDate) return new NextResponse('Calendar not available', { status: 404 })
 
-  const endDate = new Date(wedding.eventDate.getTime() + 8 * 60 * 60 * 1000)
+  const wedding = invitation.wedding
+  const locale = normalizeInvitationLocale(invitation.locale)
+  const calendarCopy = {
+    id: {
+      summary: `Pawiwahan ${wedding.groomShortName} & ${wedding.brideShortName}`,
+      description: `Pawiwahan ${wedding.groomFullName} dan ${wedding.brideFullName}`,
+    },
+    en: {
+      summary: `Wedding of ${wedding.groomShortName} & ${wedding.brideShortName}`,
+      description: `Wedding celebration of ${wedding.groomFullName} and ${wedding.brideFullName}`,
+    },
+    yue: {
+      summary: `${wedding.groomShortName} 與 ${wedding.brideShortName} 嘅婚禮`,
+      description: `誠邀您出席 ${wedding.groomFullName} 與 ${wedding.brideFullName} 嘅婚禮`,
+    },
+    ja: {
+      summary: `${wedding.groomShortName}と${wedding.brideShortName}の結婚式`,
+      description: `${wedding.groomFullName}と${wedding.brideFullName}の結婚式のご案内`,
+    },
+  }[locale]
+  const endDate = new Date(eventDate.getTime() + 8 * 60 * 60 * 1000)
   const calendar = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
@@ -28,11 +49,11 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
     'BEGIN:VEVENT',
     `UID:${wedding.id}@wedin`,
     `DTSTAMP:${icsDate(new Date())}`,
-    `DTSTART:${icsDate(wedding.eventDate)}`,
+    `DTSTART:${icsDate(eventDate)}`,
     `DTEND:${icsDate(endDate)}`,
-    `SUMMARY:${safeText(wedding.name)}`,
+    `SUMMARY:${safeText(calendarCopy.summary)}`,
     `LOCATION:${safeText([wedding.venueName, wedding.venueAddress].filter(Boolean).join(', '))}`,
-    `DESCRIPTION:${safeText(`Pawiwahan ${wedding.groomFullName} dan ${wedding.brideFullName}`)}`,
+    `DESCRIPTION:${safeText(calendarCopy.description)}`,
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n')

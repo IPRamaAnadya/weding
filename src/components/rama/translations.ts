@@ -19,6 +19,7 @@ export type RamaTranslation = {
   heroCeremony: string
   heroEyebrow: string
   explore: string
+  ceremonialGreeting: string
   welcomeTitle: string
   welcomeCopy: string
   coupleKicker: string
@@ -36,6 +37,8 @@ export type RamaTranslation = {
   minutes: string
   seconds: string
   viewLocation: string
+  calendarTitle: (groom: string, bride: string) => string
+  calendarDescription: (groom: string, bride: string) => string
   galleryKicker: string
   galleryTitle: string
   galleryDescription: string
@@ -107,6 +110,7 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     heroCeremony: 'Pawiwahan',
     heroEyebrow: 'The wedding celebration of',
     explore: 'Explore',
+    ceremonialGreeting: 'ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ',
     welcomeTitle: 'A quiet promise,\na lifetime together.',
     welcomeCopy: 'Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa, kami bermaksud menyelenggarakan upacara pawiwahan kami. Dengan penuh sukacita, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu.',
     coupleKicker: 'The Couple',
@@ -124,6 +128,8 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     minutes: 'Menit',
     seconds: 'Detik',
     viewLocation: 'Lihat Lokasi',
+    calendarTitle: (groom, bride) => `Pawiwahan ${groom} & ${bride}`,
+    calendarDescription: (groom, bride) => `Pawiwahan ${groom} dan ${bride}`,
     galleryKicker: 'A glimpse of us',
     galleryTitle: 'Our moments',
     galleryDescription: 'A few frames from our story.',
@@ -193,8 +199,9 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     heroCeremony: 'Wedding Ceremony',
     heroEyebrow: 'The wedding celebration of',
     explore: 'Explore',
+    ceremonialGreeting: 'Together with our families',
     welcomeTitle: 'A quiet promise,\na lifetime together.',
-    welcomeCopy: 'With the blessing and grace of Ida Sang Hyang Widhi Wasa, we intend to celebrate our wedding ceremony. With great joy, we invite you to join us and bestow your blessings upon our marriage.',
+    welcomeCopy: 'Together with our families, we joyfully invite you to celebrate our marriage. It would mean so much to share this special day with you and receive your warm wishes.',
     coupleKicker: 'The Couple',
     coupleTitle: 'Meet the couple',
     groom: 'The Groom',
@@ -210,6 +217,8 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     minutes: 'Minutes',
     seconds: 'Seconds',
     viewLocation: 'View Location',
+    calendarTitle: (groom, bride) => `Wedding of ${groom} & ${bride}`,
+    calendarDescription: (groom, bride) => `Wedding celebration of ${groom} and ${bride}`,
     galleryKicker: 'A glimpse of us',
     galleryTitle: 'Our moments',
     galleryDescription: 'A few frames from our story.',
@@ -279,8 +288,9 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     heroCeremony: '婚禮',
     heroEyebrow: '誠邀您見證我哋嘅婚禮',
     explore: '細看',
+    ceremonialGreeting: '誠邀您蒞臨見證',
     welcomeTitle: '一個溫柔嘅承諾，\n一生相伴。',
-    welcomeCopy: '承蒙 Ida Sang Hyang Widhi Wasa 嘅恩典與祝福，我哋將舉行婚禮。懷住滿心喜悅，誠邀您蒞臨見證，並為我哋送上祝福。',
+    welcomeCopy: '我哋即將舉行婚禮，誠意邀請您蒞臨見證，同我哋一齊分享呢個重要時刻。您嘅到來與祝福，對我哋意義重大。',
     coupleKicker: '一對新人',
     coupleTitle: '認識我哋',
     groom: '新郎',
@@ -296,6 +306,8 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     minutes: '分鐘',
     seconds: '秒',
     viewLocation: '查看地點',
+    calendarTitle: (groom, bride) => `${groom} 與 ${bride} 嘅婚禮`,
+    calendarDescription: (groom, bride) => `誠邀您出席 ${groom} 與 ${bride} 嘅婚禮`,
     galleryKicker: '我哋嘅片段',
     galleryTitle: '珍貴時刻',
     galleryDescription: '我哋故事入面嘅幾個畫面。',
@@ -365,14 +377,15 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     heroCeremony: '結婚式',
     heroEyebrow: '私たちの門出を見守ってください',
     explore: 'ご案内を見る',
+    ceremonialGreeting: '謹んでご案内申し上げます',
     welcomeTitle: '静かな誓いを、\n永遠の約束へ。',
-    welcomeCopy: 'Ida Sang Hyang Widhi Wasa の恵みと祝福のもと、私たちは結婚式を執り行うこととなりました。喜びの日を皆さまと分かち合い、温かな祝福を賜りたく、謹んでご案内申し上げます。',
+    welcomeCopy: 'このたび、私たちは結婚式を挙げることとなりました。日頃お世話になっている皆さまと喜びのひとときを過ごしたく、謹んでご案内申し上げます。',
     coupleKicker: '新郎新婦',
     coupleTitle: '私たちについて',
     groom: '新郎',
     bride: '新婦',
-    groomChildOrder: '第五子　両親',
-    brideChildOrder: '長女　両親',
+    groomChildOrder: '第五子',
+    brideChildOrder: '長女',
     saveDate: '日程のご案内',
     happyDay: '私たちの特別な日',
     onwards: 'より',
@@ -382,6 +395,8 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     minutes: '分',
     seconds: '秒',
     viewLocation: '会場を見る',
+    calendarTitle: (groom, bride) => `${groom}と${bride}の結婚式`,
+    calendarDescription: (groom, bride) => `${groom}と${bride}の結婚式のご案内`,
     galleryKicker: 'ふたりの軌跡',
     galleryTitle: '思い出',
     galleryDescription: '私たちの物語を彩る、いくつかの瞬間。',
@@ -392,9 +407,9 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     nextPhoto: '次の写真',
     closeGallery: 'ギャラリーを閉じる',
     giftKicker: '感謝のしるし',
-    giftTitle: 'デジタルご祝儀・贈り物',
+    giftTitle: '送金・贈り物のご案内',
     giftDescription: '皆さまからの祝福が、私たちにとって何よりの贈り物です。お気持ちをお寄せくださる場合は、以下をご利用ください。',
-    digitalEnvelope: 'デジタルご祝儀',
+    digitalEnvelope: 'お振込先',
     bankAccount: '口座番号',
     accountHolder: '口座名義',
     copyAccount: '口座番号をコピー',
@@ -405,7 +420,7 @@ export const ramaTranslations: Record<RamaLocale, RamaTranslation> = {
     copied: 'コピーしました',
     giftThanks: '温かいお祝いとお心遣いに、心より感謝申し上げます。',
     rsvpKicker: 'ご出欠のお願い',
-    rsvpTitle: '出席確認',
+    rsvpTitle: 'ご出欠について',
     rsvpDescription: '皆さまのご出席と祝福が、私たちにとって何よりの贈り物です。',
     fullName: 'お名前',
     yourName: 'お名前をご入力ください',

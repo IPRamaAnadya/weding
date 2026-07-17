@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `${wedding.groomFullName}と${wedding.brideFullName}の結婚式のご案内です。`,
     },
   }[locale]
+  const ogImageUrl = `/api/public/invitations/${encodeURIComponent(invitation.slug)}/og`
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
@@ -54,7 +55,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: openGraphLocaleByLocale[locale],
       title: wedding.name,
       description: localizedMetadata.description,
-      images: [{ url: '/images/rama/33.webp', width: 1200, height: 630 }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, type: 'image/png', alt: wedding.name }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: wedding.name,
+      description: localizedMetadata.description,
+      images: [ogImageUrl],
     },
   }
 }
